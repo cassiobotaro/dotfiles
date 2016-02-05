@@ -1,2 +1,2 @@
-# dotfiles
-:floppy_disk:  A series of settings
+# Botaro toolbelt
+:package:  A series of settings and useful scripts
