@@ -31,3 +31,8 @@ Programs that are missing in Xubuntu
 *requires:*
 
 Guide to install docker.
+
+## Python Env
+*requires:*
+
+Install a better python environment.(ipython, ipython notebook, flake8, virtualenvwrapper)
