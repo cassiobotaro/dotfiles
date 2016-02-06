@@ -18,7 +18,7 @@ Install a collection of pre-patched and adjusted fonts for usage with the (Power
 Install zsh with oh-my-zsh and awesome themes and plugins
 
 ## Install-vim
-requires: install-fonts.sh and change font
+*requires:* install-fonts.sh and change font
 
 Install customized vim with superpowers!
 
