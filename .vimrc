@@ -22,17 +22,17 @@ if !filereadable(neobundle_readme)
   let g:not_finsh_neobundle = "yes"
 
   " Run shell script if exist on custom select language
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
 endif
 
 " Required:
@@ -172,7 +172,7 @@ set noswapfile
 
 set fileformats=unix,dos,mac
 set showcmd
-set shell=/bin/sh
+set shell=/bin/zsh
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -290,6 +290,9 @@ else
   nnoremap <silent> <leader>sh :VimShellCreate<CR>
 endif
 
+" comments
+autocmd FileType htmldjango set commentstring={#\ %s\ #}
+autocmd FileType jinja set commentstring={#\ %s\ #}
 "*****************************************************************************
 "" Functions
 "*****************************************************************************
