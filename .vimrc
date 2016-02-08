@@ -56,7 +56,7 @@ NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle 'vim-scripts/CSApprox'
 NeoBundle 'bronson/vim-trailing-whitespace'
-NeoBundle 'jiangmiao/auto-pairs'
+NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'tools\\update-dll-mingw',
@@ -293,6 +293,12 @@ endif
 " comments
 autocmd FileType htmldjango set commentstring={#\ %s\ #}
 autocmd FileType jinja set commentstring={#\ %s\ #}
+
+" Raimondi/delimitMate
+let b:delimitMate_expand_cr=1
+let b:delimitMate_expand_space=1
+let b:delimitMate_expand_inside_quotes=1
+
 "*****************************************************************************
 "" Functions
 "*****************************************************************************
