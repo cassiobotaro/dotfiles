@@ -1,7 +1,6 @@
 "*****************************************************************************
 "" NeoBundle core
 "*****************************************************************************
-
 if has('vim_starting')
   set nocompatible               " Be iMproved
 
@@ -11,7 +10,7 @@ endif
 
 let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
 
-let g:vim_bootstrap_langs = "javascript,python,c,html,go"
+let g:vim_bootstrap_langs = "go,python,javascript,html,c"
 let g:vim_bootstrap_editor = "vim"				" nvim or vim
 
 if !filereadable(neobundle_readme)
@@ -22,17 +21,6 @@ if !filereadable(neobundle_readme)
   let g:not_finsh_neobundle = "yes"
 
   " Run shell script if exist on custom select language
-
-
-
-
-
-
-
-
-
-
-
 endif
 
 " Required:
@@ -46,17 +34,20 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "" NeoBundle install packages
 "*****************************************************************************
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'jistr/vim-nerdtree-tabs.git'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
+NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle 'vim-scripts/CSApprox'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'scrooloose/syntastic'
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'tools\\update-dll-mingw',
@@ -90,24 +81,17 @@ NeoBundle 'sherzberg/vim-bootstrap-updater'
 
 "" Custom bundles
 
-"" Python Bundle
-NeoBundle "davidhalter/jedi-vim"
-NeoBundle "scrooloose/syntastic"
-NeoBundle "majutsushi/tagbar"
-NeoBundle "Yggdroot/indentLine"
-
-
 "" Go Lang Bundle
-NeoBundle "majutsushi/tagbar"
 NeoBundle "fatih/vim-go"
 
+"" Python Bundle
+NeoBundle "davidhalter/jedi-vim"
+NeoBundle "Yggdroot/indentLine"
 
 NeoBundle 'vim-scripts/c.vim'
 
-
 "" Javascript Bundle
-NeoBundle "scrooloose/syntastic"
-
+NeoBundle 'jelera/vim-javascript-syntax'
 
 "" HTML Bundle
 NeoBundle 'amirh/HTML-AutoCloseTag'
@@ -115,8 +99,6 @@ NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'gorodinskiy/vim-coloresque'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'mattn/emmet-vim'
-
-
 
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
@@ -245,6 +227,17 @@ let g:airline_theme = 'powerlineish'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+
+
+" comments
+autocmd FileType htmldjango set commentstring={#\ %s\ #}
+autocmd FileType jinja set commentstring={#\ %s\ #}
+
+" Raimondi/delimitMate
+let b:delimitMate_expand_cr=1
+let b:delimitMate_expand_space=1
+let b:delimitMate_expand_inside_quotes=1
 
 "*****************************************************************************
 "" Abbreviations
@@ -289,15 +282,6 @@ if g:vim_bootstrap_editor == 'nvim'
 else
   nnoremap <silent> <leader>sh :VimShellCreate<CR>
 endif
-
-" comments
-autocmd FileType htmldjango set commentstring={#\ %s\ #}
-autocmd FileType jinja set commentstring={#\ %s\ #}
-
-" Raimondi/delimitMate
-let b:delimitMate_expand_cr=1
-let b:delimitMate_expand_space=1
-let b:delimitMate_expand_inside_quotes=1
 
 "*****************************************************************************
 "" Functions
@@ -358,8 +342,8 @@ noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gr :Gremove<CR>
 
 " session management
-nnoremap <leader>so :OpenSession
-nnoremap <leader>ss :SaveSession
+nnoremap <leader>so :OpenSession<Space>
+nnoremap <leader>ss :SaveSession<Space>
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
@@ -382,11 +366,15 @@ set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
 let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-let g:ctrlp_use_caching = 0
+let g:ctrlp_use_caching = 1
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 noremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_map = '<leader>e'
 let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore '+ g:ctrlp_custom_ignore +' -g ""'
+endif
 
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -403,6 +391,9 @@ let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
 
+" Tagbar
+nmap <silent> <F4> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
 
 " Disable visualbell
 set visualbell t_vb=
@@ -450,43 +441,8 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "" Open current line on GitHub
 noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs xdg-open<CR><CR>
+
 "" Custom configs
-
-" vim-python
-augroup vimrc-python
-  autocmd!
-  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
-      \ formatoptions+=croq softtabstop=4 smartindent
-      \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-augroup END
-
-" jedi-vim
-let g:jedi#popup_on_dot = 0
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#smart_auto_mappings = 0
-
-" syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
-let g:syntastic_python_flake8_post_args='--ignore=W391'
-
-" vim-airline
-let g:airline#extensions#virtualenv#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-
-
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
@@ -517,15 +473,43 @@ augroup FileType go
 augroup END
 
 
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
+" vim-python
+augroup vimrc-python
+  autocmd!
+  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
+      \ formatoptions+=croq softtabstop=4 smartindent
+      \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+augroup END
+
+" jedi-vim
+let g:jedi#popup_on_dot = 0
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "<leader>d"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#show_call_signatures = "0"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#smart_auto_mappings = 0
+
+" syntastic
+let g:syntastic_python_checkers=['python', 'flake8']
+let g:syntastic_python_flake8_post_args='--ignore=W391'
+
+" vim-airline
+let g:airline#extensions#virtualenv#enabled = 1
+
+
+
 
 
 let g:javascript_enable_domhtmlcss = 1
 
-
-
+" vim-javascript
+augroup vimrc-javascript
+  autocmd!
+  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
+augroup END
 
 
 "" Include user's local vim config
@@ -572,3 +556,4 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
