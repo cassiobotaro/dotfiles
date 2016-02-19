@@ -514,8 +514,8 @@ augroup END
 
 " for html/rb files, 2 spaces
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
-autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 autocmd Filetype css setlocal ts=2 sw=2 expandtab
+autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))

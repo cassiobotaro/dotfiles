@@ -49,7 +49,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git extract virtualenvwrapper autojump pip ubuntu docker go)
+plugins=(git extract virtualenvwrapper autojump pip ubuntu docker go tmux)
 
 # User configuration
 
@@ -98,3 +98,8 @@ alias jcat='python3 -m json.tool'
 alias cal='python3 -m calendar'
 alias py2path='python2 -m site'
 alias py3path='python3 -m site'
+# TMUX
+alias tmux="TERM=screen-256color-bce tmux"
+
+# added by travis gem
+[ -f /home/cassiobotaro/.travis/travis.sh ] && source /home/cassiobotaro/.travis/travis.sh
