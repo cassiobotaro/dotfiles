@@ -1,0 +1,12 @@
+c = get_config()  # noqa
+c.TerminalIPythonApp.display_banner = False
+c.TerminalInteractiveShell.confirm_exit = False
+c.TerminalInteractiveShell.term_title = True
+c.InteractiveShell.autoindent = True
+c.InteractiveShell.xmode = 'Context'
+c.Completer.greedy = True
+c.PromptManager.out_template = ''
+c.PromptManager.in_template = '>>> '
+c.PromptManager.in2_template = '  '
+c.PromptManager.justify = True
+c.PrefilterManager.multi_line_specials = True
