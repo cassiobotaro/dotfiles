@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/cassiobotaro/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -100,6 +100,3 @@ alias py2path='python2 -m site'
 alias py3path='python3 -m site'
 # TMUX
 alias tmux="TERM=screen-256color-bce tmux"
-
-# added by travis gem
-[ -f /home/cassiobotaro/.travis/travis.sh ] && source /home/cassiobotaro/.travis/travis.sh
