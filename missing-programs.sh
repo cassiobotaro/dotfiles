@@ -1,3 +1,2 @@
-sudo apt-get install tlp tlp-rdw
+sudo apt-get install -y tlp tlp-rdw vlc xubuntu-restricted-extras build-essential
 sudo tlp start
-sudo apt-get install vlc xubuntu-restricted-extras build-essential 
