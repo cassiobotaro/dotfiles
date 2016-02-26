@@ -47,6 +47,7 @@ NeoBundle 'vim-scripts/CSApprox'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tell-k/vim-autopep8'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'Shougo/vimproc.vim', {
@@ -234,6 +235,9 @@ let g:airline#extensions#tagbar#enabled = 1
 " comments
 autocmd FileType htmldjango set commentstring={#\ %s\ #}
 autocmd FileType jinja set commentstring={#\ %s\ #}
+
+" vim autopep8
+let g:autopep8_disable_show_diff=1
 
 " Raimondi/delimitMate
 let b:delimitMate_expand_cr=1
