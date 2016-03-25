@@ -1,125 +1,84 @@
-"*****************************************************************************
-"" NeoBundle core
-"*****************************************************************************
-if has('vim_starting')
-  set nocompatible               " Be iMproved
+call plug#begin('~/.vim/plugged')
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+" Better file browser
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+" Code commenter
+Plug 'tpope/vim-commentary'
 
-let g:vim_bootstrap_langs = "go,python,javascript,html,c"
-let g:vim_bootstrap_editor = "vim"				" nvim or vim
+" Git commands
+Plug 'tpope/vim-fugitive'
 
-if !filereadable(neobundle_readme)
-  echo "Installing NeoBundle..."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
-  let g:not_finsh_neobundle = "yes"
+" Code and files fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
 
-  " Run shell script if exist on custom select language
-endif
+" lean & mean status/tabline for vim that's light as air
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+" git diff in the gutter
+Plug 'airblade/vim-gitgutter'
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+" A collection of language packs for Vim.
+Plug 'sheerun/vim-polyglot'
 
-"*****************************************************************************
-"" NeoBundle install packages
-"*****************************************************************************
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'jistr/vim-nerdtree-tabs.git'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'vim-scripts/grep.vim'
-NeoBundle 'vim-scripts/CSApprox'
-NeoBundle 'bronson/vim-trailing-whitespace'
-NeoBundle 'Raimondi/delimitMate'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tell-k/vim-autopep8'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
+" Better and faster grep
+Plug 'mileszs/ack.vim'
 
-"" Vim-Session
-NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-session'
+" AutoClose delimiters
+Plug 'Raimondi/delimitMate'
 
-if v:version >= 703
-  NeoBundle 'Shougo/vimshell.vim'
-endif
+" quoting/parenthesizing made simple
+Plug 'tpope/vim-surround'
 
-if v:version >= 704
-  "" Snippets
-  NeoBundle 'SirVer/ultisnips'
-  NeoBundle 'FelikZ/ctrlp-py-matcher'
-endif
+" Python auto pep 8
+Plug 'tell-k/vim-autopep8'
 
-NeoBundle 'honza/vim-snippets'
+" Auto sort imports
+Plug 'fisadev/vim-isort'
 
-"" Color
-NeoBundle 'tomasr/molokai'
+" displays tags in a window
+Plug 'majutsushi/tagbar'
 
-"" Vim-Bootstrap Updater
-NeoBundle 'sherzberg/vim-bootstrap-updater'
+" syntax check for many languages
+Plug 'scrooloose/syntastic'
 
-"" Custom bundles
+" Vim session with steroids
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 
-"" Go Lang Bundle
-NeoBundle "fatih/vim-go"
+" Shell inside vim
+Plug 'Shougo/vimproc.vim', { 'do': 'make'  } | Plug 'Shougo/vimshell.vim'
 
-"" Python Bundle
-NeoBundle "davidhalter/jedi-vim"
-NeoBundle "Yggdroot/indentLine"
+" Snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-NeoBundle 'vim-scripts/c.vim'
+" color theme
+Plug 'fatih/molokai'
 
-"" Javascript Bundle
-NeoBundle 'jelera/vim-javascript-syntax'
+" Go support
+Plug 'fatih/vim-go'
 
-"" HTML Bundle
-NeoBundle 'amirh/HTML-AutoCloseTag'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'gorodinskiy/vim-coloresque'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'mattn/emmet-vim'
+" Javascript
+Plug 'jelera/vim-javascript-syntax'
 
-"" Include user's extra bundle
-if filereadable(expand("~/.vimrc.local.bundles"))
-  source ~/.vimrc.local.bundles
-endif
+" Python
+Plug 'davidhalter/jedi-vim'
+Plug 'Yggdroot/indentLine'
 
-call neobundle#end()
+" HTML
+Plug 'hail2u/vim-css3-syntax'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'mattn/emmet-vim'
 
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
+call plug#end()
 
 "*****************************************************************************
-"" Basic Setup
-"*****************************************************************************"
-"" Encoding
+" Basic Setup
+"*****************************************************************************
+""" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
@@ -165,40 +124,16 @@ let g:session_autosave = "no"
 let g:session_command_aliases = 1
 
 "*****************************************************************************
-"" Visual Settings
+" Visual Settings
 "*****************************************************************************
 syntax on
 set ruler
 set number
-
 let no_buffers_menu=1
-if !exists('g:not_finsh_neobundle')
-  colorscheme molokai
-endif
-
+colorscheme molokai
 set mousemodel=popup
 set t_Co=256
 set cursorline
-set guioptions=egmrti
-set gfn=Monospace\ 10
-
-if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
-    set transparency=7
-  endif
-else
-  let g:CSApprox_loaded = 1
-
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-  else
-    if $TERM == 'xterm'
-      set term=xterm-256color
-    endif
-  endif
-endif
-
 if &term =~ '256color'
   set t_ut=
 endif
@@ -211,8 +146,7 @@ set scrolloff=3
 set laststatus=2
 
 "" Use modeline overrides
-set modeline
-set modelines=10
+set nomodeline
 
 set title
 set titleold="Terminal"
@@ -224,30 +158,10 @@ if exists("*fugitive#statusline")
   set statusline+=%{fugitive#statusline()}
 endif
 
-" vim-airline
-let g:airline_theme = 'powerlineish'
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-
-
-" comments
-autocmd FileType htmldjango set commentstring={#\ %s\ #}
-autocmd FileType jinja set commentstring={#\ %s\ #}
-
-" vim autopep8
-let g:autopep8_disable_show_diff=1
-
-" Raimondi/delimitMate
-let b:delimitMate_expand_cr=1
-let b:delimitMate_expand_space=1
-let b:delimitMate_expand_inside_quotes=1
-
 "*****************************************************************************
-"" Abbreviations
+""" Abbreviations
 "*****************************************************************************
-"" no one is really happy until you have this shortcuts
+""" no one is really happy until you have this shortcuts
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev Qall! qall!
@@ -259,48 +173,6 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-"" NERDTree configuration
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-noremap <F3> :NERDTreeToggle<CR>
-
-" grep.vim
-nnoremap <silent> <leader>f :Rgrep<CR>
-let Grep_Default_Options = '-IR'
-let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
-
-" vimshell.vim
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_prompt =  '$ '
-
-" terminal emulation
-if g:vim_bootstrap_editor == 'nvim'
-  nnoremap <silent> <leader>sh :terminal<CR>
-else
-  nnoremap <silent> <leader>sh :VimShellCreate<CR>
-endif
-
-"*****************************************************************************
-"" Functions
-"*****************************************************************************
-if !exists('*s:setupWrapping')
-  function s:setupWrapping()
-    set wrap
-    set wm=2
-    set textwidth=79
-  endfunction
-endif
-
-"*****************************************************************************
-"" Autocmd Rules
 "*****************************************************************************
 "" The PC is fast enough, do syntax highlight syncing from start
 augroup vimrc-sync-fromstart
@@ -329,12 +201,21 @@ augroup END
 
 set autoread
 
+" Remove trailing whitespace on saveutocmd Rules
+autocmd BufWritePre * :%s/\s\+$//e
+
 "*****************************************************************************
 "" Mappings
 "*****************************************************************************
+
+" Enable saving by `Ctrl-s`
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>
+
 "" Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
+
 
 "" Git
 noremap <Leader>ga :Gwrite<CR>
@@ -366,57 +247,12 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 "" Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
-"" ctrlp.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-let g:ctrlp_use_caching = 1
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-noremap <leader>b :CtrlPBuffer<CR>
-let g:ctrlp_map = '<leader>e'
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore '+ g:ctrlp_custom_ignore +' -g ""'
-endif
-
-" snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
-
-" syntastic
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
-
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
 
 " Disable visualbell
 set visualbell t_vb=
 
 "" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
-
-noremap YY "+y<CR>
-noremap <leader>p "+gP<CR>
-noremap XX "+x<CR>
-
-if has('macunix')
-  " pbcopy for OSX copy/paste
-  vmap <C-x> :!pbcopy<CR>
-  vmap <C-c> :w !pbcopy<CR><CR>
-endif
+set clipboard=unnamed,unnamedplus
 
 "" Buffer nav
 noremap <leader>z :bp<CR>
@@ -446,6 +282,128 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "" Open current line on GitHub
 noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs xdg-open<CR><CR>
+
+" vim-javascript
+augroup vimrc-javascript
+  autocmd!
+  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
+augroup END
+
+
+" for html/rb files, 2 spaces
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
+autocmd Filetype css setlocal ts=2 sw=2 expandtab
+autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+
+
+" Plugins configuration
+"
+" Shellvim
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_prompt =  '$ '
+nnoremap <silent> <leader>sh :VimShellCreate<CR>
+
+" Nerdtree
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowBookmarks=1
+let g:nerdtree_tabs_focus_on_files=1
+let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+let g:NERDTreeAutoDeleteBuffer=1
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+nnoremap <silent> <F2> :NERDTreeFind<CR>
+noremap <F3> :NERDTreeToggle<CR>
+
+" Vim commentary
+autocmd FileType htmldjango set commentstring={#\ %s\ #}
+autocmd FileType jinja set commentstring={#\ %s\ #}
+
+" Vim airline
+let g:airline_theme = 'powerlineish'
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+if !exists('g:airline_powerline_fonts')
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = '|'
+  let g:airline_left_sep          = '▶'
+  let g:airline_left_alt_sep      = '»'
+  let g:airline_right_sep         = '◀'
+  let g:airline_right_alt_sep     = '«'
+  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+  let g:airline#extensions#readonly#symbol   = '⊘'
+  let g:airline#extensions#linecolumn#prefix = '¶'
+  let g:airline#extensions#paste#symbol      = 'ρ'
+  let g:airline_symbols.linenr    = '␊'
+  let g:airline_symbols.branch    = '⎇'
+  let g:airline_symbols.paste     = 'ρ'
+  let g:airline_symbols.paste     = 'Þ'
+  let g:airline_symbols.paste     = '∥'
+  let g:airline_symbols.whitespace = 'Ξ'
+else
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
+
+  " powerline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+endif
+
+" ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" DelimitMate
+let b:delimitMate_expand_cr=1
+let b:delimitMate_expand_space=1
+let b:delimitMate_expand_inside_quotes=1
+
+" Auto pep8
+let g:autopep8_disable_show_diff=1
+
+"" ctrlp.vim
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
+let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
+let g:ctrlp_use_caching = 1
+cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+noremap <leader>b :CtrlPBuffer<CR>
+let g:ctrlp_map = '<leader>e'
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --ignore '+ g:ctrlp_custom_ignore +' -g ""'
+endif
+" snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
+
+" syntastic
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_auto_loc_list=1
+let g:syntastic_aggregate_errors = 1
+
+" Tagbar
+nmap <silent> <F4> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
 
 "" Custom configs
 
@@ -499,71 +457,13 @@ let g:jedi#smart_auto_mappings = 0
 
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
-let g:syntastic_python_flake8_post_args='--ignore=W391'
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
 
-
-
-
-
 let g:javascript_enable_domhtmlcss = 1
-
-" vim-javascript
-augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
-augroup END
-
-
-" for html/rb files, 2 spaces
-autocmd Filetype html setlocal ts=2 sw=2 expandtab
-autocmd Filetype css setlocal ts=2 sw=2 expandtab
-autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
-
-"*****************************************************************************
-"" Convenience variables
-"*****************************************************************************
-
-" vim-airline
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-if !exists('g:airline_powerline_fonts')
-  let g:airline#extensions#tabline#left_sep = ' '
-  let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
-  let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
-  let g:airline_right_alt_sep     = '«'
-  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
-  let g:airline#extensions#readonly#symbol   = '⊘'
-  let g:airline#extensions#linecolumn#prefix = '¶'
-  let g:airline#extensions#paste#symbol      = 'ρ'
-  let g:airline_symbols.linenr    = '␊'
-  let g:airline_symbols.branch    = '⎇'
-  let g:airline_symbols.paste     = 'ρ'
-  let g:airline_symbols.paste     = 'Þ'
-  let g:airline_symbols.paste     = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
-else
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
-
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
-endif
-
