@@ -57,7 +57,7 @@ plugins=(git extract virtualenvwrapper autojump pip ubuntu docker go tmux)
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -66,7 +66,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
+export TERM="xterm-256color"
 export EDITOR='vim'
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
