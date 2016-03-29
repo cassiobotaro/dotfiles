@@ -25,7 +25,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 
 " Better and faster grep
-Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
 
 " AutoClose delimiters
 Plug 'Raimondi/delimitMate'
@@ -361,8 +361,8 @@ else
   let g:airline_symbols.linenr = ''
 endif
 
-" ack
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" ag
+let g:ag_prg = 'ag --vimgrep'
 
 " DelimitMate
 let b:delimitMate_expand_cr=1
