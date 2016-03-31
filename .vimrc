@@ -76,6 +76,9 @@ Plug 'mattn/emmet-vim'
 " Trailing whitespace
 Plug 'bronson/vim-trailing-whitespace'
 
+" Devicons
+Plug 'ryanoasis/vim-devicons'
+
 call plug#end()
 
 "*****************************************************************************
