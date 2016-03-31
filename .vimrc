@@ -73,6 +73,9 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'mattn/emmet-vim'
 
+" Trailing whitespace
+Plug 'bronson/vim-trailing-whitespace'
+
 call plug#end()
 
 "*****************************************************************************
