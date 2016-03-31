@@ -204,9 +204,6 @@ augroup END
 
 set autoread
 
-" Remove trailing whitespace on saveutocmd Rules
-autocmd BufWritePre * :%s/\s\+$//e
-
 "*****************************************************************************
 "" Mappings
 "*****************************************************************************
