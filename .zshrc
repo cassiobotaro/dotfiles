@@ -9,6 +9,15 @@ BULLETTRAIN_GO_SHOW=true
 BULLETTRAIN_CONTEXT_SHOW=false
 BULLETTRAIN_TIME_SHOW=false
 BULLETTRAIN_DIR_EXTENDED=0
+
+BULLETTRAIN_GIT_PROMPT_CMD="\$(custom_git_prompt)"
+
+custom_git_prompt() {
+  prompt=$(git_prompt_info)
+  prompt=${prompt//\//\ \ }
+  prompt=${prompt//_/\ }
+  echo ${prompt}
+}
 ZSH_THEME="bullet-train"
 
 # Uncomment the following line to use case-sensitive completion.
