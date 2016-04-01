@@ -477,6 +477,11 @@ let g:airline#extensions#virtualenv#enabled = 1
 
 let g:javascript_enable_domhtmlcss = 1
 
+" IndentLine
+let g:indentLine_concealcursor = 0
+let g:indentLine_char = '┆'
+let g:indentLine_faster = 1
+"
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
