@@ -5,5 +5,6 @@ sed -i -e 's/FontName=.*/FontName=Droid Sans Mono for Powerline 11/g' ~/.config/
 sudo -H pip install -U flake8 autopep8 isort
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+cd -
 cp .vimrc ~/.vimrc
 vim +PlugInstall

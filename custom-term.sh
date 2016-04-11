@@ -1,5 +1,5 @@
 # install oh-my-zsh
-sudo apt-get install zsh git python-setuptools autojump tree golang ttf-ancient-fonts
+sudo apt-get install -y zsh git python-setuptools autojump tree golang ttf-ancient-fonts
 # cp .gitconfig ~/.gitconfig
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 sh install-fonts.sh
