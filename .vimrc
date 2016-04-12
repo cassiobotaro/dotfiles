@@ -295,7 +295,7 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 "" Open current line on GitHub
-noremap ,o :!echo `git url`/blob/`git rev-parse --abbrev-ref HEAD`/%\#L<C-R>=line('.')<CR> \| xargs xdg-open<CR><CR>
+nnoremap <Leader>gb :.Gbrowse<CR>
 
 " vim-javascript
 augroup vimrc-javascript
