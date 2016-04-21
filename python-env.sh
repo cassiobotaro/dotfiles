@@ -1,5 +1,5 @@
-sudo apt-get install -y python-setuptools python-dev python3-dev
-sudo easy_install pip
+sudo apt-get install -y python-dev python3-dev python-pip
 sudo -H pip install -U  virtualenvwrapper jupyter flake8 docker-compose ipdb
-cp ipython_config.py ~/.ipython/profile_default/
+ipython --version
+cp ipython_config.py ~/.ipython/profile_cassiobotaro/
 echo 'source /usr/local/bin/virtualenvwrapper.sh' >> ~/.bashrc
