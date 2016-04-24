@@ -1,0 +1,14 @@
+" AutoClose delimiters
+Plug 'Raimondi/delimitMate'
+
+" quoting/parenthesizing made simple
+Plug 'tpope/vim-surround'
+
+" Python auto pep 8
+Plug 'tell-k/vim-autopep8'
+
+" Auto sort imports
+Plug 'fisadev/vim-isort'
+
+" Devicons
+Plug 'ryanoasis/vim-devicons'
