@@ -18,7 +18,7 @@ if !filereadable(vimplug_exists)
 
   " Run shell script if exist on custom select language
 
-  autocmd VimEnter * PlugInstall | q
+  autocmd VimEnter * PlugInstall
 endif
 
 " Required:
