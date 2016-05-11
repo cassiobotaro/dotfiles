@@ -5,20 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-BULLETTRAIN_GO_SHOW=true
-BULLETTRAIN_CONTEXT_SHOW=false
-BULLETTRAIN_TIME_SHOW=false
-BULLETTRAIN_DIR_EXTENDED=0
-
-BULLETTRAIN_GIT_PROMPT_CMD="\$(custom_git_prompt)"
-
-custom_git_prompt() {
-  prompt=$(git_prompt_info)
-  prompt=${prompt//\//\ \ }
-  prompt=${prompt//_/\ }
-  echo ${prompt}
-}
-ZSH_THEME="bullet-train"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -62,7 +49,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git extract virtualenvwrapper autojump pip ubuntu docker go tmux)
+plugins=(git extract virtualenvwrapper autojump  docker go tmux)
 
 # User configuration
 
@@ -111,5 +98,3 @@ alias jcat='python3 -m json.tool'
 alias cal='python3 -m calendar'
 alias py2path='python2 -m site'
 alias py3path='python3 -m site'
-# TMUX
-alias tmux="TERM=screen-256color-bce tmux"
