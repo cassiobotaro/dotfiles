@@ -1,6 +1,6 @@
 # Botaro toolbelt
 
-A series of settings and useful scripts
+A series of settings and useful scripts.
 
 ## Install-terminator
 *requires:* install-fonts.sh
