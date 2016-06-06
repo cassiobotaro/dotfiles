@@ -12,3 +12,6 @@ Plug 'fisadev/vim-isort'
 
 " Devicons
 Plug 'ryanoasis/vim-devicons'
+
+" Pytest
+Plug 'alfredodeza/pytest.vim'
