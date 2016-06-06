@@ -10,7 +10,7 @@ Install terminator and customize with awesome font.
 ## Install-fonts
 *requires:*
 
-Install a collection of pre-patched and adjusted fonts for usage with the (Powerline) [https://github.com/powerline/powerline] statusline plugin.
+Install a collection of pre-patched and adjusted fonts for usage with the [Powerline] (https://github.com/powerline/powerline) statusline plugin.
 
 ## Custom-term
 *requires:*
