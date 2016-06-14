@@ -15,4 +15,5 @@ let b:delimitMate_expand_inside_quotes=1
 let g:autopep8_disable_show_diff=1
 " Vim Airline
 let g:airline_skip_empty_sections = 1
-
+" Line highlight
+set cursorline
