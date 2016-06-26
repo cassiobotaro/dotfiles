@@ -16,3 +16,5 @@ let g:autopep8_disable_show_diff=1
 " Vim Airline
 let g:airline_skip_empty_sections = 1
 
+"Highlight current line
+set cursorline
