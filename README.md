@@ -1,38 +1,57 @@
-# Botaro toolbelt
+# Dotfiles
 
 A series of settings and useful scripts.
 
-## Install-terminator
-*requires:* install-fonts.sh
+## install_fonts.sh
 
-Install terminator and customize with awesome font.
-
-## Install-fonts
 *requires:*
 
 Install a collection of pre-patched and adjusted fonts for usage with the [Powerline] (https://github.com/powerline/powerline) statusline plugin.
 
-## Custom-term
-*requires:*
+## install_custom_zsh.sh
 
-Install zsh with oh-my-zsh and awesome themes and plugins
+*requires:* install-fonts.sh
 
-## Install-vim
-*requires:* install-fonts.sh and change font
+Install zsh with oh-my-zsh with [awesome theme](https://github.com/caiogondim/bullet-train-oh-my-zsh-theme) and plugins.
+
+## install_vim.sh
+
+*requires:* install-fonts.sh
 
 Install customized vim with superpowers!
 
-## Missing Programs
+## install_tmux.sh
+
+*requires:*
+
+Install tmux with [maglev](https://github.com/caiogondim/maglev) theme.
+
+## install_missing_programs.sh
+
 *requires:*
 
 Programs that are missing in Xubuntu
 
-## Install Docker
+## install_docker.sh
+
 *requires:*
 
 Guide to install docker.
 
-## Python Env
+## install_python_env.sh
+
 *requires:*
 
 Install a better python environment.(ipython, ipython notebook, flake8, virtualenvwrapper)
+
+## install_google_chrome.sh
+
+*requires:*
+
+Install browser Google Chrome.
+
+## install_front_end_things.sh
+
+*requires:*
+
+Install Node and some front end things.
