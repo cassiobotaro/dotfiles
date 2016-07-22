@@ -25,18 +25,3 @@ set cursorline
 " NerdTree
 let g:NERDTreeDirArrowExpandable = '📁'
 let g:NERDTreeDirArrowCollapsible = '📂'
-
-" Jedi Vim
-let g:jedi#use_tabs_not_buffers=1
-
-" Syntastic
-let g:syntastic_auto_loc_list=2
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-let g:syntastic_style_error_symbol = '💩'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
