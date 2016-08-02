@@ -87,7 +87,7 @@ Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
 "" Go Lang Bundle
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
@@ -588,4 +588,3 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
-
