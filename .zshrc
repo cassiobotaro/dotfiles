@@ -90,6 +90,7 @@ export EDITOR='vim'
 # Config
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
+alias tree="tree -C"
 
 # python aliases
 alias rmpyc='find . -name "__pycache__" -delete -or -iname "*.pyc" -delete'
