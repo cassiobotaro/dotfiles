@@ -7,7 +7,7 @@ endif
 
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "javascript,ruby,python,c,html,go"
+let g:vim_bootstrap_langs = "python,ruby,javascript,html,go,c"
 let g:vim_bootstrap_editor = "vim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
@@ -87,7 +87,7 @@ Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
 "" Go Lang Bundle
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
@@ -227,6 +227,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
+let g:airline_skip_empty_sections = 1
 
 "*****************************************************************************
 "" Abbreviations
@@ -390,7 +391,10 @@ nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 " Disable visualbell
-set novisualbell t_vb=
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
 
 "" Copy/Paste/Cut
 if has('unnamedplus')
@@ -438,7 +442,8 @@ nnoremap <Leader>o :.Gbrowse<CR>
 
 "" Custom configs
 
-
+autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 
 
 " vim-python
@@ -588,3 +593,4 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
