@@ -22,7 +22,3 @@ let g:airline_powerline_fonts = 1
 
 " Highlight current line
 set cursorline
-
-" NerdTree
-let g:NERDTreeDirArrowExpandable = '📁'
-let g:NERDTreeDirArrowCollapsible = '📂'

@@ -1,0 +1,12 @@
+# copy to ~/
+[user]
+	name = cassiobotaro
+	email = cassiobotaro@gmail.com
+[push]
+	default = simple
+[credential]
+	helper = cache --timeout=7200
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff

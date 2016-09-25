@@ -30,7 +30,7 @@ Install tmux with [maglev](https://github.com/caiogondim/maglev) theme.
 
 *requires:*
 
-Programs that are missing in Xubuntu
+Programs that are missing in Operation System
 
 ## install_docker.sh
 
