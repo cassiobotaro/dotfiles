@@ -1,3 +1,4 @@
+export TERM="xterm-256color"
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -53,7 +54,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git extract virtualenvwrapper autojump  docker go tmux)
+plugins=(git extract virtualenvwrapper autojump  docker go tmux sudo docker-compose)
 
 # User configuration
 
@@ -61,12 +62,13 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+export GOROOT=/home/cassiobotaro/.local/share/umake/go/go-lang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-export TERM="xterm-256color"
+
 export EDITOR='vim'
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
