@@ -24,7 +24,7 @@ Install customized vim with superpowers!
 
 *requires:*
 
-Install tmux with [maglev](https://github.com/caiogondim/maglev) theme.
+Install tmux with a simple personal theme and config.
 
 ## install_missing_programs.sh
 
