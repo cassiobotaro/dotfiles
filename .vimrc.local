@@ -24,8 +24,11 @@ let g:airline_powerline_fonts = 1
 set cursorline
 
 " vim-go
-let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'gofmt']
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
+let g:go_fmt_command = "goimports"
+let g:go_metalinter_autosave = 1
 
 au FileType go nmap <Leader>gs <Plug>(go-implements)
 au FileType go nmap <Leader>ge <Plug>(go-rename)
@@ -37,3 +40,12 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+augroup completion_preview_close
+  autocmd!
+  autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | endif
+augroup END
+
+" Molokai colorscheme
+let g:rehash256 = 1
+let g:molokai_original = 1
