@@ -49,3 +49,6 @@ augroup END
 " Molokai colorscheme
 let g:rehash256 = 1
 let g:molokai_original = 1
+
+" devicons problem with ctrlp
+let g:webdevicons_enable_ctrlp = 0
