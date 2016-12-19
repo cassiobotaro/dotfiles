@@ -1,6 +1,6 @@
 # Dotfiles
 
-A series of settings and useful scripts.
+A series of settings(dotfiles) and useful scripts.
 
 ## install_fonts.sh
 
