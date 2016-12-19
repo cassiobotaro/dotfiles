@@ -1,7 +1,4 @@
-# install oh-my-zsh
-sudo apt install -y zsh git autojump tree ttf-ancient-fonts python-pip tmux
-sudo  -H pip install -U virtualenvwrapper pip
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+#!/bin/sh
 wget https://raw.githubusercontent.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme
 mv bullet-train.zsh-theme ~/.oh-my-zsh/themes/
 cp ../.zshrc ~/.zshrc

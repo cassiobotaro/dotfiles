@@ -1,4 +1,5 @@
-sudo apt-get install -y vim vim-gtk git exuberant-ctags ncurses-term silversearcher-ag curl python-pip python3-pip
+#!/bin/sh
+sudo apt-get install -y vim-nox vim-gtk git exuberant-ctags ncurses-term silversearcher-ag curl python-pip python3-pip
 sudo -H pip install -U flake8
 sudo -H pip3 install -U autopep8 isort
 cp ../.vimrc ~/.vimrc

@@ -62,9 +62,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-export GOROOT=/home/cassiobotaro/.local/share/umake/go/go-lang
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -110,3 +107,6 @@ alias web='python3 -m webbrowser'
 alias inspect='python3 -m inspect'
 alias tokenize='python3 -m tokenize'
 alias zipy='python3 -m zipfile'
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
