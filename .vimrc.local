@@ -1,3 +1,6 @@
+" Writes the content of the file automatically if you call :make
+set autowrite
+
 " for html/rb files, 2 spaces
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
 autocmd Filetype htmldjango setlocal ts=2 sw=2 expandtab
@@ -23,28 +26,10 @@ let g:airline_powerline_fonts = 1
 " Highlight current line
 set cursorline
 
-" vim-go
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_list_type = "quickfix"
-let g:go_fmt_command = "goimports"
-let g:go_metalinter_autosave = 1
-
-au FileType go nmap <Leader>gs <Plug>(go-implements)
-au FileType go nmap <Leader>ge <Plug>(go-rename)
-au FileType go nmap <leader>gc <Plug>(go-coverage)
-
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-augroup completion_preview_close
-  autocmd!
-  autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | endif
-augroup END
-
 " python
 let python_highlight_all=1
+
+" Molokai
+let g:rehash256 = 1
+let g:molokai_original = 1
+colorscheme molokai
