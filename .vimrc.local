@@ -26,10 +26,10 @@ let g:airline_powerline_fonts = 1
 " Highlight current line
 set cursorline
 
-" python
-let python_highlight_all=1
-
 " Molokai
 let g:rehash256 = 1
 let g:molokai_original = 1
 colorscheme molokai
+
+" Vim-go
+let g:go_gocode_unimported_packages = 1
