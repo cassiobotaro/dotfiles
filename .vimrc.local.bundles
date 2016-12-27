@@ -1,6 +1,3 @@
-" AutoClose delimiters
-Plug 'Raimondi/delimitMate'
-
 " quoting/parenthesizing made simple
 Plug 'tpope/vim-surround'
 
