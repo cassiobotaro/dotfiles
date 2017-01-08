@@ -12,3 +12,6 @@ Plug 'ryanoasis/vim-devicons'
 
 " Pytest
 Plug 'alfredodeza/pytest.vim'
+
+"present
+Plug 'corylanou/vim-present', {'for' : 'present'}
