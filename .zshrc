@@ -6,9 +6,13 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-BULLETTRAIN_GO_SHOW=true
-BULLETTRAIN_CONTEXT_SHOW=false
-BULLETTRAIN_TIME_SHOW=false
+BULLETTRAIN_PROMPT_ORDER=(
+    git
+    dir
+    ruby
+    virtualenv
+    go
+)
 BULLETTRAIN_DIR_EXTENDED=0
 ZSH_THEME="bullet-train"
 
