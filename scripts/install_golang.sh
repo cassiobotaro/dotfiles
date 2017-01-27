@@ -1,7 +1,7 @@
 #!/bin/sh
-wget https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz
-sudo tar -zxvf go1.7.4.linux-amd64.tar.gz -C /usr/local/
-rm go1.7.4.linux-amd64.tar.gz
+wget https://storage.googleapis.com/golang/go1.7.5.linux-amd64.tar.gz
+sudo tar -zxvf go1.7.5.linux-amd64.tar.gz -C /usr/local/
+rm go1.7.5.linux-amd64.tar.gz
 echo "Set your env!"
 echo "echo 'export GOROOT=/usr/local/go' >> ~/.zshrc"
 echo "echo 'export GOPATH=\$HOME/go' >> ~/.zshrc"
