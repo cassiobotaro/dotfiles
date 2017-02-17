@@ -549,7 +549,7 @@ let g:javascript_enable_domhtmlcss = 1
 " vim-javascript
 augroup vimrc-javascript
   autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
+  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
 augroup END
 
 
@@ -558,7 +558,7 @@ augroup END
 augroup vimrc-python
   autocmd!
   autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
-      \ formatoptions+=croq softtabstop=4 smartindent
+      \ formatoptions+=croq softtabstop=4
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
