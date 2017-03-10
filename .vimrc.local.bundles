@@ -16,5 +16,8 @@ Plug 'alfredodeza/pytest.vim'
 "present
 Plug 'corylanou/vim-present', {'for' : 'present'}
 
-" quickrun
-Plug 'thinca/vim-quickrun'
+" vim-eunuch
+Plug 'tpope/vim-eunuch'
+
+" vim-startify
+Plug 'mhinz/vim-startify'
