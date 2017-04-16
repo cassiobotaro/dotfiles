@@ -33,3 +33,9 @@ colorscheme molokai
 
 " Vim-go
 let g:go_gocode_unimported_packages = 1
+let g:go_metalinter_autosave = 1
+
+aug QFClose
+  au!
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+aug END

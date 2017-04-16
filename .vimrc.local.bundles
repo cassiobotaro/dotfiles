@@ -19,5 +19,11 @@ Plug 'corylanou/vim-present', {'for' : 'present'}
 " vim-eunuch
 Plug 'tpope/vim-eunuch'
 
-" vim-startify
-Plug 'mhinz/vim-startify'
+" tmux
+Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
+
+"auto set paste mode
+Plug 'ConradIrwin/vim-bracketed-paste'
+
+" Docker
+Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
