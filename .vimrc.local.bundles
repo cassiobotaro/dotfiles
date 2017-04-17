@@ -2,16 +2,16 @@
 Plug 'tpope/vim-surround'
 
 " Python auto pep 8
-Plug 'tell-k/vim-autopep8'
+Plug 'tell-k/vim-autopep8', {'for': 'python'}
 
 " Auto sort imports
-Plug 'fisadev/vim-isort'
+Plug 'fisadev/vim-isort', {'for': 'python'}
 
 " Devicons
 Plug 'ryanoasis/vim-devicons'
 
 " Pytest
-Plug 'alfredodeza/pytest.vim'
+Plug 'alfredodeza/pytest.vim', {'for': 'python'}
 
 "present
 Plug 'corylanou/vim-present', {'for' : 'present'}
@@ -27,3 +27,6 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
+
+" Dispatch
+Plug 'tpope/vim-dispatch'

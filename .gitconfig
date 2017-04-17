@@ -2,6 +2,7 @@
 [user]
 	name = cassiobotaro
 	email = cassiobotaro@gmail.com
+	signingkey = 117EB8ECA717EDF8
 [push]
 	default = simple
 [credential]
@@ -9,4 +10,6 @@
 [core]
 	editor = vim
 [merge]
-	tool = vimdiff
+tool = vimdiff
+[commit]
+	gpgsign = true
