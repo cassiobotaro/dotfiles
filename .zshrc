@@ -9,7 +9,7 @@ ZSH_THEME="steeef"
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git extract virtualenvwrapper autojump  docker go tmux sudo docker-compose)
+plugins=(git extract virtualenvwrapper autojump  docker go tmux sudo docker-compose zsh-syntax-highlighting)
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
