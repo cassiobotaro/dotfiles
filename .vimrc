@@ -1,3 +1,5 @@
+" vim-bootstrap 8624ab1
+
 "*****************************************************************************
 "" Vim-PLug core
 "*****************************************************************************
@@ -101,6 +103,7 @@ Plug 'jelera/vim-javascript-syntax'
 " python
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
 
 "*****************************************************************************
