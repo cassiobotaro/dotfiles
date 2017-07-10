@@ -30,3 +30,8 @@ Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
 
 " Dispatch
 Plug 'tpope/vim-dispatch'
+
+" go-debug
+if has('nvim')
+    Plug 'jodosha/vim-godebug', {'for': 'go'}
+endif
