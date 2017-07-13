@@ -1,4 +1,4 @@
-" vim-bootstrap 529babb
+" vim-bootstrap 148a7a8
 
 "*****************************************************************************
 "" Vim-PLug core
@@ -481,18 +481,6 @@ autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 
 
 " go
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [  'p:package', 'i:imports:1', 'c:constants', 'v:variables',
-        \ 't:types',  'n:interfaces', 'w:fields', 'e:embedded', 'm:methods',
-        \ 'r:constructor', 'f:functions' ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
-    \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
-
 " vim-go
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -507,20 +495,7 @@ endfunction
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
-let g:go_auto_type_info = 1
 let g:syntastic_go_checkers = ['golint', 'govet']
-let g:go_metalinter_enabled = [
-    \ 'deadcode',
-    \ 'errcheck',
-    \ 'gas',
-    \ 'goconst',
-    \ 'gocyclo',
-    \ 'golint',
-    \ 'gosimple',
-    \ 'ineffassign',
-    \ 'vet',
-    \ 'vetshadow'
-\]
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 let g:go_highlight_types = 1

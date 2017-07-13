@@ -19,19 +19,8 @@ Plug 'corylanou/vim-present', {'for' : 'present'}
 " vim-eunuch
 Plug 'tpope/vim-eunuch'
 
-" tmux
-Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
-
-"auto set paste mode
-Plug 'ConradIrwin/vim-bracketed-paste'
-
 " Docker
 Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
 
 " Dispatch
 Plug 'tpope/vim-dispatch'
-
-" go-debug
-if has('nvim')
-    Plug 'jodosha/vim-godebug', {'for': 'go'}
-endif

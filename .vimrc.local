@@ -29,32 +29,6 @@ set cursorline
 " Vim-go
 let g:go_gocode_unimported_packages = 1
 let g:go_metalinter_autosave = 1
-" Run only when called
-let g:go_metalinter_enabled = [
-            \'megacheck',
-            \'structcheck',
-            \'unused',
-            \'goconst',
-            \'gotype,'
-            \'golint',
-            \'gosimple',
-            \'interfacer',
-            \'misspell',
-            \'aligncheck',
-            \'errcheck',
-            \'goimports',
-            \'lll',
-            \'safesql',
-            \'staticcheck',
-            \'unconvert',
-            \'unparam',
-            \'dupl',
-            \'gocyclo',
-            \'ineffassign',
-            \'varcheck',
-            \'deadcode',
-            \'gas'
-\]
 
 " Closes buffer and quicklist too
 aug QFClose
