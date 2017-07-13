@@ -6,6 +6,6 @@ sudo pip install -u neovim
 sudo pip3 install -u neovim
 mkdir -p ~/.config/nvim/
 cp ../init.vim ~/.config/nvim/
-cp ../.vimrc.local.bundles ~/.config/nvim/local_bundles.vim
-cp ../.vimrc.local ~/.config/nvim/local_init.vim
+cp ../local_bundles.vim ~/.config/nvim/
+cp ../local_init.vim ~/.config/nvim/
 nvim +PlugInstall +qall
