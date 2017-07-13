@@ -24,3 +24,7 @@ Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
 
 " Dispatch
 Plug 'tpope/vim-dispatch'
+
+" vim-delve
+" uncomment when https://github.com/sebdah/vim-delve/pull/6 was merged
+" Plug 'sebdah/vim-delve'
