@@ -31,6 +31,9 @@ let g:go_gocode_unimported_packages = 1
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+au FileType go set foldmethod=syntax
+au FileType go set nofoldenable
+let g:go_fold_enable = ['block', 'import', 'varconst']
 
 " Closes buffer and quicklist too
 aug QFClose
@@ -39,7 +42,7 @@ aug QFClose
 aug END
 
 " Ale
-let g:ale_linters = {'go': ['go build', 'go vet', 'golint'], 'python':['flake8']}
+let g:ale_linters = {'go': ['go vet', 'golint'], 'python':['flake8']}
 let g:ale_lint_on_save = 1
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
