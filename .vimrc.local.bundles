@@ -26,4 +26,4 @@ Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}
 Plug 'tpope/vim-dispatch'
 
 " vim-delve
-Plug 'sebdah/vim-delve'
+" Plug 'sebdah/vim-delve'

@@ -1,4 +1,4 @@
-" vim-bootstrap 148a7a8
+" vim-bootstrap 89346c6
 
 "*****************************************************************************
 "" Vim-PLug core
@@ -161,7 +161,6 @@ set nobackup
 set noswapfile
 
 set fileformats=unix,dos,mac
-set showcmd
 
 if exists('$SHELL')
     set shell=$SHELL
@@ -486,13 +485,12 @@ autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 function! s:build_go_files()
   let l:file = expand('%')
   if l:file =~# '^\f\+_test\.go$'
-    call go#cmd#Test(0, 1)
+    call go#test#Test(0, 1)
   elseif l:file =~# '^\f\+\.go$'
     call go#cmd#Build(0)
   endif
 endfunction
 
-let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
 let g:syntastic_go_checkers = ['golint', 'govet']
@@ -638,4 +636,3 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
-
