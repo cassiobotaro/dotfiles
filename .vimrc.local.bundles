@@ -27,3 +27,6 @@ Plug 'tpope/vim-dispatch'
 
 " vim-delve
 " Plug 'sebdah/vim-delve'
+
+" Hub
+Plug 'tpope/vim-rhubarb'
