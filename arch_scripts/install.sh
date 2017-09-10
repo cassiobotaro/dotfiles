@@ -1,4 +1,5 @@
-yaourt -S chromedriver google-chrome slack-desktop git-core ctags ncurses curl spotify tmux neovim python-neovim python-pip zsh xclip phantomjs git autojump tree oh-my-zsh-git docker-compose docker geckodriver go tlp tlp-rdw ttf-dejavu
+yaourt -R google-chromium
+yaourt -S chromedriver google-chrome slack-desktop git-core ctags ncurses curl spotify tmux neovim python-neovim python-pip zsh xclip phantomjs git autojump tree oh-my-zsh-git docker-compose docker geckodriver go tlp tlp-rdw ttf-dejavu vim
 chsh -s $(which zsh)
 sudo tlp start
 systemctl start docker
@@ -16,10 +17,14 @@ go get -u github.com/kardianos/govendor
 go get -u golang.org/x/tools/cmd/present
 go get -u github.com/alecthomas/gometalinter
 gometalinter -i
-sudo -H pip install --upgrade  virtualenvwrapper flake8 jedi
+sudo -H pip install --upgrade  virtualenvwrapper flake8 jedi ipython
 mkdir -p ~/.config/nvim
-cp ../.zshrc ~/
-cp ../.tmux.conf ~/
-cp ../init.vim ~/.config/nvim
-cp ../local_init.vim ~/.config/nvim
-cp ../local_bundles.vim ~/.config/nvim
+cp .zshrc ~/
+cp .gitconfig ~/
+cp .tmux.conf ~/
+cp init.vim ~/.config/nvim
+cp local_init.vim ~/.config/nvim
+cp local_bundles.vim ~/.config/nvim
+cp .vimrc ~/
+cp .vimrc.local ~/
+cp .vimrc.local.bundles ~/
