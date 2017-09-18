@@ -50,3 +50,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " set clipboard
 set clipboard=unnamed,unnamedplus
+"
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
