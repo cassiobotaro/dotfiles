@@ -17,7 +17,7 @@ go get -u github.com/kardianos/govendor
 go get -u golang.org/x/tools/cmd/present
 go get -u github.com/alecthomas/gometalinter
 gometalinter -i
-sudo -H pip install --upgrade  virtualenvwrapper flake8 jedi ipython
+pip install --user --upgrade virtualenvwrapper flake8-bugbear jedi ipython  bandit pylint pydocstyle
 mkdir -p ~/.config/nvim
 cp .zshrc ~/
 cp .gitconfig ~/
