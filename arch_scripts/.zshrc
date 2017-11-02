@@ -57,3 +57,5 @@ function pgcli(){
         --link=$1  \
         pygmy/pgcli postgres://${PGUSER:-"postgres"}:{PGPASS:-"postgres"}@${PGHOST:-$1}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
 }
+
+export NUVEO_DEBUG=true

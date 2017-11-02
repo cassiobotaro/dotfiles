@@ -30,3 +30,4 @@ Plug 'sebdah/vim-delve'
 
 " Hub
 Plug 'tpope/vim-rhubarb'
+Plug 'tell-k/vim-quick-radon'
