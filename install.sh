@@ -1,4 +1,4 @@
-yaourt -S chromedriver google-chrome slack-desktop git-core ctags ncurses curl spotify tmux neovim python-neovim python-pip zsh xclip phantomjs git autojump tree oh-my-zsh-git docker-compose docker geckodriver go tlp tlp-rdw ttf-dejavu vim gvim powerline-fonts ttf-ancient-fonts the_silver_searcher xfce4-clipman-plugin
+yaourt -S chromedriver google-chrome slack-desktop git-core ctags ncurses curl spotify tmux neovim python-neovim python-pip zsh xclip phantomjs git autojump tree oh-my-zsh-git docker-compose docker geckodriver go tlp tlp-rdw ttf-dejavu vim gvim powerline-fonts ttf-ancient-fonts the_silver_searcher xfce4-clipman-plugin tp_smapi acpi_call
 chsh -s $(which zsh)
 sudo tlp start
 systemctl start docker
