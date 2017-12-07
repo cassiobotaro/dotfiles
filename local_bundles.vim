@@ -33,3 +33,8 @@ Plug 'tpope/vim-dispatch'
 
 " go-debug
 Plug 'sebdah/vim-delve', {'for': 'go'}
+
+" Deoplete Auto complete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-jedi'

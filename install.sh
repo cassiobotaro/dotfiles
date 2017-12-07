@@ -1,4 +1,3 @@
-yaourt -R google-chromium
 yaourt -S chromedriver google-chrome slack-desktop git-core ctags ncurses curl spotify tmux neovim python-neovim python-pip zsh xclip phantomjs git autojump tree oh-my-zsh-git docker-compose docker geckodriver go tlp tlp-rdw ttf-dejavu vim gvim powerline-fonts ttf-ancient-fonts the_silver_searcher xfce4-clipman-plugin
 chsh -s $(which zsh)
 sudo tlp start
@@ -17,7 +16,7 @@ go get -u github.com/kardianos/govendor
 go get -u golang.org/x/tools/cmd/present
 go get -u github.com/alecthomas/gometalinter
 gometalinter -i
-pip install --user --upgrade virtualenvwrapper flake8-bugbear jedi ipython  bandit pylint pydocstyle pipenv radon
+sudo pip install --upgrade virtualenvwrapper flake8-bugbear jedi ipython  bandit pylint pydocstyle pipenv radon autopep8 isort
 mkdir -p ~/.config/nvim
 cp .zshrc ~/
 cp .gitconfig ~/

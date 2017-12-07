@@ -32,6 +32,7 @@ let g:go_metalinter_autosave = 1
 au FileType go set foldmethod=syntax
 au FileType go set nofoldenable
 let g:go_fold_enable = ['block', 'import', 'varconst']
+let g:go_decls_mode='fzf'
 
 " Closes buffer and quicklist too
 aug QFClose
@@ -50,3 +51,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " set clipboard
 set clipboard=unnamed,unnamedplus
+"
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1

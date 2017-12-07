@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=/usr/share/oh-my-zsh
 
 # 256-color
 export TERM="xterm-256color"
@@ -9,7 +9,7 @@ ZSH_THEME="steeef"
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git extract virtualenvwrapper autojump  docker go tmux sudo docker-compose zsh-syntax-highlighting)
+plugins=(git extract virtualenvwrapper autojump  docker go tmux sudo docker-compose archlinux)
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
@@ -38,8 +38,24 @@ alias tokenize='python3 -m tokenize'
 alias zipy='python3 -m zipfile'
 
 # go
-export GOROOT=/usr/local/go
+export GOROOT=/usr/lib/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+function ctop() {
+    docker run --rm -ti \
+        --name=ctop \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        quay.io/vektorlab/ctop:latest
+}
+
+function pgcli(){
+    docker run --rm -ti \
+        --name=pgcli \
+        --link=$1  \
+        pygmy/pgcli postgres://${PGUSER:-"postgres"}:{PGPASS:-"postgres"}@${PGHOST:-$1}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
+}
+
+export NUVEO_DEBUG=true

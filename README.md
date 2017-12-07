@@ -1,3 +1,3 @@
 # Dotfiles
 
-A series of settings(dotfiles) and useful scripts.
+As the name says, here are my dotfiles, updated as possible.
