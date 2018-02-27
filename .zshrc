@@ -9,7 +9,7 @@ ZSH_THEME="steeef"
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git extract virtualenvwrapper autojump  docker go tmux sudo docker-compose archlinux)
+plugins=(git extract virtualenvwrapper autojump  docker go tmux sudo docker-compose archlinux pyenv)
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
@@ -51,11 +51,6 @@ function ctop() {
         quay.io/vektorlab/ctop:latest
 }
 
-function pgcli(){
-    docker run --rm -ti \
-        --name=pgcli \
-        --link=$1  \
-        pygmy/pgcli postgres://${PGUSER:-"postgres"}:{PGPASS:-"postgres"}@${PGHOST:-$1}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
-}
-
 export NUVEO_DEBUG=true
+alias vim=nvim
+source $HOME/.cargo/env

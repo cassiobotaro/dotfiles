@@ -5,7 +5,7 @@ Plug 'tpope/vim-surround'
 Plug 'tell-k/vim-autopep8', {'for': 'python'}
 
 " Auto sort imports
-Plug 'fisadev/vim-isort', {'for': 'python'}
+Plug 'stsewd/isort.nvim', { 'for': 'python', 'do': ':UpdateRemotePlugins' }
 
 " Devicons
 Plug 'ryanoasis/vim-devicons'
@@ -38,3 +38,5 @@ Plug 'sebdah/vim-delve', {'for': 'go'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'zchee/deoplete-jedi'
+" theme for vim
+Plug 'ayu-theme/ayu-vim'

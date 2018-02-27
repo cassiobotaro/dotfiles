@@ -28,7 +28,7 @@ set cursorline
 
 " Vim-go
 let g:go_gocode_unimported_packages = 1
-let g:go_metalinter_autosave = 1
+" let g:go_metalinter_autosave = 1
 au FileType go set foldmethod=syntax
 au FileType go set nofoldenable
 let g:go_fold_enable = ['block', 'import', 'varconst']
@@ -54,3 +54,8 @@ set clipboard=unnamed,unnamedplus
 "
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+let g:python3_host_prog = '/usr/bin/python3'
+
+set termguicolors
+let ayucolor="dark"
+colorscheme ayu
