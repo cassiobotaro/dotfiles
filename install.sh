@@ -1,4 +1,4 @@
-yaourt -S slack-desktop git ctags ncurses curl spotify tmux neovim python-neovim python-pip zsh xclip autojump tree oh-my-zsh-git docker-compose docker go powerline-fonts the_silver_searcher xfce4-clipman-plugin gimp xfce4-whiskermenu-plugin ttf-nerd-fonts-knack-complete-git flake8 python-jedi jupyter autopep8 python-isort
+yaourt -S slack-desktop git ctags ncurses curl spotify tmux neovim python-neovim python-pip zsh xclip autojump tree oh-my-zsh-git docker-compose docker go powerline-fonts the_silver_searcher xfce4-clipman-plugin gimp xfce4-whiskermenu-plugin ttf-nerd-fonts-knack-complete-git flake8 python-jedi jupyter autopep8 python-isort ttf-vlgothic
 cp /usr/share/oh-my-zsh/zshrc ~/.zshrc
 chsh -s $(which zsh)
 systemctl start docker
