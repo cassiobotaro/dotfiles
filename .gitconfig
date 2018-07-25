@@ -1,12 +1,9 @@
-# copy to ~/
 [user]
 	name = cassiobotaro
 	email = cassiobotaro@gmail.com
 [push]
 	default = simple
-[credential]
-	helper = cache --timeout=86400
 [core]
 	editor = vim
-[merge]
-	tool = vimdiff
+[url "git@github.com:"]
+	insteadOf = https://github.com/
