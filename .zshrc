@@ -12,21 +12,17 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(
     git
     extract
-    virtualenvwrapper
     autojump
-    docker
-    go
     tmux
     sudo
     docker-compose
-    archlinux
 )
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 
 alias zshconfig="nvim ~/.zshrc"
-alias nvimconfig="nvim ~/.config/nvim/local_init.vim"
+alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias tree="tree -C"
 
 # go
@@ -34,8 +30,11 @@ export GOROOT=/usr/lib/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# fzf
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# container monitoring
 function ctop() {
     docker run --rm -ti \
         --name=ctop \
@@ -43,5 +42,12 @@ function ctop() {
         quay.io/vektorlab/ctop:latest
 }
 
-export NUVEO_DEBUG=true
+
+# postgres client
+function pgcli(){
+	echo "postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}"
+        docker run --rm -ti --name=pgcli --net=host \
+        pygmy/pgcli postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
+}
+
 alias vim=nvim
