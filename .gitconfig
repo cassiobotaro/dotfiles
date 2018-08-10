@@ -4,6 +4,6 @@
 [push]
 	default = simple
 [core]
-	editor = nvim
+	editor = vim
 [url "git@github.com:"]
 	insteadOf = https://github.com/

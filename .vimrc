@@ -1,4 +1,4 @@
-" Heavily inspired by @drgarcia1986 and vim-bootstrap
+" Heavily inspired by @drgarcia1986i, @lerrua and vim-bootstrap
 
 " Normally we use vim-extensions. If you want true vi-compatibility
 " remove change the following statements
@@ -8,15 +8,13 @@ set modelines=0
 
 
 " Auto install Vim Plug
-let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
-  silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall
 endif
 
-
-"  Plugins
 
 call plug#begin('~/.vim/plugged/')
 Plug 'vim-airline/vim-airline' |  Plug 'vim-airline/vim-airline-themes'            " statusline/tabline themes(keep on top)
@@ -33,23 +31,17 @@ Plug 'w0rp/ale'                                                                 
 Plug 'ryanoasis/vim-devicons'                                                      " dev icons
 Plug 'corylanou/vim-present', {'for' : 'present'}                                  " go present
 Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}                             " dockerfile
-Plug 'maralla/completor.vim'                                                       " autocomplete
 Plug 'alfredodeza/pytest.vim', {'for': 'python'}                                   " run pytest inside vim
-Plug 'davidhalter/jedi-vim', {'for': 'python'}                                     " python plugin
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
 Plug 'buoto/gotests-vim', {'for': 'go'}                                            " generate tests for go
-Plug 'sebdah/vim-delve', {'for': 'go'}                                             " go debugger
 call plug#end()
-
-
-" Configurations
 
 let mapleader = ","                                             " set leader shortcut to a comma
 
 set t_Co=256                                                    " display 256 colors
-set backup
-set backupdir=~/.cache/nvim                                     " directory to store backup files
-set directory=~/.cache/nvim                                     " directory to store swap files
+set noswapfile                                                  " avoid swap files
+set nobackup                                                    " avoid bkp files
+set nowritebackup                                               " no make a backup before overwriting file
 set undofile                                                    " persistent undo
 set undolevels=1000                                             " maximum number of changes that can be undone
 set undoreload=10000                                            " maximum number lines to save for undo on a buffer reload
@@ -74,9 +66,6 @@ silent! colorscheme molokai                                     " colorscheme
 filetype plugin indent on                                       " recognize filetype, plugins and indent
 syntax on                                                       " enable syntax highlight
 
-
-" Key maps
-
 " Split
 " horizontally
 noremap <Leader>h :<C-u>split<CR>
@@ -95,6 +84,8 @@ noremap <leader>x :bn<CR>
 noremap <leader>w :bn<CR>
 " close buffer
 noremap <leader>c :bd<CR>
+"" Set working directory
+nnoremap <leader>. :lcd %:p:h<CR>
 
 
 " Closes buffer and quicklist too
@@ -109,12 +100,23 @@ aug completion_preview_close
   au CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | endif
 aug END
 
+"" Remember cursor position
+augroup vimrc-remember-cursor-position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
 
-" Plugins
+" remove trailing whitespaces
+command! FixWhitespace :%s/\s\+$//e
+" fix python import (based on isort)
+command! -nargs=* -range=% FixPythonImports :<line1>,<line2>! isort <args> -
+" Save with root privilege
+command! Wroot :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
 
 " airline configs
 let g:airline_symbols = {}
-let g:airline_theme = 'term'
+let g:airline_theme = 'dracula'
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
 let g:airline#extensions#readonly#symbol   = '⊘'
@@ -142,14 +144,20 @@ nnoremap <silent> <leader>e :FZF -m<CR>
 " find some text
 nnoremap <silent> <leader>f :Ag<CR>
 
-
-" remove trailing whitespaces
-command! FixWhitespace :%s/\s\+$//e
-" fix python import (based on isort)
-command! -nargs=* -range=% FixPythonImports :<line1>,<line2>! isort <args> -
-" Save with root privilege
-command! Wroot :execute ':silent w !sudo tee % > /dev/null' | :edit!
-
+" ALE
+let g:ale_linters = {
+\	'go': ['go build', 'go vet', 'golint'],
+\	'python': ['flake8']
+\}
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = ''
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+" jump to prev/next quickfix results
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " vim-go
 " run :GoBuild or :GoTestCompile based on the go file
@@ -193,40 +201,11 @@ augroup go
   au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
 augroup END
 let g:go_gocode_unimported_packages = 1
-au FileType go set foldmethod=syntax
-au FileType go set nofoldenable
-let g:go_fold_enable = ['block', 'import', 'varconst']
 let g:go_decls_mode='fzf'
 
-" jedi-vim
-augroup vimrc-python
+augroup python
   autocmd!
   autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
       \ formatoptions+=croq softtabstop=4
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
-let g:jedi#popup_on_dot = 0
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#smart_auto_mappings = 0
-
-
-" ALE
-let g:ale_linters = {
-\	'go': ['go build', 'go vet', 'golint'],
-\	'python': ['flake8']
-\}
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = ''
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-" jump to prev/next quickfix results
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)

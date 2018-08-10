@@ -19,10 +19,10 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-export EDITOR='nvim'
+export EDITOR='vim'
 
-alias zshconfig="nvim ~/.zshrc"
-alias nvimconfig="nvim ~/.config/nvim/init.vim"
+alias zshconfig="vim ~/.zshrc"
+alias vimconfig="vim ~/.vimrc"
 alias tree="tree -C"
 
 # go
@@ -42,12 +42,9 @@ function ctop() {
         quay.io/vektorlab/ctop:latest
 }
 
-
 # postgres client
 function pgcli(){
-	echo "postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}"
-        docker run --rm -ti --name=pgcli --net=host \
-        pygmy/pgcli postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
+    echo "postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}"
+    docker run --rm -ti --name=pgcli --net=host \
+    pygmy/pgcli postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
 }
-
-alias vim=nvim
