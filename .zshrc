@@ -24,6 +24,8 @@ export EDITOR='vim'
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 alias tree="tree -C"
+alias cat='bat'
+alias preview="fzf --preview 'bat --color \"always\" {}'"
 
 # go
 export GOROOT=/usr/lib/go
@@ -32,6 +34,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # fzf
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})+abort'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # container monitoring
