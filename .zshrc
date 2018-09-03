@@ -19,13 +19,15 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-export EDITOR='vim'
+export EDITOR='nvim'
 
-alias zshconfig="vim ~/.zshrc"
-alias vimconfig="vim ~/.vimrc"
+
+alias zshconfig="nvim ~/.zshrc"
+alias nvimconfig="nvim ~/.vimrc"
 alias tree="tree -C"
 alias cat='bat'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias vim=neovim
 
 # go
 export GOROOT=/usr/lib/go
@@ -34,7 +36,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # fzf
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(vim {})+abort'"
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # container monitoring
