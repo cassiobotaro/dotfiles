@@ -16,6 +16,7 @@ plugins=(
     tmux
     sudo
     docker-compose
+    pyenv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -27,7 +28,7 @@ alias nvimconfig="nvim ~/.vimrc"
 alias tree="tree -C"
 alias cat='bat'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
-alias vim=neovim
+alias vim=nvim
 
 # go
 export GOROOT=/usr/lib/go
