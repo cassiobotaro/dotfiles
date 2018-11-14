@@ -16,6 +16,7 @@ plugins=(
     tmux
     sudo
     docker-compose
+    pyenv
 )
 
 source $ZSH/oh-my-zsh.sh
