@@ -2,8 +2,8 @@ git clone https://aur.archlinux.org/yay.git &&\
 	cd yay &&\
 	makepkg -si &&\
 	cd - &&\
-	rm -R yay
-yay -S slack-desktop git curl spotify tmux neovim python-pip zsh xclip autojump tree oh-my-zsh-git base-devel openssl zlib docker-compose docker the_silver_searcher xfce4-clipman-plugin gimp xfce4-whiskermenu-plugin ttf-nerd-fonts-hack-complete-git bat ttf-vlgothic ttf-ancient-fonts ttf-ancient-fonts ctags ncurses python-neovim python-jedi python-isort python2-neovim flake8 python-pipenv pyenv
+	sudo rm -R yay
+yay -S google-chrome slack-desktop git curl spotify tmux neovim python-pip zsh xclip autojump tree oh-my-zsh-git base-devel openssl zlib docker-compose docker the_silver_searcher xfce4-clipman-plugin gimp xfce4-whiskermenu-plugin ttf-nerd-fonts-hack-complete-git bat ttf-vlgothic ttf-ancient-fonts ttf-ancient-fonts ctags ncurses python-neovim python-jedi python-isort python2-neovim flake8 redshift pyenv
 cp .zshrc ~/
 cp .tmux.conf ~/
 mkdir -p ~/.config/nvim

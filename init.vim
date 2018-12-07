@@ -29,7 +29,6 @@ Plug 'buoto/gotests-vim', {'for': 'go'}                                         
 Plug 'sebdah/vim-delve', {'for': 'go'}                                             " go debugger
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }                      " autocomplete
 Plug 'zchee/deoplete-jedi'                                                         " python autocomplete
-Plug 'zchee/deoplete-go', { 'do': 'make'}                                          " go autocomplete
 call plug#end()
 
 " Configurations
