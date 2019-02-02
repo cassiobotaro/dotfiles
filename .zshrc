@@ -54,3 +54,6 @@ function pgcli(){
     docker run --rm -ti --name=pgcli --net=host \
     pygmy/pgcli postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
 }
+
+PATH=~/.local/bin:$PATH
+source virtualenvwrapper.sh
