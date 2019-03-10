@@ -14,4 +14,5 @@ chsh -s $(which zsh)
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo usermod -aG docker $USER
+sudo chown -R "$USER:$USER" "$ZSH_CACHE_DIR"
 su - $USER
