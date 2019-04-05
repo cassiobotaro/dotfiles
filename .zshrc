@@ -24,10 +24,8 @@ export EDITOR='nvim'
 
 
 alias zshconfig="nvim ~/.zshrc"
-alias nvimconfig="nvim ~/.vimrc"
+alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias tree="tree -C"
-alias cat='bat'
-alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias vim=nvim
 
 # go
@@ -56,4 +54,4 @@ function pgcli(){
 }
 
 PATH=~/.local/bin:$PATH
-source virtualenvwrapper.sh
+
