@@ -27,8 +27,8 @@ Plug 'alfredodeza/pytest.vim', {'for': 'python'}                                
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
 Plug 'buoto/gotests-vim', {'for': 'go'}                                            " generate tests for go
 Plug 'sebdah/vim-delve', {'for': 'go'}                                             " go debugger
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }                      " autocomplete
-Plug 'zchee/deoplete-jedi'                                                         " python autocomplete
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }          " markdown preview
+Plug 'davidhalter/jedi-vim'                                                        " python stuff
 call plug#end()
 
 " Configurations
@@ -166,6 +166,6 @@ let g:go_gocode_propose_source=1
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
 let g:go_gocode_unimported_packages = 1
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
+let g:go_metalinter_command = "golangci-lint"
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'

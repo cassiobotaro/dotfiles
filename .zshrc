@@ -53,5 +53,9 @@ function pgcli(){
     pygmy/pgcli postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
 }
 
-PATH=~/.local/bin:$PATH
+# update python packages
+function upy(){
+    pip install --user -U neovim jedi isort flake8 black cookiecutter
+}
 
+PATH=~/.local/bin:$PATH
