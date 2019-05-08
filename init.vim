@@ -28,7 +28,7 @@ Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                  
 Plug 'buoto/gotests-vim', {'for': 'go'}                                            " generate tests for go
 Plug 'sebdah/vim-delve', {'for': 'go'}                                             " go debugger
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }          " markdown preview
-Plug 'davidhalter/jedi-vim'                                                        " python stuff
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 
 " Configurations
@@ -169,3 +169,8 @@ let g:go_gocode_unimported_packages = 1
 let g:go_metalinter_command = "golangci-lint"
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+
+" Jedi
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = "2"
+autocmd FileType python setlocal completeopt-=preview
