@@ -106,12 +106,12 @@ augroup vimrc-remember-cursor-position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-" remove trailing whitespaces
-command! FixWhitespace :%s/\s\+$//e
+"remove trailing whitespace on save
+autocmd! BufWritePre * :%s/\s\+$//e
 " fix python import (based on isort)
 command! -nargs=* -range=% FixPythonImports :<line1>,<line2>! isort <args> -
-" Save with root privilege
-command! Wroot :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
+
 
 
 " airline configs
@@ -158,8 +158,6 @@ let g:ale_lint_on_text_changed = 'never'
 " jump to prev/next quickfix results
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-let g:python3_host_prog = '/usr/bin/python'
 
 " vim-go
 let g:go_gocode_propose_source=1

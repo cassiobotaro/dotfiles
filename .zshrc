@@ -59,3 +59,4 @@ function upy(){
 }
 
 PATH=~/.local/bin:$PATH
+source $HOME/.poetry/env
