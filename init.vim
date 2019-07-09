@@ -86,6 +86,9 @@ noremap <leader>w :bn<CR>
 noremap <leader>c :bd<CR>
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
+"" Vmap for maintain Visual Mode after shifting > and <
+vmap < <gv
+vmap > >gv
 
 
 " Closes buffer and quicklist too

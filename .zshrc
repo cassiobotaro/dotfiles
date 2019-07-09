@@ -28,11 +28,6 @@ alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias tree="tree -C"
 alias vim=nvim
 
-# go
-export GOROOT=/usr/lib/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
 # fzf
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
@@ -55,8 +50,7 @@ function pgcli(){
 
 # update python packages
 function upy(){
-    pip install --user -U neovim jedi isort flake8 black cookiecutter
+    pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose 
 }
 
 PATH=~/.local/bin:$PATH
-source $HOME/.poetry/env
