@@ -1,7 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/cassiobotaro/.oh-my-zsh"
 
-
 # 256-color
 export TERM="xterm-256color"
 
@@ -18,7 +17,6 @@ plugins=(
     sudo
     docker-compose
     pyenv
-    virtualenvwrapper
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -26,14 +24,9 @@ export EDITOR='nvim'
 
 
 alias zshconfig="nvim ~/.zshrc"
-alias nvimconfig="nvim ~/.vimrc"
+alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias tree="tree -C"
 alias vim=nvim
-
-# go
-export GOROOT=/usr/lib/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # fzf
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
@@ -55,4 +48,9 @@ function pgcli(){
     pygmy/pgcli postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
 }
 
-export PATH=~/.local/bin:$PATH
+# update python packages
+function upy(){
+    pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose 
+}
+
+PATH=~/.local/bin:$PATH
