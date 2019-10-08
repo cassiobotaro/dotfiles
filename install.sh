@@ -10,6 +10,7 @@ cp .gitconfig ~/
 chsh -s $(which zsh)
 sudo systemctl enable docker
 sudo usermod -aG docker $USER
+mkdir ~/.cache/vlc
 sudo chown -R "$USER:$USER" "$ZSH_CACHE_DIR"
 su - $USER
 sudo tlp start
