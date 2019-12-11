@@ -1,4 +1,4 @@
-git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && cd - && sudo rm -R yay
+sudo pacman -S yay
 yay -S google-chrome slack-desktop git curl go spotify tmux neovim zsh xclip autojump tree oh-my-zsh-git base-devel openssl zlib xz docker the_silver_searcher gimp ttf-nerd-fonts-hack-complete-git ctags ncurses redshift pyenv tlp
 sudo python -m ensurepip
 python -m pip install --user neovim jedi isort flake8 black cookiecutter docker-compose
