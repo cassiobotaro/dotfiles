@@ -1,4 +1,4 @@
-scriptencoding utf-8
+draculascriptencoding utf-8
 
 " Auto install Vim Plug
 let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
@@ -119,7 +119,7 @@ command! -nargs=* -range=% FixPythonImports :<line1>,<line2>! isort <args> -
 
 " airline configs
 let g:airline_symbols = {}
-let g:airline_theme = 'dracula'
+let g:airline_theme = 'minimalist'
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
 let g:airline#extensions#readonly#symbol   = '⊘'
