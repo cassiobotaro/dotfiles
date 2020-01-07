@@ -21,6 +21,8 @@ yay -S openssl zlib xz
  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 sudo python -m ensurepip
 python -m pip install -U --user neovim jedi isort flake8 black cookiecutter docker-compose pip
+# go stuffs
+yay -S go
 # other dev stuffs
 yay -S docker
 sudo systemctl enable docker
