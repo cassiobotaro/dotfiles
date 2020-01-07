@@ -18,7 +18,7 @@ cp .gitconfig ~/
 chsh -s $(which zsh)
 # python environment
 yay -S openssl zlib xz
-yay -S pyenv
+ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 sudo python -m ensurepip
 python -m pip install -U --user neovim jedi isort flake8 black cookiecutter docker-compose pip
 # other dev stuffs
