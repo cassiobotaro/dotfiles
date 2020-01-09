@@ -1,4 +1,4 @@
-draculascriptencoding utf-8
+scriptencoding utf-8
 
 " Auto install Vim Plug
 let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
