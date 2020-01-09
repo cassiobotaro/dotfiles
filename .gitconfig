@@ -1,7 +1,5 @@
 [user]
 	name = cassiobotaro
 	email = cassiobotaro@gmail.com
-[push]
-	default = simple
 [core]
 	editor = nvim

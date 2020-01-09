@@ -119,7 +119,7 @@ command! -nargs=* -range=% FixPythonImports :<line1>,<line2>! isort <args> -
 
 " airline configs
 let g:airline_symbols = {}
-let g:airline_theme = 'dracula'
+let g:airline_theme = 'minimalist'
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
 let g:airline#extensions#readonly#symbol   = '⊘'
@@ -163,13 +163,8 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " vim-go
-let g:go_gocode_propose_source=1
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
-let g:go_gocode_unimported_packages = 1
-let g:go_metalinter_command = "golangci-lint"
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
 
 " Jedi
 let g:jedi#popup_on_dot = 0
