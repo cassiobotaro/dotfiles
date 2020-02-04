@@ -1,7 +1,5 @@
-scriptencoding utf-8
-
 " Auto install Vim Plug
-let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
+let vimplug_exists=expand(stdpath('data') . '/site/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -9,7 +7,7 @@ if !filereadable(vimplug_exists)
 endif
 
 " Plugins
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 Plug 'vim-airline/vim-airline' |  Plug 'vim-airline/vim-airline-themes'            " statusline/tabline themes(keep on top)
 Plug 'airblade/vim-gitgutter'                                                      " git diff in a gutter(sign column)
 Plug 'tpope/vim-commentary'                                                        " Comment stuff out
@@ -28,7 +26,8 @@ Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                  
 Plug 'buoto/gotests-vim', {'for': 'go'}                                            " generate tests for go
 Plug 'sebdah/vim-delve', {'for': 'go'}                                             " go debugger
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }          " markdown preview
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'                                                        " python complete and refactors
+Plug 'jeetsukumaran/vim-pythonsense'                                               " text objects and motions for python
 call plug#end()
 
 " Configurations

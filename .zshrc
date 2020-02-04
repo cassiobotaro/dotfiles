@@ -29,7 +29,7 @@ alias tree="tree -C"
 alias vim=nvim
 
 # fzf
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -55,3 +55,5 @@ function upy(){
 
 PATH=~/.local/bin:$PATH
 export PATH="$HOME/.poetry/bin:$PATH"
+source $HOME/.cargo/env
+source /usr/share/nvm/init-nvm.sh

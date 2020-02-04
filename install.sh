@@ -7,7 +7,7 @@ mkdir ~/.cache/vlc
 sudo chown -R "$USER:$USER" "$ZSH_CACHE_DIR"
 sudo tlp start
 # terminal stuffs
-yay -S xsel autojump tree the_silver_searcher ttf-nerd-fonts-hack-complete-git ctags ncurses
+yay -S xsel autojump tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses
 yay -S  tmux neovim zsh oh-my-zsh-git
 # set preferences
 cp .zshrc ~/
