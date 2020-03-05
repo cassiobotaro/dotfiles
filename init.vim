@@ -17,7 +17,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'                             
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }                  " fzf full installation
 Plug 'junegunn/fzf.vim'                                                            " fzf vim plugin
 Plug 'tomasr/molokai'                                                              " colorscheme
-Plug 'w0rp/ale'                                                                    " linter
+Plug 'dense-analysis/ale'                                                          " linter
 Plug 'ryanoasis/vim-devicons'                                                      " dev icons
 Plug 'corylanou/vim-present', {'for' : 'present'}                                  " go present
 Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}                             " dockerfile
@@ -28,6 +28,9 @@ Plug 'sebdah/vim-delve', {'for': 'go'}                                          
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }          " markdown preview
 Plug 'davidhalter/jedi-vim'                                                        " python complete and refactors
 Plug 'jeetsukumaran/vim-pythonsense'                                               " text objects and motions for python
+Plug 'cespare/vim-toml'                                                            " syntax for toml files
+Plug 'solarnz/thrift.vim'                                                          " syntax for thrift files
+Plug 'leafoftree/vim-vue-plugin'                                                   " Vim syntax and indent plugin for .vue files
 call plug#end()
 
 " Configurations
@@ -61,6 +64,7 @@ set expandtab							" insert spaces when hitting TABs
 set softtabstop=4						" insert/delete 4 spaces when hitting a TAB/BACKSPACE
 set shiftround							" round indent to multiple of 'shiftwidth'
 set autoindent							" align the new line indent with the previous line
+set termguicolors                       " Enables 24-bit RGB color
 filetype plugin indent on                                       " recognizes filetype, plugins and indent
 syntax on
 silent! colorscheme molokai                                     " colorscheme
@@ -137,14 +141,14 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 
 "" fzf.vim
-set grepprg=ag\ --nogroup\ --nocolor
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set grepformat=%f:%l:%c:%m,%f:%l:%m
 " list buffers
 nnoremap <silent> <leader>b :Buffers<CR>
 " list files in current directory
 nnoremap <silent> <leader>e :FZF -m<CR>
 " find some text
-nnoremap <silent> <leader>f :Ag<CR>
+nnoremap <silent> <leader>f :Rg<CR>
 
 " ALE
 let g:ale_linters = {
@@ -169,3 +173,6 @@ let g:go_fmt_fail_silently = 1
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = "2"
 autocmd FileType python setlocal completeopt-=preview
+
+" vim vue plugin
+let g:vim_vue_plugin_load_full_syntax = 1
