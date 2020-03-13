@@ -4,7 +4,6 @@ sudo pacman -S yay
 yay -S base-devel
 yay -S google-chrome spotify gimp redshift tlp vlc
 mkdir ~/.cache/vlc
-sudo chown -R "$USER:$USER" "$ZSH_CACHE_DIR"
 sudo tlp start
 # terminal stuffs
 yay -S xsel autojump tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses github-cli-bin
@@ -23,9 +22,14 @@ sudo python -m ensurepip
 python -m pip install -U --user neovim jedi isort flake8 black cookiecutter docker-compose pip
 # go stuffs
 yay -S go
+# rust stuff
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# node stuff
+yay -S nvm
 # other dev stuffs
 yay -S docker
 sudo systemctl enable docker
 sudo usermod -aG docker $USER
 # END
 su - $USER
+sudo chown -R "$USER:$USER" "$ZSH_CACHE_DIR"
