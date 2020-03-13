@@ -19,7 +19,7 @@ chsh -s $(which zsh)
 yay -S openssl zlib xz
  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 sudo python -m ensurepip
-python -m pip install -U --user neovim jedi isort flake8 black cookiecutter docker-compose pip
+python -m pip install -U --user neovim jedi isort flake8 black cookiecutter docker-compose pip poetry
 # go stuffs
 yay -S go
 # rust stuff
