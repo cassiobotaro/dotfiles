@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo snap install go --classic
+sudo snap install --classic go
