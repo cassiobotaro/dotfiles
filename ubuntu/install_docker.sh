@@ -1,4 +1,5 @@
 #!/bin/sh
-wget -qO- https://get.docker.com/ | sh
-sudo usermod -aG docker cassiobotaro
+sudo apt install docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
 su - $USER
