@@ -129,9 +129,18 @@ let g:jedi#show_call_signatures = "2"
 autocmd FileType python setlocal completeopt-=preview
 
 " fzf
+" file complete using fzf and rg
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
 " list buffers
 nnoremap <silent> <leader>b :Buffers<CR>
 " list files in current directory
 nnoremap <silent> <leader>e :Files<CR>
 " find some text
 nnoremap <silent> <leader>f :Rg<CR>
+
+" ALE
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {
+\	'go': ['go build', 'go vet', 'golint'],
+\	'python': ['flake8']
+\}
