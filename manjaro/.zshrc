@@ -29,7 +29,7 @@ alias tree="tree -C"
 alias vim=nvim
 
 # fzf
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
