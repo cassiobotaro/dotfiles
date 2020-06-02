@@ -5,7 +5,6 @@ cp .tmux.conf ~/
 mkdir -p ~/.config/nvim
 cp init.vim ~/.config/nvim
 cp .gitconfig ~/
-chsh -s $(which zsh)
 # install docker
 sudo apt install docker.io
 sudo systemctl enable --now docker
@@ -34,6 +33,7 @@ export NVM_DIR="$HOME/.nvm" && (
 ) && \. "$NVM_DIR/nvm.sh"
 # install oh-my-zsh
 sudo apt install -y zsh git autojump tree tmux
+chsh -s $(which zsh)
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 echo "Logout and login to effective your changes."
 # install python
