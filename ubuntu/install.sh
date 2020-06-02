@@ -1,6 +1,5 @@
 #!/bin/sh
 # set preferences
-cp .zshrc ~/
 cp .tmux.conf ~/
 mkdir -p ~/.config/nvim
 cp init.vim ~/.config/nvim
@@ -32,6 +31,7 @@ export NVM_DIR="$HOME/.nvm" && (
   git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
 ) && \. "$NVM_DIR/nvm.sh"
 # install oh-my-zsh
+cp .zshrc ~/
 sudo apt install -y zsh git autojump tree tmux
 chsh -s $(which zsh)
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
