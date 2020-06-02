@@ -10,6 +10,7 @@ sudo systemctl enable --now docker
 sudo usermod -aG docker $USER
 su - $USER
 # install fonts
+sudo apt install curl
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
 curl -fLo "Hack Regular Nerd Font Complete Mono.ttf" https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete%20Mono.ttf
