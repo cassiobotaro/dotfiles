@@ -6,7 +6,7 @@ yay -S google-chrome spotify gimp redshift tlp vlc
 mkdir ~/.cache/vlc
 sudo tlp start
 # terminal stuffs
-yay -S xsel autojump tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses github-cli-bin
+yay -S xsel autojump tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses github-cli-bin noto-fonts-emoji
 yay -S  tmux neovim zsh oh-my-zsh-git
 # set preferences
 cp .zshrc ~/
