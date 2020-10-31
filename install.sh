@@ -2,12 +2,14 @@
 sudo pacman -S yay
 # missing apps
 yay -S base-devel
-yay -S google-chrome spotify gimp redshift tlp vlc
+yay -S google-chrome gimp redshift tlp vlc
 mkdir ~/.cache/vlc
 sudo tlp start
+# spotify is not working from repository, then use snap
+snap install spotify
 # terminal stuffs
-yay -S xsel autojump tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses github-cli-bin noto-fonts-emoji bat
-yay -S  tmux neovim zsh oh-my-zsh-git
+yay -S xsel autojump tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses github-cli noto-fonts-emoji bat
+yay -S tmux neovim zsh oh-my-zsh-git
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
@@ -17,9 +19,8 @@ cp .gitconfig ~/
 chsh -s $(which zsh)
 # python environment
 yay -S openssl zlib xz
- git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-sudo python -m ensurepip
-python -m pip install -U --user neovim jedi isort flake8 black cookiecutter docker-compose pip poetry
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+python -m pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip poetry
 # go stuffs
 yay -S go
 # rust stuff
