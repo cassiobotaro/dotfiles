@@ -3,3 +3,6 @@
 	email = cassiobotaro@gmail.com
 [core]
 	editor = nvim
+	attributesfile = /home/cassiobotaro/.gitattributes
+[pull]
+	rebase = false

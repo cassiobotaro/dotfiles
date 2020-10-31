@@ -26,7 +26,6 @@ export EDITOR='nvim'
 alias zshconfig="nvim ~/.zshrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias tree="tree -C"
-alias vim=nvim
 
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
@@ -55,5 +54,6 @@ function upy(){
 
 PATH=~/.local/bin:$PATH
 export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 source $HOME/.cargo/env
 source /usr/share/nvm/init-nvm.sh

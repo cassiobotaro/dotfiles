@@ -9,6 +9,7 @@ endif
 " Plugins
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'vim-airline/vim-airline' |  Plug 'vim-airline/vim-airline-themes'            " statusline/tabline themes(keep on top)
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'                                " snippets
 Plug 'airblade/vim-gitgutter'                                                      " git diff in a gutter(sign column)
 Plug 'tpope/vim-commentary'                                                        " Comment stuff out
 Plug 'tpope/vim-fugitive'                                                          " git inside vim
@@ -22,13 +23,17 @@ Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}                          
 Plug 'davidhalter/jedi-vim'                                                        " python complete and refactors
 Plug 'jeetsukumaran/vim-pythonsense'                                               " text objects and motions for python
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
+Plug 'mateusbraga/vim-spell-pt-br'                                                 " pt-br spell checker
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'cespare/vim-toml'
 call plug#end()
 
 
 " Configurations
 let mapleader = ','                                             " set leader shortcut to comma
 let g:loaded_python_provider=0                                  " disable python 2 provider
-let g:python3_host_prog="/home/cassiobotaro/.pyenv/versions/3.8.2/bin/python3" " python 3
+let g:python3_host_prog="/home/cassiobotaro/.pyenv/versions/3.8.5/bin/python3" " python 3
 set clipboard+=unnamedplus                                      " set clipboard
 set termguicolors 						                        " Enables 24-bit RGB color
 set shortmess+=I 						                        " remove nvim intro message
@@ -55,6 +60,7 @@ set noshowmode                                                  " don't show pre
 filetype plugin indent on                                       " recognizes filetype, plugins and indent
 syntax on                                                       " syntax highlight
 silent! colorscheme codedark                                    " colorscheme codedark
+au FileType markdown setl spelllang=pt_br,en spell
 
 
 " Remaps
@@ -135,3 +141,13 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>e :Files<CR>
 " find some text
 nnoremap <silent> <leader>f :Rg<CR>
+
+" UtilSnips
+" Trigger configuration. You need to change this to something else than <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" vim-markdown
+let g:vim_markdown_folding_disabled = 1
+set conceallevel=2
