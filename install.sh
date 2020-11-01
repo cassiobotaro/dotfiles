@@ -17,6 +17,7 @@ mkdir -p ~/.config/nvim
 cp init.vim ~/.config/nvim
 cp .gitconfig ~/
 cp .gitatributtes ~/
+cp terminalrc ~/.config/xfce4/terminal/
 chsh -s $(which zsh)
 # python environment
 yay -S openssl zlib xz
