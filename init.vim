@@ -33,7 +33,7 @@ call plug#end()
 " Configurations
 let mapleader = ','                                             " set leader shortcut to comma
 let g:loaded_python_provider=0                                  " disable python 2 provider
-let g:python3_host_prog="/home/cassiobotaro/.pyenv/versions/3.8.5/bin/python3" " python 3
+let g:python3_host_prog="/home/cassiobotaro/.pyenv/versions/3.9.0/bin/python3" " python 3
 set clipboard+=unnamedplus                                      " set clipboard
 set termguicolors 						                        " Enables 24-bit RGB color
 set shortmess+=I 						                        " remove nvim intro message
