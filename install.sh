@@ -20,6 +20,9 @@ chsh -s $(which zsh)
 # python environment
 yay -S openssl zlib xz
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+pyenv install 3.9.0
+pyenv global 3.9.0
+pyenv rehash
 python -m pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip poetry
 # go stuffs
 yay -S go
