@@ -34,6 +34,7 @@ yay -S nvm
 # other dev stuffs
 yay -S docker
 sudo systemctl enable docker
+sudo systemctl start docker
 sudo usermod -aG docker $USER
 # END
 su - $USER
