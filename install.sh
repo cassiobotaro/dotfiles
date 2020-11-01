@@ -16,6 +16,7 @@ cp .tmux.conf ~/
 mkdir -p ~/.config/nvim
 cp init.vim ~/.config/nvim
 cp .gitconfig ~/
+cp .gitatributtes ~/
 chsh -s $(which zsh)
 # python environment
 yay -S openssl zlib xz
