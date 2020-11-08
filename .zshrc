@@ -28,7 +28,7 @@ alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias tree="tree -C"
 
 # fzf
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

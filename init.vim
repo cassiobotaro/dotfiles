@@ -138,9 +138,10 @@ autocmd FileType python setlocal completeopt-=preview
 " list buffers
 nnoremap <silent> <leader>b :Buffers<CR>
 " list files in current directory
-nnoremap <silent> <leader>e :Files<CR>
+nnoremap <silent> <leader>e :GFiles<CR>
 " find some text
 nnoremap <silent> <leader>f :Rg<CR>
+set grepprg=rg\ --vimgrep
 
 " UtilSnips
 " Trigger configuration. You need to change this to something else than <tab> if you use https://github.com/Valloric/YouCompleteMe.
