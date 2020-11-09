@@ -21,6 +21,9 @@ Plug 'dense-analysis/ale'                                                       
 Plug 'ekalinin/Dockerfile.vim', {'for' : 'Dockerfile'}                             " dockerfile
 Plug 'davidhalter/jedi-vim'                                                        " python complete and refactors
 Plug 'jeetsukumaran/vim-pythonsense'                                               " text objects and motions for python
+Plug 'alfredodeza/pytest.vim'                                                      " pytest inside vim
+Plug 'fisadev/vim-isort'                                                           " python sort imports
+Plug 'psf/black', { 'branch': 'stable' }                                           " python formatter
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
 Plug 'mateusbraga/vim-spell-pt-br'                                                 " pt-br spell checker
 Plug 'godlygeek/tabular'
@@ -96,13 +99,6 @@ aug completion_preview_close
   au!
   au CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | endif
 aug END
-
-" Commands
-" fix python import (based on isort)
-command! -nargs=* -range=% FixPythonImports :<line1>,<line2>! isort <args>
-" execute black on file
-command! -nargs=* -range=% Black :! black <args> %
-
 
 " Plugin Configurations
 
