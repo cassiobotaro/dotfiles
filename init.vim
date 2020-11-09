@@ -131,3 +131,117 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
 set conceallevel=2
+
+" ale
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
+let g:ale_sign_ok = 'ﲏ'
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+
+" statuslines
+set statusline=
+set statusline+=\                                              " vim symbol
+set statusline+=\ \\|                                           " separator
+set statusline+=\ %{GitBranchStatusline()}                      " display git branch label
+set statusline+=\ %{GitStatus()}
+set statusline+=\ \\|                                           " separator
+set statusline+=\ 
+set statusline+=\ %{expand('%:~:.')}                            " display path directory
+set statusline+=\                                               " white space
+set statusline+=\%{ReadOnlyStatusline()}                        " display read only icon
+set statusline+=\%{PasteStatusline()}%*                         " display paste mode icon
+set statusline+=\ %=                                            " split point for left and right groups
+set statusline+=\ %l                                            " row number
+set statusline+=\                                              " colon separator
+set statusline+=%v                                              " column number
+set statusline+=\                                              " line number icon
+set statusline+=\ \\|                                           " separator
+set statusline+=\ %{WebDevIconsGetFileFormatSymbol()}           " file format icon
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}      " current file encoding
+set statusline+=\ \\|                                           " separator
+set statusline+=\ %{LinterStatusline()}                         " linter status
+set statusline+=\ \\|                                           " separator
+set statusline+=\%{VimModeStatusline()}                        " display actual vim mode
+
+" statusline functions
+let s:mode_map = {
+        \ 'n':      ' NORMAL ',
+        \ 'no':     ' NO     ',
+        \ 'v':      ' V-CHAR ',
+        \ 'V':      ' V-LINE ',
+        \ "\<C-v>": ' V-BLCK ',
+        \ 's':      ' S-CHAR ',
+        \ 'S':      ' S-LINE ',
+        \ "\<C-s>": ' S-B    ',
+        \ 'i':      ' INSERT ',
+        \ 'ic':     ' I-COMP ',
+        \ 'ix':     ' I-COMP ',
+        \ 'R':      ' R      ',
+        \ 'Rc':     ' R-COMP ',
+        \ 'Rv':     ' R-VIRT ',
+        \ 'Rx':     ' R-COMP ',
+        \ 'c':      ' C-LINE ',
+        \ 'cv':     ' EX     ',
+        \ 'ce':     ' EX     ',
+        \ 'r':      ' ENTER  ',
+        \ 'rm':     ' MORE   ',
+        \ 'r?':     ' ?      ',
+        \ '!':      ' SHELL  ',
+\ }
+
+function! VimModeStatusline()
+    let l:mode = mode()
+    return has_key(s:mode_map, l:mode) ? s:mode_map[l:mode] : ''
+endfunction
+
+function! LinterStatusline() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    if l:counts.total > 0
+        return printf('%s: %d %s: %d', g:ale_sign_error, all_errors, g:ale_sign_warning, all_non_errors)
+    endif
+    return printf('%s', g:ale_sign_ok)
+endfunction
+
+function! ModifiedStatusline()
+    if &modified == 1
+        return '  '
+    endif
+    return ''
+endfunction
+
+function! ReadOnlyStatusline()
+    if &readonly == 1
+        return '  '
+    endif
+    return ''
+endfunction
+
+function! PasteStatusline()
+    if &paste == 1
+        return '  '
+    endif
+    return ''
+endfunction
+
+function! GitBranchStatusline()
+    let l:branch_name = fugitive#head()
+    if l:branch_name != ""
+        return printf(' %s', branch_name)
+    endif
+    return ''
+endfunction
+
+function! FilenameStatusline()
+    let l:filetype_symbol = WebDevIconsGetFileTypeSymbol()
+    let l:filetype_name = expand('%:t')
+    return printf(' %s %s ', filetype_symbol, filetype_name)
+endfunction
+function! GitStatus()
+    let [a,m,r] = GitGutterGetHunkSummary()
+    return printf('+%d ~%d -%d', a, m, r)
+endfunction
