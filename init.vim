@@ -26,9 +26,9 @@ Plug 'fisadev/vim-isort'                                                        
 Plug 'psf/black', { 'branch': 'stable' }                                           " python formatter
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
 Plug 'mateusbraga/vim-spell-pt-br'                                                 " pt-br spell checker
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'cespare/vim-toml'
+Plug 'cespare/vim-toml'                                                            " vim syntax for TOML.
+Plug 'godlygeek/tabular'                                                           " required by vim-markdown to format tables
+Plug 'plasticboy/vim-markdown'                                                     " markdown extension
 call plug#end()
 
 
@@ -81,9 +81,11 @@ noremap <leader>w :bn<CR>
 noremap <leader>c :bd<CR>
 " set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
-"" vmap for maintain Visual Mode after shifting > and <
+" vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
+" Clean search (highlight)
+nnoremap <silent> <leader><space> :noh<cr>
 
 
 " Auto Commands
