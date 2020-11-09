@@ -24,6 +24,7 @@ Plug 'jeetsukumaran/vim-pythonsense'                                            
 Plug 'alfredodeza/pytest.vim'                                                      " pytest inside vim
 Plug 'fisadev/vim-isort'                                                           " python sort imports
 Plug 'psf/black', { 'branch': 'stable' }                                           " python formatter
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}                      " requirements format syntax support for Vim
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
 Plug 'mateusbraga/vim-spell-pt-br'                                                 " pt-br spell checker
 Plug 'cespare/vim-toml'                                                            " vim syntax for TOML.
