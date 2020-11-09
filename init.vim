@@ -28,8 +28,6 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}                   
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
 Plug 'mateusbraga/vim-spell-pt-br'                                                 " pt-br spell checker
 Plug 'cespare/vim-toml'                                                            " vim syntax for TOML.
-Plug 'godlygeek/tabular'                                                           " required by vim-markdown to format tables
-Plug 'plasticboy/vim-markdown'                                                     " markdown extension
 call plug#end()
 
 
@@ -128,10 +126,6 @@ set grepprg=rg\ --vimgrep
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" vim-markdown
-let g:vim_markdown_folding_disabled = 1
-set conceallevel=2
 
 " ale
 let g:ale_sign_error = ''
