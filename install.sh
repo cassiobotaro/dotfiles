@@ -8,7 +8,7 @@ sudo tlp start
 # spotify is not working from repository, then use snap
 snap install spotify
 # terminal stuffs
-yay -S xsel autojump tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses github-cli noto-fonts-emoji bat
+yay -S autojump tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses github-cli noto-fonts-emoji bat xclip
 yay -S tmux neovim zsh oh-my-zsh-git
 # set preferences
 cp .zshrc ~/
