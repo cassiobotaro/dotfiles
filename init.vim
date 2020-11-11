@@ -116,7 +116,7 @@ autocmd FileType python setlocal completeopt-=preview
 " list buffers
 nnoremap <silent> <leader>b :Buffers<CR>
 " list files in current directory
-nnoremap <silent> <leader>e :GFiles<CR>
+nnoremap <silent> <leader>e :Files<CR>
 " find some text
 nnoremap <silent> <leader>f :Rg<CR>
 set grepprg=rg\ --vimgrep
