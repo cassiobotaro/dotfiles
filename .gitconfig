@@ -6,3 +6,5 @@
 	attributesfile = /home/cassiobotaro/.gitattributes
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main
