@@ -20,7 +20,7 @@ cp .gitatributtes ~/
 cp terminalrc ~/.config/xfce4/terminal/
 chsh -s $(which zsh)
 # python environment
-yay -S openssl zlib xz
+yay -S openssl zlib xz tk
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 pyenv install 3.9.0
 pyenv global 3.9.0
