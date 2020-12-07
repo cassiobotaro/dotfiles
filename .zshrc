@@ -12,7 +12,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(
     git
     extract
-    autojump
+    fasd
     tmux
     sudo
     docker-compose
