@@ -49,19 +49,20 @@ set hidden                                                      " allow buffer s
 set autowrite                                                   " write the content of the file automatically when call :make
 set ignorecase                                                  " ignore case omnifunc search
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__          " ignore files matching these patterns when opening files based on a glob pattern
-set shiftwidth=4						                        " operation >> indents 4 columns; << unindents 2 columns
-set tabstop=4							                        " a hard TAB displays as 4 columns
-set expandtab							                        " insert spaces when hitting TABs
-set softtabstop=4						                        " insert/delete 4 spaces when hitting a TAB/BACKSPACE
-set shiftround							                        " round indent to multiple of 'shiftwidth'
-set autoindent							                        " align the new line indent with the previous line
+" set shiftwidth=4						                        " operation >> indents 4 columns; << unindents 2 columns
+" set tabstop=4							                        " a hard TAB displays as 4 columns
+" set expandtab							                        " insert spaces when hitting TABs
+" set softtabstop=4						                        " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+" set shiftround							                        " round indent to multiple of 'shiftwidth'
+" set autoindent							                        " align the new line indent with the previous line
 set updatetime=300                                              " update quickly
 set omnifunc=syntaxcomplete#Complete                            " enable autocomplete
 set noshowmode                                                  " don't show pressed commands
 filetype plugin indent on                                       " recognizes filetype, plugins and indent
 syntax on                                                       " syntax highlight
 silent! colorscheme codedark                                    " colorscheme codedark
-au FileType markdown setl spelllang=pt_br,en spell
+au FileType markdown setl spelllang=pt_br,en spell              " spellcheck on markdown
+set signcolumn=yes                                              " keep sign column (gutter)
 
 
 " Remaps
@@ -132,7 +133,7 @@ let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
 let g:ale_sign_ok = 'ﲏ'
 let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_text_changed = 'never'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 
