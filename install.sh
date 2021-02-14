@@ -25,7 +25,8 @@ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 pyenv install 3.9.0
 pyenv global 3.9.0
 pyenv rehash
-python -m pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip poetry
+cp .pdbrc ~/
+python -m pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip poetry wheel
 # go stuffs
 yay -S go
 # rust stuff

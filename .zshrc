@@ -49,7 +49,7 @@ function pgcli(){
 
 # update python packages
 function upy(){
-    pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip
+    pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip wheel
 }
 
 PATH=~/.local/bin:$PATH
