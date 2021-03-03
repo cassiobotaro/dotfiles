@@ -27,6 +27,9 @@ pyenv global 3.9.0
 pyenv rehash
 cp .pdbrc ~/
 python -m pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip poetry wheel
+# poetry (python env)
+mkdir $ZSH_CUSTOM/plugins/poetry
+poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 # go stuffs
 yay -S go
 # rust stuff

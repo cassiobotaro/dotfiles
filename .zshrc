@@ -26,6 +26,7 @@ export EDITOR='nvim'
 alias zshconfig="nvim ~/.zshrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias tree="tree -C"
+alias myip="curl http://ipecho.net/plain; echo"
 
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
@@ -50,6 +51,13 @@ function pgcli(){
 # update python packages
 function upy(){
     pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip wheel
+}
+
+# clean python thrash
+function pyclean(){
+    find . -name "*.pyc" | xargs rm -rf
+    find . -name "*.pyo" | xargs rm -rf
+    find . -name "__pycache__" -type d | xargs rm -rf
 }
 
 PATH=~/.local/bin:$PATH
