@@ -1,5 +1,7 @@
 # package manager
 sudo pacman -S yay
+# add colors to yay
+sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 # missing apps
 yay -S base-devel
 yay -S google-chrome gimp redshift tlp vlc
