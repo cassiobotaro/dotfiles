@@ -40,6 +40,7 @@ yay -S docker
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker $USER
+yay -S graphviz
 # END
 su - $USER
 sudo chown -R "$USER:$USER" "$ZSH_CACHE_DIR"

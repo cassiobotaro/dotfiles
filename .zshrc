@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/usr/share/oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # 256-color
 export TERM="xterm-256color"
@@ -17,6 +17,7 @@ plugins=(
     sudo
     docker-compose
     pyenv
+    poetry
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -50,7 +51,7 @@ function pgcli(){
 
 # update python packages
 function upy(){
-    pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip wheel
+    pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip wheel mypy
 }
 
 # clean python thrash
@@ -63,5 +64,3 @@ function pyclean(){
 PATH=~/.local/bin:$PATH
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-source $HOME/.cargo/env
-source /usr/share/nvm/init-nvm.sh

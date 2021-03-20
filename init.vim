@@ -28,16 +28,19 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}                   
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
 Plug 'mateusbraga/vim-spell-pt-br'                                                 " pt-br spell checker
 Plug 'cespare/vim-toml'                                                            " vim syntax for TOML.
+Plug 'tyru/open-browser.vim'
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
 call plug#end()
 
 
 " Configurations
 let mapleader = ','                                             " set leader shortcut to comma
 let g:loaded_python_provider=0                                  " disable python 2 provider
-let g:python3_host_prog="/home/cassiobotaro/.pyenv/versions/3.9.0/bin/python3" " python 3
+let g:python3_host_prog="/home/cassiobotaro/.pyenv/shims/python3" " python 3
 set clipboard+=unnamedplus                                      " set clipboard
-set termguicolors 						                        " Enables 24-bit RGB color
-set shortmess+=I 						                        " remove nvim intro message
+set termguicolors 						" Enables 24-bit RGB color
+set shortmess+=I 						" remove nvim intro message
 set noswapfile                                                  " avoid swap files
 set nobackup                                                    " avoid bkp files
 set nowritebackup                                               " no make a backup before overwriting file
@@ -49,12 +52,12 @@ set hidden                                                      " allow buffer s
 set autowrite                                                   " write the content of the file automatically when call :make
 set ignorecase                                                  " ignore case omnifunc search
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__          " ignore files matching these patterns when opening files based on a glob pattern
-" set shiftwidth=4						                        " operation >> indents 4 columns; << unindents 2 columns
-" set tabstop=4							                        " a hard TAB displays as 4 columns
-" set expandtab							                        " insert spaces when hitting TABs
-" set softtabstop=4						                        " insert/delete 4 spaces when hitting a TAB/BACKSPACE
-" set shiftround							                        " round indent to multiple of 'shiftwidth'
-" set autoindent							                        " align the new line indent with the previous line
+set shiftwidth=4						" operation >> indents 4 columns; << unindents 2 columns
+set tabstop=4							" a hard TAB displays as 4 columns
+set expandtab							" insert spaces when hitting TABs
+set softtabstop=4						" insert/delete 4 spaces when hitting a TAB/BACKSPACE
+set shiftround							" round indent to multiple of 'shiftwidth'
+set autoindent							" align the new line indent with the previous line
 set updatetime=300                                              " update quickly
 set omnifunc=syntaxcomplete#Complete                            " enable autocomplete
 set noshowmode                                                  " don't show pressed commands
