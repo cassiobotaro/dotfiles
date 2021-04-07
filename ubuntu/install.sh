@@ -1,0 +1,67 @@
+# developer tools
+sudo apt install build-essential wget
+
+# install fonts
+mkdir -p ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+unzip Hack.zip -d ~/.local/share/fonts
+fc-cache -fv
+rm Hack.zip
+
+# missing apps
+# google chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+# spotify
+snap install spotify
+# others
+sudo apt install gimp redshift tlp vlc
+sudo tlp start
+
+# terminal stuffs
+sudo apt install fasd tree ripgrep exuberant-ctags ncurses-term curl xclip tmux zsh
+sudo snap install nvim --classic
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+sudo apt-add-repository https://cli.github.com/packages
+sudo apt update
+sudo apt install gh
+wget https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_amd64.deb
+sudo dpkg -i bat_0.18.0_amd64.deb
+# set preferences
+cp .zshrc ~/
+cp .tmux.conf ~/
+mkdir -p ~/.config/nvim
+cp init.vim ~/.config/nvim
+cp .gitconfig ~/
+cp terminalrc ~/.config/xfce4/terminal/
+
+# python environment
+sudo apt-get update; sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+pyenv install 3.9.4
+pyenv global 3.9.4
+pyenv rehash
+cp .pdbrc ~/
+upy
+# poetry (python env)
+mkdir $ZSH_CUSTOM/plugins/poetry
+poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+# Go
+wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz
+sudo  tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz
+# podman
+. /etc/os-release
+echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y install podman
+# graphviz and java (required by plantuml)
+sudo apt install graphviz openjdk-14-jdk
+
+# avoid vlc bug with subtitles
+mkdir ~/.cache/vlc
+
+# END
+su - $USER
+sudo chown -R "$USER:$USER" "$ZSH_CACHE_DIR"
