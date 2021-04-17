@@ -17,6 +17,7 @@ plugins=(
     sudo
     pyenv
     poetry
+    gh
 )
 
 source $ZSH/oh-my-zsh.sh
