@@ -36,7 +36,7 @@ export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 
 # update python packages
 function upy(){
-    pip install --user -U neovim jedi isort flake8 black cookiecutter podman-compose pip wheel poetry
+    pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip wheel poetry
 }
 
 # clean python thrash
