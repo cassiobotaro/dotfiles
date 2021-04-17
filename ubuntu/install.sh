@@ -49,13 +49,10 @@ poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 # Go
 wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz
 sudo  tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz
-# podman
-. /etc/os-release
-echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
-curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
-sudo apt-get update
-sudo apt-get -y upgrade
-sudo apt-get -y install podman
+# docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker $USER
 # graphviz and java (required by plantuml)
 sudo apt install graphviz openjdk-14-jdk
 
