@@ -21,12 +21,14 @@ sudo tlp start
 # terminal stuffs
 sudo apt install fasd tree ripgrep exuberant-ctags ncurses-term curl xclip tmux zsh
 sudo snap install nvim --classic
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-sudo apt-add-repository https://cli.github.com/packages
+# github cli
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 sudo apt update
 sudo apt install gh
 mkdir $ZSH_CUSTOM/plugins/gh
 gh completion --shell zsh > $ZSH_CUSTOM/plugins/gh/_gh
+# bat
 wget https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_amd64.deb
 sudo dpkg -i bat_0.18.0_amd64.deb
 # set preferences
