@@ -29,8 +29,9 @@ sudo apt install gh
 mkdir $ZSH_CUSTOM/plugins/gh
 gh completion --shell zsh > $ZSH_CUSTOM/plugins/gh/_gh
 # bat
-wget https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_amd64.deb
-sudo dpkg -i bat_0.18.0_amd64.deb
+wget https://github.com/sharkdp/bat/releases/download/v0.18.1/bat_0.18.1_amd64.deb
+sudo dpkg -i bat_0.18.1_amd64.deb
+rm bat_0.18.1_amd64.deb
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
