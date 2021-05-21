@@ -42,8 +42,8 @@ cp terminalrc ~/.config/xfce4/terminal/
 # python environment
 sudo apt-get update; sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-pyenv install 3.9.4
-pyenv global 3.9.4
+pyenv install 3.9.5
+pyenv global 3.9.5
 pyenv rehash
 cp .pdbrc ~/
 upy
@@ -51,8 +51,8 @@ upy
 mkdir $ZSH_CUSTOM/plugins/poetry
 poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 # Go
-wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz
-sudo  tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
+sudo  tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
 # docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
