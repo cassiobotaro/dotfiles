@@ -15,7 +15,7 @@ plugins=(
     fasd
     tmux
     sudo
-    pyenv
+    docker-compose
     poetry
     gh
 )
@@ -28,16 +28,33 @@ alias zshconfig="nvim ~/.zshrc"
 alias nvimconfig="nvim ~/.config/nvim/init.vim"
 alias tree="tree -C"
 alias myip="curl http://ipecho.net/plain; echo"
-alias docker="podman"
+# vnp on/off
+alias vpnon="sudo vpnc /etc/vpnc/vpn-ML.conf"
+alias vpnoff="sudo vpnc-disconnect"
 
 # fzf
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# container monitoring
+function ctop() {
+    docker run --rm -ti \
+        --name=ctop \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        quay.io/vektorlab/ctop:latest
+}
+
+# postgres client
+function pgcli(){
+    docker run --rm -ti --name=pgcli --net=host \
+    postgres:alpine psql postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
+}
+
 # update python packages
 function upy(){
-    pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip wheel poetry
+    python -m pip install -U pip
+    python -m pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose wheel poetry httpie
 }
 
 # clean python thrash
@@ -51,3 +68,12 @@ PATH=~/.local/bin:$PATH
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+# avoid to save env vars
+export HISTORY_IGNORE="export*"

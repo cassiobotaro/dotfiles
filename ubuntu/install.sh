@@ -54,6 +54,7 @@ poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 # Go
 wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
 sudo  tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
+rm go1.16.4.linux-amd64.tar.gz
 # docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
