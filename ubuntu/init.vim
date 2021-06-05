@@ -25,7 +25,7 @@ Plug 'alfredodeza/pytest.vim'                                                   
 Plug 'fisadev/vim-isort'                                                           " python sort imports
 Plug 'psf/black'                                                                   " python formatter
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}                      " requirements format syntax support for Vim
-Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoInstallBinaries'}                     " go plugin
+Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries'}                     " go plugin
 Plug 'mateusbraga/vim-spell-pt-br'                                                 " pt-br spell checker
 Plug 'cespare/vim-toml'                                                            " vim syntax for TOML.
 Plug 'tyru/open-browser.vim'
@@ -38,9 +38,9 @@ call plug#end()
 let mapleader = ','                                             " set leader shortcut to comma
 let g:loaded_python_provider=0                                  " disable python 2 provider
 let g:python3_host_prog="/home/cassiobotaro/.pyenv/versions/3.9.5/bin/python3" " python 3
-set clipboard+=unnamedplus                                      " set clipboard
-set termguicolors 						" Enables 24-bit RGB color
-set shortmess+=I 						" remove nvim intro message
+set clipboard^=unnamedplus                                      " set clipboard
+set termguicolors 						                        " Enables 24-bit RGB color
+set shortmess+=I 						                        " remove nvim intro message
 set noswapfile                                                  " avoid swap files
 set nobackup                                                    " avoid bkp files
 set nowritebackup                                               " no make a backup before overwriting file
@@ -52,12 +52,12 @@ set hidden                                                      " allow buffer s
 set autowrite                                                   " write the content of the file automatically when call :make
 set ignorecase                                                  " ignore case omnifunc search
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__          " ignore files matching these patterns when opening files based on a glob pattern
-set shiftwidth=4						" operation >> indents 4 columns; << unindents 2 columns
-set tabstop=4							" a hard TAB displays as 4 columns
-set expandtab							" insert spaces when hitting TABs
-set softtabstop=4						" insert/delete 4 spaces when hitting a TAB/BACKSPACE
-set shiftround							" round indent to multiple of 'shiftwidth'
-set autoindent							" align the new line indent with the previous line
+set shiftwidth=4						                        " operation >> indents 4 columns; << unindents 2 columns
+set tabstop=4							                        " a hard TAB displays as 4 columns
+set expandtab							                        " insert spaces when hitting TABs
+set softtabstop=4						                        " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+set shiftround							                        " round indent to multiple of 'shiftwidth'
+set autoindent							                        " align the new line indent with the previous line
 set updatetime=300                                              " update quickly
 set omnifunc=syntaxcomplete#Complete                            " enable autocomplete
 set noshowmode                                                  " don't show pressed commands
@@ -109,7 +109,44 @@ aug END
 
 " vim-go
 let g:go_fmt_command = 'goimports'
+let g:go_metalinter_command = "golangci-lint"
 let g:go_fmt_fail_silently = 1
+let g:go_doc_popup_window = 1
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+augroup go
+
+  au!
+  au Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+  au Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+  au Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+  au Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+  au FileType go nmap <Leader>dd <Plug>(go-def-vertical)
+  au FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
+  au FileType go nmap <Leader>db <Plug>(go-doc-browser)
+
+  au FileType go nmap <leader>r  <Plug>(go-run)
+  au FileType go nmap <leader>t  <Plug>(go-test)
+  au FileType go nmap <Leader>gt <Plug>(go-coverage-toggle)
+  au FileType go nmap <Leader>i <Plug>(go-info)
+  au FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
+  au FileType go nmap <C-g> :GoDecls<cr>
+  au FileType go nmap <leader>dr :GoDeclsDir<cr>
+  au FileType go imap <C-g> <esc>:<C-u>GoDecls<cr>
+  au FileType go imap <leader>dr <esc>:<C-u>GoDeclsDir<cr>
+  au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
+
+augroup END
 
 " Jedi
 let g:jedi#popup_on_dot = 0
@@ -136,9 +173,9 @@ let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
 let g:ale_sign_ok = 'ﲏ'
 let g:ale_lint_on_save = 1
-" let g:ale_lint_on_text_changed = 'never'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+let g:ale_lint_on_insert_leave = 0
 
 " statuslines
 set statusline=
@@ -163,7 +200,7 @@ set statusline+=\ %{&fileencoding?&fileencoding:&encoding}      " current file e
 set statusline+=\ \\|                                           " separator
 set statusline+=\ %{LinterStatusline()}                         " linter status
 set statusline+=\ \\|                                           " separator
-set statusline+=\%{VimModeStatusline()}                        " display actual vim mode
+set statusline+=\%{VimModeStatusline()}                         " display actual vim mode
 
 " statusline functions
 let s:mode_map = {
