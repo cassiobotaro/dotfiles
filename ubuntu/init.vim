@@ -37,7 +37,7 @@ call plug#end()
 " Configurations
 let mapleader = ','                                             " set leader shortcut to comma
 let g:loaded_python_provider=0                                  " disable python 2 provider
-let g:python3_host_prog="/home/cassiobotaro/.pyenv/versions/3.9.5/bin/python3" " python 3
+let g:python3_host_prog="/home/cassiobotaro/.pyenv/versions/3.10.2/bin/python3" " python 3
 set clipboard^=unnamedplus                                      " set clipboard
 set termguicolors 						                        " Enables 24-bit RGB color
 set shortmess+=I 						                        " remove nvim intro message
@@ -66,7 +66,7 @@ syntax on                                                       " syntax highlig
 silent! colorscheme codedark                                    " colorscheme codedark
 au FileType markdown setl spelllang=pt_br,en spell              " spellcheck on markdown
 set signcolumn=yes                                              " keep sign column (gutter)
-
+set rnu                                                         " relative numbers
 
 " Remaps
 " split horizontally
@@ -112,6 +112,11 @@ let g:go_fmt_command = 'goimports'
 let g:go_metalinter_command = "golangci-lint"
 let g:go_fmt_fail_silently = 1
 let g:go_doc_popup_window = 1
+let g:go_term_enabled = 1
+let g:go_term_mode = 'split'
+let g:go_term_reuse = 1
+set splitbelow
+
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
