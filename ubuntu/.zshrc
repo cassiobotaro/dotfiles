@@ -20,7 +20,6 @@ plugins=(
     nvm
     changie
     rust
-    pyenv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -76,3 +75,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export GTK_IM_MODULE="uim"
 export QT_IM_MODULE="uim"
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"

@@ -67,6 +67,7 @@ silent! colorscheme codedark                                    " colorscheme co
 au FileType markdown setl spelllang=pt_br,en spell              " spellcheck on markdown
 set signcolumn=yes                                              " keep sign column (gutter)
 set rnu                                                         " relative numbers
+set nu                                                          " numbers
 
 " Remaps
 " split horizontally
