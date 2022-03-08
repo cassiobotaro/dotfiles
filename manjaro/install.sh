@@ -30,7 +30,7 @@ chsh -s $(which zsh)
 
 # programming envinroment
 # vscode
-yay -S  
+yay -S  visual-studio-code-bin
 
 # python dependencies
 yay -S openssl zlib xz tk
