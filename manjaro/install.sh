@@ -60,16 +60,19 @@ changie completion zsh > $ZSH_CUSTOM/plugins/changie/_changie
 # pdb config (python)
 cp .pdbrc ~/
 python -m pip install -U pip
-python -m pip install neovim jedi isort flake8 black cookiecutter podman-compose poetry wheel httpie mypy
+python -m pip install neovim jedi isort flake8 black cookiecutter poetry wheel httpie mypy
 asdf reshim python
 
 # poetry (python)
 mkdir $ZSH_CUSTOM/plugins/poetry
 poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 
-# podman
-yay -S podman
-python -m pip install --user podman-compose
+# docker
+yay -S docker
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker $USER
+python -m pip install docker-compose
 asdf reshim python
 
 # graphviz 
