@@ -15,34 +15,68 @@ sudo tlp start
 yay -S fasd fd tree ctags ncurses curl bat xclip tmux zsh github-cli neovim
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
+# github cli plugin
+mkdir $ZSH_CUSTOM/plugins/gh
+gh completion --shell zsh > $ZSH_CUSTOM/plugins/gh/_gh
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
-mkdir -p ~/.config/nvim
-cp init.vim ~/.config/nvim
+# TODO: review neovim
+#mkdir -p ~/.config/nvim
+#cp init.vim ~/.config/nvim
 cp .gitconfig ~/
 cp terminalrc ~/.config/xfce4/terminal/
 chsh -s $(which zsh)
-# python environment
+
+# programming envinroment
+# vscode
+yay -S  
+
+# python dependencies
 yay -S openssl zlib xz tk
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-pyenv install 3.9.2
-pyenv global 3.9.2
-pyenv rehash
+
+# asdf
+yay -S asdf-vm
+asdf plugin add python
+asdf plugin add nodejs
+asdf plugin add rust
+asdf plugin add golang
+
+asdf install python 3.10.2
+asdf global python 3.10.2
+asdf install python 3.9
+asdf install rust 1.59.0
+asdf global rust 1.59.0
+asdf install golang 1.17.8
+asdf global golang 1.17.8
+asdf install nodejs 17.6.0
+asdf global nodejs 17.6.0
+
+# changie (go)
+go install github.com/miniscruff/changie@latest
+asdf reshim go
+changie completion zsh > $ZSH_CUSTOM/plugins/changie/_changie
+
+# pdb config (python)
 cp .pdbrc ~/
-python -m pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose pip poetry wheel mypy
-# poetry (python env)
+python -m pip install -U pip
+python -m pip install neovim jedi isort flake8 black cookiecutter podman-compose poetry wheel httpie mypy
+asdf reshim python
+
+# poetry (python)
 mkdir $ZSH_CUSTOM/plugins/poetry
 poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
-# go stuffs
-yay -S go
-# other dev stuffs
-yay -S docker
-sudo systemctl enable docker
-sudo systemctl start docker
-sudo usermod -aG docker $USER
+
+# podman
+yay -S podman
+python -m pip install --user podman-compose
+asdf reshim python
+
+# graphviz 
 yay -S graphviz
+
+# magalu
+yay -S slack-desktop vpnc
+
 # END
 su - $USER
-sudo chown -R "$USER:$USER" "$ZSH_CACHE_DIR"
