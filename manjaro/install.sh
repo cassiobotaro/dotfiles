@@ -1,19 +1,21 @@
+
 # package manager
 sudo pacman -S yay
 # add colors to yay
 sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
+
+# install fonts
+yay -S ttf-nerd-fonts-hack-complete-git noto-fonts-emoji
+
 # missing apps
-yay -S base-devel
-yay -S google-chrome gimp redshift tlp vlc
-mkdir ~/.cache/vlc
+yay -S base-devel google-chrome gimp redshift tlp vlc spotify
 sudo tlp start
-# spotify is not working from repository, then use snap
-snap install spotify
+
 # terminal stuffs
-yay -S fasd tree ripgrep ttf-nerd-fonts-hack-complete-git ctags ncurses github-cli noto-fonts-emoji bat xclip
-yay -S tmux neovim zsh
-# oh my zsh
+yay -S fasd fd tree ctags ncurses curl bat xclip tmux zsh github-cli neovim
+# oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
