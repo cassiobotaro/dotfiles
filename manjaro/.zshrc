@@ -1,12 +1,12 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# 256-color
-export TERM="xterm-256color"
-
 # THEME
 ZSH_THEME="steeef"
 
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
@@ -15,21 +15,20 @@ plugins=(
     fasd
     tmux
     sudo
-    docker-compose
     poetry
     gh
-    nvm
     changie
-    cargo
     asdf
+    docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 
-
-alias zshconfig="nvim ~/.zshrc"
-alias nvimconfig="nvim ~/.config/nvim/init.vim"
+# aliases
+alias cat=bat
+alias zshconf="nvim ~/.zshrc"
+alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias tree="tree -C"
 alias myip="curl http://ipecho.net/plain; echo"
 # vnp on/off
@@ -37,9 +36,16 @@ alias vpnon="sudo vpnc /etc/vpnc/vpn-ML.conf"
 alias vpnoff="sudo vpnc-disconnect"
 
 # fzf
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+# postgres client
+function pgcli(){
+    docker run --rm -ti --name=pgcli --net=host \
+    postgres:alpine psql postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
+}
 
 # container monitoring
 function ctop() {
@@ -49,16 +55,11 @@ function ctop() {
         quay.io/vektorlab/ctop:latest
 }
 
-# postgres client
-function pgcli(){
-    docker run --rm -ti --name=pgcli --net=host \
-    postgres:alpine psql postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
-}
-
 # update python packages
 function upy(){
     python -m pip install -U pip
-    python -m pip install --user -U neovim jedi isort flake8 black cookiecutter docker-compose wheel poetry httpie
+    python -m pip install -U neovim jedi isort flake8 black cookiecutter docker-compose wheel poetry httpie
+    asdf reshim python
 }
 
 # clean python thrash
@@ -69,21 +70,5 @@ function pyclean(){
     find . -name ".mypy_cache" -type d | xargs rm -rf
 }
 
-PATH=~/.local/bin:$PATH
-export PATH="$HOME/.poetry/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH=$PATH:/usr/local/go/bin
-
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
 # avoid to save env vars
 export HISTORY_IGNORE="export*"
-
-batdiff() {
-    git diff --name-only --diff-filter=d | xargs bat --diff
-}
