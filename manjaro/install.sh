@@ -81,5 +81,18 @@ yay -S graphviz
 # magalu
 yay -S slack-desktop vpnc
 
-# END
+# Como desabilitar a opção de "Desabilitar o touchpad enquanto digita"
+# 1. Instale xorg-input 
+# yay -S xorg-xinput
+# 2. Rode xinput e anote o ID do touchpad
+# xinput
+# 3. Liste a propriedades do dispositivo
+# utilizando o ID obtido no passo anterior.
+# Procure por algo como: "Disable while typing Enabled [number] 1"
+# xinput list-props ID
+# 4. Modifique a propriedade para falso
+# xinput set-prop [id do touchpad obtido no passo 2] [número da configuração que aparece no passo 3] 0
+# Exemplo: xinput set-prop 12 302 0
+
+# FIM
 su - $USER
