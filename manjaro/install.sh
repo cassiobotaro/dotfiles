@@ -21,9 +21,7 @@ gh completion --shell zsh > $ZSH_CUSTOM/plugins/gh/_gh
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
-# TODO: review neovim
-#mkdir -p ~/.config/nvim
-#cp init.vim ~/.config/nvim
+cp -R ../nvim/ ~/.config/
 cp .gitconfig ~/
 cp terminalrc ~/.config/xfce4/terminal/
 chsh -s $(which zsh)
@@ -75,14 +73,14 @@ sudo usermod -aG docker $USER
 python -m pip install docker-compose
 asdf reshim python
 
-# graphviz 
+# graphviz
 yay -S graphviz
 
 # magalu
 yay -S slack-desktop vpnc
 
 # Como desabilitar a opção de "Desabilitar o touchpad enquanto digita"
-# 1. Instale xorg-input 
+# 1. Instale xorg-input
 # yay -S xorg-xinput
 # 2. Rode xinput e anote o ID do touchpad
 # xinput
