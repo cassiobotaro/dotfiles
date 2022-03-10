@@ -4,6 +4,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # THEME
 ZSH_THEME="steeef"
 
+# 256-color
+export TERM="xterm-256color"
+
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
