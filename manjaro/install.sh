@@ -21,7 +21,8 @@ gh completion --shell zsh > $ZSH_CUSTOM/plugins/gh/_gh
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
-cp -R ../nvim/ ~/.config/
+mkdir -p ~/.config/nvim
+cp init.vim ~/.config/nvim/init.vim
 cp .gitconfig ~/
 cp terminalrc ~/.config/xfce4/terminal/
 chsh -s $(which zsh)
