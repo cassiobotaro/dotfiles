@@ -21,8 +21,6 @@ gh completion --shell zsh > $ZSH_CUSTOM/plugins/gh/_gh
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
-mkdir -p ~/.config/nvim
-cp init.vim ~/.config/nvim/init.vim
 cp .gitconfig ~/
 cp terminalrc ~/.config/xfce4/terminal/
 chsh -s $(which zsh)
@@ -39,6 +37,7 @@ yay -S asdf-vm
 asdf plugin add python
 asdf plugin add nodejs
 asdf plugin add golang
+asdf plugin add neovim
 
 asdf install python 3.10.4
 asdf global python 3.10.4
@@ -47,6 +46,11 @@ asdf install golang 1.18.1
 asdf global golang 1.18.1
 asdf install nodejs 18.0.0
 asdf global nodejs 18.0.0
+asdf install neovim latest
+asdf global neovim latest
+
+# lunarvim
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 
 # changie (go)
 go install github.com/miniscruff/changie@latest
