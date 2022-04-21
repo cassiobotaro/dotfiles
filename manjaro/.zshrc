@@ -26,14 +26,17 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-export EDITOR='nvim'
+export EDITOR='lvim'
 
 # aliases
-alias cat=bat
+alias cat="bat -p"
 alias zshconf="nvim ~/.zshrc"
-alias nvimconf="nvim ~/.config/nvim/init.lua"
+alias lvimconf="lvim ~/.config/lvim/config.lua"
 alias tree="tree -C"
 alias myip="curl http://ipecho.net/plain; echo"
+alias nvim="lvim"
+alias vim="lvim"
+
 # vnp on/off
 alias vpnon="sudo vpnc /etc/vpnc/vpn-ML.conf"
 alias vpnoff="sudo vpnc-disconnect"
@@ -58,6 +61,15 @@ function ctop() {
         quay.io/vektorlab/ctop:latest
 }
 
+# structurizr
+function structurizr() {
+    readonly file=${1:?"The file must be specified."}
+    docker run --rm -it \
+        -p 8080:8080 \
+        -v "$PWD/$file":/usr/local/structurizr/workspace.dsl \
+            structurizr/lite
+}
+
 # update python packages
 function upy(){
     python -m pip install -U pip
@@ -75,3 +87,5 @@ function pyclean(){
 
 # avoid to save env vars
 export HISTORY_IGNORE="export*"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
