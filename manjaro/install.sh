@@ -12,7 +12,7 @@ yay -S base-devel google-chrome gimp redshift tlp vlc spotify
 sudo tlp start
 
 # terminal stuffs
-yay -S fasd fd tree ctags ncurses curl bat xclip tmux zsh github-cli neovim
+yay -S fasd fd tree ctags ncurses curl bat xclip tmux zsh github-cli neovim ripgrep
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # github cli plugin
@@ -38,18 +38,15 @@ yay -S openssl zlib xz tk
 yay -S asdf-vm
 asdf plugin add python
 asdf plugin add nodejs
-asdf plugin add rust
 asdf plugin add golang
 
-asdf install python 3.10.2
-asdf global python 3.10.2
-asdf install python 3.9
-asdf install rust 1.59.0
-asdf global rust 1.59.0
-asdf install golang 1.17.8
-asdf global golang 1.17.8
-asdf install nodejs 17.6.0
-asdf global nodejs 17.6.0
+asdf install python 3.10.4
+asdf global python 3.10.4
+asdf install python 3.9.12
+asdf install golang 1.18.1
+asdf global golang 1.18.1
+asdf install nodejs 18.0.0
+asdf global nodejs 18.0.0
 
 # changie (go)
 go install github.com/miniscruff/changie@latest
