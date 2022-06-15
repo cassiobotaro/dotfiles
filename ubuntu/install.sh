@@ -20,7 +20,7 @@ sudo tlp start
 
 # terminal stuffs
 sudo apt install fasd tree fd-find exuberant-ctags ncurses-term curl xclip tmux zsh
-ln -s $(which fdfind) ~/.local/bin/fd
+sudo ln -s $(which fdfind) /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -43,59 +43,64 @@ cp .tmux.conf ~/
 mkdir -p ~/.config/nvim
 cp init.vim ~/.config/nvim
 cp .gitconfig ~/
-cp terminalrc ~/.config/xfce4/terminal/
-# nvim
 
-# python environment
+# python dependencies
 sudo apt-get update; sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-pyenv install 3.9.10
-pyenv install 3.10.2
-pyenv global 3.10.2
-pyenv rehash
+
+# asdf
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+
+# python
+asdf plugin add python
+asdf install python latest
+asdf global python latest
 cp .pdbrc ~/
-upy
-# poetry (python env)
+python -m pip install neovim jedi isort flake8 black cookiecutter poetry wheel httpie
+asdf reshim python
 mkdir $ZSH_CUSTOM/plugins/poetry
 poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 
-# Go
-wget https://golang.org/dl/go1.17.linux-amd64.tar.gz
-sudo  tar -C /usr/local -xzf go1.17.linux-amd64.tar.gz
-rm go1.17.linux-amd64.tar.gz
+# go
+asdf plugin add golang
+asdf install golang latest
+asdf global golang latest
 go install github.com/miniscruff/changie@latest
-mkdir $ZSH_CUSTOM/plugins/changie
+asdf reshim golang
+mkdir -p $ZSH_CUSTOM/plugins/changie
 changie completion zsh > $ZSH_CUSTOM/plugins/changie/_changie
 
-# node environment
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-nvm install --lts
+# rust
+asdf plugin add rust
+asdf install rust latest
+asdf global rust latest
 
+# neovim
+asdf plugin add neovim
+asdf install neovim latest
+asdf global neovim latest
 
-# rust environment
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# fzf
+asdf plugin add fzf
+asdf install fzf latest
+asdf global fzf latest
 
-# podman
-. /etc/os-release
-echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
-curl -L "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key" | sudo apt-key add -
-sudo apt-get update
-sudo apt-get -y upgrade
-sudo apt-get -y install podman
-python -m pip install --user podman-compose
+# docker
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo usermod -aG docker $USER
 
 # graphviz
-sudo apt install graphviz openjdk-17-jre
-
-# magalu
-sudo snap install slack --classic
-sudo apt install vpnc
-
-# keyboard hack
-sudo apt install uim
-echo 'export GTK_IM_MODULE="uim"' >> ~/.profile
-echo 'export QT_IM_MODULE="uim"' >> ~/.profile
-curl 'https://gist.githubusercontent.com/guiambros/b773ee85746e06454596/raw/0ea6d7f7cf9a6ff38b4cafde24dd43852e46d5e3/.XCompose' > ~/.XCompose
+sudo apt install graphviz
 
 # END
 su - $USER
