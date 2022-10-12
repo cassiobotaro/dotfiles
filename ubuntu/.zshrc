@@ -30,6 +30,7 @@ export EDITOR='nvim'
 
 # aliases
 alias cat="bat -p"
+alias ls="exa"
 alias zshconf="nvim ~/.zshrc"
 alias nvimconf="nvim ~/.config/nvim/config.lua"
 alias tree="tree -C"
