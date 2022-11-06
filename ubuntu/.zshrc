@@ -31,9 +31,9 @@ export EDITOR='nvim'
 # aliases
 alias cat="bat -p"
 alias ls="exa"
+alias tree="ls -T"
 alias zshconf="nvim ~/.zshrc"
-alias nvimconf="nvim ~/.config/nvim/config.lua"
-alias tree="tree -C"
+alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias myip="curl http://ipecho.net/plain; echo"
 alias vim="nvim"
 
