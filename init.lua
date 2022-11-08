@@ -1,7 +1,38 @@
+-- Packer (plugin manager)
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
+require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'
+  -- colorscheme onedark
+  use({
+      'navarasu/onedark.nvim',
+      config = function()
+          require('onedark').load()
+      end
+  })
+
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)
+
+
 -- Globals
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 vim.g.python3_host_prog = "python"
+
 
 -- Options
 vim.o.clipboard = "unnamedplus" -- use system clipboard
@@ -20,7 +51,6 @@ vim.bo.expandtab = true -- in Insert mode: Use the appropriate number of spaces 
 vim.bo.softtabstop = 4 -- number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>.
 vim.o.shiftround = true -- round indent to multiple of 'shiftwidth'.  Applies to > and < commands.
 vim.o.updatetime = 300 -- if this many milliseconds nothing is typed the swap file will be written to disk. Also used for the CursorHold autocommand event.
-
 
 
 -- Mappings
