@@ -1,30 +1,49 @@
 -- Packer (plugin manager)
 local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+    local fn = vim.fn
+    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 
 local packer_bootstrap = ensure_packer()
 
 require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  -- colorscheme onedark
-  use({
-      'navarasu/onedark.nvim',
-      config = function()
-          require('onedark').load()
-      end
-  })
+    use 'wbthomason/packer.nvim'
+    -- colorscheme onedark
+    use({
+        'navarasu/onedark.nvim',
+        config = function()
+            require('onedark').load()
+        end
+    })
 
-  if packer_bootstrap then
-    require('packer').sync()
-  end
+    -- statusline
+    use({
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = function()
+            require('lualine').setup()
+        end
+    })
+    -- buffer tabs
+    use({
+        "akinsho/bufferline.nvim",
+        tag = "v3.*",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("bufferline").setup{}
+        end
+    })
+
+
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end)
 
 
@@ -71,12 +90,12 @@ vim.keymap.set('v', ">", [[>gv]]) -- move code backward in visual mode
 
 -- remember last cursor position
 vim.api.nvim_create_autocmd("BufReadPost", {
-  callback = function()
-    local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
-    if row > 0 and row <= vim.api.nvim_buf_line_count(0) then
-      vim.api.nvim_win_set_cursor(0, { row, col })
-    end
-  end,
+    callback = function()
+        local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+        if row > 0 and row <= vim.api.nvim_buf_line_count(0) then
+            vim.api.nvim_win_set_cursor(0, { row, col })
+        end
+    end,
 })
 
 -- remove trailing whitespace on save
