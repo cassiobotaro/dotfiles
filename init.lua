@@ -40,6 +40,23 @@ require('packer').startup(function(use)
         end
     })
 
+    -- editor
+    use({
+        "numToStr/Comment.nvim",
+        config = function()
+            require("Comment").setup()
+        end,
+    })
+
+    -- git
+    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
+
 
     if packer_bootstrap then
         require('packer').sync()
@@ -67,9 +84,11 @@ vim.o.ignorecase = true -- ignore case in search patterns
 vim.bo.shiftwidth = 4 -- number of spaces to use for each step of (auto)indent
 vim.bo.tabstop = 4 -- number of spaces that a <Tab> in the file counts for
 vim.bo.expandtab = true -- in Insert mode: Use the appropriate number of spaces to insert a <Tab>
-vim.bo.softtabstop = 4 -- number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>.
-vim.o.shiftround = true -- round indent to multiple of 'shiftwidth'.  Applies to > and < commands.
-vim.o.updatetime = 300 -- if this many milliseconds nothing is typed the swap file will be written to disk. Also used for the CursorHold autocommand event.
+vim.bo.softtabstop = 4 -- number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
+vim.o.shiftround = true -- round indent to multiple of 'shiftwidth'.  Applies to > and < commands
+vim.o.updatetime = 300 -- if this many milliseconds nothing is typed the swap file will be written to disk. Also used for the CursorHold autocommand event
+vim.o.scrolloff = 12 -- minimal number of screen lines to keep above and below the cursor
+vim.bo.smartindent = true -- do smart autoindenting when starting a new line
 
 
 -- Mappings
