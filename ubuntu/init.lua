@@ -13,7 +13,12 @@ end
 local packer_bootstrap = ensure_packer()
 
 require('packer').startup(function(use)
+    -- plugin manager
     use 'wbthomason/packer.nvim'
+
+    -- fancy icons
+    use 'nvim-tree/nvim-web-devicons'
+
     -- colorscheme onedark
     use({
         'navarasu/onedark.nvim',
@@ -25,7 +30,7 @@ require('packer').startup(function(use)
     -- statusline
     use({
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' },
+        requires = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             require('lualine').setup()
         end
@@ -34,18 +39,26 @@ require('packer').startup(function(use)
     use({
         "akinsho/bufferline.nvim",
         tag = "v3.*",
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = "nvim-tree/nvim-web-devicons",
         config = function()
             require("bufferline").setup{}
         end
     })
 
-    -- editor
+    -- comment stuff out
     use({
         "numToStr/Comment.nvim",
         config = function()
             require("Comment").setup()
         end,
+    })
+
+    -- surround selections, stylishly
+    use({
+        "kylechui/nvim-surround",
+        config = function()
+            require("nvim-surround").setup()
+        end
     })
 
     -- git
