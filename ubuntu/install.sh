@@ -11,7 +11,7 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 # spotify
-curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
+curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-get update && sudo apt-get install spotify-client
 # others
@@ -41,7 +41,8 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
 cp .zshrc ~/
 cp .tmux.conf ~/
 mkdir -p ~/.config/nvim
-cp init.vim ~/.config/nvim
+cp init.lua ~/.config/nvim
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 cp .gitconfig ~/
 
 # python dependencies
