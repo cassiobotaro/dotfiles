@@ -19,7 +19,7 @@ sudo apt install build-essential wget gimp redshift tlp
 sudo tlp start
 
 # terminal stuffs
-sudo apt install fasd fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq
+sudo apt install fasd fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep
 sudo ln -s $(which fdfind) /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

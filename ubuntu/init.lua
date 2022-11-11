@@ -70,6 +70,14 @@ require('packer').startup(function(use)
         end
     }
 
+    -- highly extendable fuzzy finder over lists
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        requires = {
+            'nvim-lua/plenary.nvim',
+        }
+    }
+
 
     if packer_bootstrap then
         require('packer').sync()
@@ -114,6 +122,9 @@ vim.keymap.set('n', "<leader>q", [[<Cmd>bp<CR>]]) -- move to previous buffer
 vim.keymap.set('n', "<leader>w", [[<Cmd>bn<CR>]]) -- move to next buffer
 vim.keymap.set('n', "<leader>c", [[<Cmd>bd<CR>]]) -- close current buffer
 vim.keymap.set('n', "<leader>.", [[<Cmd>lcd %:p:h<CR>]]) -- set current file directory as working directory
+vim.keymap.set('n', "<leader>b", [[<Cmd>Telescope buffers<CR>]]) -- list buffers
+vim.keymap.set('n', "<leader>e", [[<Cmd>Telescope find_files<CR>]]) -- list files in directory
+vim.keymap.set('n', "<leader>f", [[<Cmd>Telescope live_grep<CR>]]) -- search text
 vim.keymap.set('v', "<", [[<gv]]) -- move code forward in visual mode
 vim.keymap.set('v', ">", [[>gv]]) -- move code backward in visual mode
 
