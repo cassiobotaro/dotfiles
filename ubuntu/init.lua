@@ -79,6 +79,67 @@ require('packer').startup(function(use)
     }
 
 
+    -- treesitter
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+            require('nvim-treesitter.configs').setup({
+                -- highlight = { enable = true },
+                indent = { enable = true },
+                ensure_installed = {
+                    "lua",
+                    "go",
+                    "gomod",
+                    "python",
+                    "toml",
+                    "markdown",
+                    "java",
+                    "dockerfile",
+                    "json",
+                    "yaml",
+                    "bash",
+                    "rust",
+                },
+                auto_install = true,
+                textobjects = {
+                    select = {
+                        enable = true,
+                        -- Automatically jump forward to textobj, similar to targets.vim
+                        lookahead = true,
+                        keymaps = {
+                            -- You can use the capture groups defined in textobjects.scm
+                            ["af"] = "@function.outer",
+                            ["if"] = "@function.inner",
+                            ["ac"] = "@class.outer",
+                            ["ic"] = "@class.inner",
+                        },
+                    },
+                    move = {
+                        enable = true,
+                        set_jumps = true,
+                        goto_next_start = {
+                            ["]]"] = "@function.outer",
+                        },
+                        goto_previous_start = {
+                            ["[["] = "@function.outer",
+                        },
+                    },
+                    swap = {
+                        enable = true,
+                        swap_next = {
+                            ["<leader>ps"] = "@parameter.inner",
+                        },
+                        swap_previous = {
+                            ["<leader>pS"] = "@parameter.inner",
+                        },
+                    },
+                },
+            })
+        end
+    })
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+
+
     if packer_bootstrap then
         require('packer').sync()
     end
