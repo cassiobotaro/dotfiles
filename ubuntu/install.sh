@@ -1,3 +1,4 @@
+#!/bin/bash
 # install fonts
 mkdir -p ~/.local/share/fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
@@ -20,7 +21,7 @@ sudo tlp start
 
 # terminal stuffs
 sudo apt install fasd fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep
-sudo ln -s $(which fdfind) /usr/bin/fd
+sudo ln -s "$(which fdfind)" /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -29,8 +30,8 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 sudo apt update
 sudo apt install gh
-mkdir $ZSH_CUSTOM/plugins/gh
-gh completion --shell zsh > $ZSH_CUSTOM/plugins/gh/_gh
+mkdir "$ZSH_CUSTOM/plugins/gh"
+gh completion --shell zsh > "$ZSH_CUSTOM/plugins/gh/_gh"
 # bat
 wget https://github.com/sharkdp/bat/releases/download/v0.21.0/bat_0.21.0_amd64.deb
 sudo dpkg -i bat_0.21.0_amd64.deb
@@ -58,8 +59,8 @@ asdf global python latest
 cp .pdbrc ~/
 python -m pip install neovim jedi isort flake8 black cookiecutter poetry wheel httpie
 asdf reshim python
-mkdir $ZSH_CUSTOM/plugins/poetry
-poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+mkdir "$ZSH_CUSTOM/plugins/poetry"
+poetry completions zsh > "$ZSH_CUSTOM/plugins/poetry/_poetry"
 
 # go
 asdf plugin add golang
@@ -67,8 +68,8 @@ asdf install golang latest
 asdf global golang latest
 go install github.com/miniscruff/changie@latest
 asdf reshim golang
-mkdir -p $ZSH_CUSTOM/plugins/changie
-changie completion zsh > $ZSH_CUSTOM/plugins/changie/_changie
+mkdir -p "$ZSH_CUSTOM/plugins/changie"
+changie completion zsh > "$ZSH_CUSTOM/plugins/changie/_changie"
 
 # rust
 asdf plugin add rust
@@ -77,8 +78,8 @@ asdf global rust latest
 
 # neovim
 asdf plugin add neovim
-asdf install neovim latest
-asdf global neovim latest
+asdf install neovim 0.7.2
+asdf global neovim 0.7.2
 
 # fzf
 asdf plugin add fzf
@@ -98,10 +99,10 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo usermod -aG docker $USER
+sudo usermod -aG docker "$USER"
 
 # graphviz
 sudo apt install graphviz
 
 # END
-su - $USER
+su - "$USER"

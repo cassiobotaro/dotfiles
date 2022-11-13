@@ -84,7 +84,7 @@ require('packer').startup(function(use)
         "nvim-treesitter/nvim-treesitter",
         config = function()
             require('nvim-treesitter.configs').setup({
-                -- highlight = { enable = true },
+                highlight = { enable = true },
                 indent = { enable = true },
                 ensure_installed = {
                     "lua",
@@ -138,6 +138,38 @@ require('packer').startup(function(use)
         end
     })
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+
+    -- lsp
+    use {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+    }
+    require("mason").setup()
+    local mlsp = require("mason-lspconfig")
+    mlsp.setup({
+        ensure_installed = {
+            "bashls", -- bash
+            "sumneko_lua", -- lua
+            "rust_analyzer", -- rust
+            "gopls", -- go
+            "pyright", -- python
+            "taplo", -- toml
+            "jdtls", -- java
+            "dockerls", -- docker
+            "jsonls", -- json
+            "yamlls", -- yaml
+        },
+        automatic_installation = true,
+    })
+    mlsp.setup_handlers {
+        -- The first entry (without a key) will be the default handler
+        -- and will be called for each installed server that doesn't have
+        -- a dedicated handler.
+        function (server_name) -- default handler (optional)
+            require("lspconfig")[server_name].setup {}
+        end,
+    }
 
 
     if packer_bootstrap then
