@@ -41,9 +41,6 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
-mkdir -p ~/.config/nvim
-cp init.lua ~/.config/nvim
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 cp .gitconfig ~/
 
 # python dependencies
@@ -57,7 +54,7 @@ asdf plugin add python
 asdf install python latest
 asdf global python latest
 cp .pdbrc ~/
-python -m pip install neovim jedi isort flake8 black cookiecutter poetry wheel httpie
+python -m pip install jedi isort flake8 black cookiecutter poetry wheel httpie
 asdf reshim python
 mkdir "$ZSH_CUSTOM/plugins/poetry"
 poetry completions zsh > "$ZSH_CUSTOM/plugins/poetry/_poetry"
@@ -76,15 +73,15 @@ asdf plugin add rust
 asdf install rust latest
 asdf global rust latest
 
-# neovim
-asdf plugin add neovim
-asdf install neovim 0.7.2
-asdf global neovim 0.7.2
-
 # fzf
 asdf plugin add fzf
 asdf install fzf latest
 asdf global fzf latest
+
+# java
+asdf plugin-add java https://github.com/halcyon/asdf-java.git
+asdf install java openjdk-19
+asdf global java openjdk
 
 # docker
 sudo apt-get install \
@@ -110,9 +107,6 @@ rm -f packages.microsoft.gpg
 sudo apt install apt-transport-https
 sudo apt update
 sudo apt install code
-
-# graphviz
-sudo apt install graphviz
 
 # END
 su - "$USER"
