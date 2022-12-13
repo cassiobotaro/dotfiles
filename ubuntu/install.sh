@@ -12,12 +12,9 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 # spotify
-curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add -
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-get update && sudo apt-get install spotify-client
+sudo snap install spotify
 # others
-sudo apt install build-essential wget gimp redshift tlp
-sudo tlp start
+sudo apt install build-essential git
 
 # terminal stuffs
 sudo apt install fasd fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep
@@ -33,11 +30,10 @@ sudo apt install gh
 mkdir "$ZSH_CUSTOM/plugins/gh"
 gh completion --shell zsh > "$ZSH_CUSTOM/plugins/gh/_gh"
 # bat
-wget https://github.com/sharkdp/bat/releases/download/v0.21.0/bat_0.21.0_amd64.deb
-sudo dpkg -i bat_0.21.0_amd64.deb
-rm bat_0.21.0_amd64.deb
-# asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+wget https://github.com/sharkdp/bat/releases/download/v0.22.1/bat_0.22.1_amd64.deb
+sudo dpkg -i bat_0.22.1_amd64.deb
+rm bat_0.22.1_amd64.deb
+
 # set preferences
 cp .zshrc ~/
 cp .tmux.conf ~/
@@ -47,14 +43,14 @@ cp .gitconfig ~/
 sudo apt-get update; sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
 
 # python
 asdf plugin add python
 asdf install python latest
 asdf global python latest
 cp .pdbrc ~/
-python -m pip install jedi isort flake8 black cookiecutter poetry wheel httpie
+python -m pip install jedi isort flake8 black cookiecutter poetry wheel httpie ruff
 asdf reshim python
 mkdir "$ZSH_CUSTOM/plugins/poetry"
 poetry completions zsh > "$ZSH_CUSTOM/plugins/poetry/_poetry"
@@ -81,7 +77,7 @@ asdf global fzf latest
 # java
 asdf plugin-add java https://github.com/halcyon/asdf-java.git
 asdf install java openjdk-19
-asdf global java openjdk
+asdf global java openjdk-19
 
 # docker
 sudo apt-get install \
