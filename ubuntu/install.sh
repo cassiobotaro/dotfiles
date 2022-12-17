@@ -50,7 +50,7 @@ asdf plugin add python
 asdf install python latest
 asdf global python latest
 cp .pdbrc ~/
-python -m pip install jedi isort flake8 black cookiecutter poetry wheel httpie ruff
+python -m pip install jedi isort flake8 black cookiecutter poetry wheel httpie ruff neovim
 asdf reshim python
 mkdir "$ZSH_CUSTOM/plugins/poetry"
 poetry completions zsh > "$ZSH_CUSTOM/plugins/poetry/_poetry"
@@ -73,11 +73,17 @@ asdf global rust latest
 asdf plugin add fzf
 asdf install fzf latest
 asdf global fzf latest
+~/.asdf/installs/fzf/$(fzf --version | cut -d" " -f 1)/install --all
 
 # java
 asdf plugin-add java https://github.com/halcyon/asdf-java.git
 asdf install java openjdk-19
 asdf global java openjdk-19
+
+# neovim
+asdf plugin add neovim
+asdf install neovim stable
+asdf global neovim stable
 
 # docker
 sudo apt-get install \

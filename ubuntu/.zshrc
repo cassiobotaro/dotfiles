@@ -67,7 +67,7 @@ function structurizr() {
 # update python packages
 function upy(){
     python -m pip install -U pip
-    python -m pip install -U neovim jedi isort flake8 black cookiecutter docker-compose wheel poetry httpie
+    python -m pip install -U jedi isort flake8 black cookiecutter poetry wheel httpie ruff neovim
     asdf reshim python
 }
 
