@@ -85,6 +85,11 @@ asdf plugin add neovim
 asdf install neovim stable
 asdf global neovim stable
 
+# nodejs
+asdf plugin add nodejs
+asdf install nodejs lts
+asdf global nodejs lts
+
 # docker
 sudo apt-get install \
     ca-certificates \
