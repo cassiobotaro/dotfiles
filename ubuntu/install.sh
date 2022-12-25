@@ -17,18 +17,18 @@ sudo snap install spotify
 sudo apt install build-essential git
 
 # terminal stuffs
-sudo apt install fasd fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep
+sudo apt install fasd fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep shellcheck
 sudo ln -s "$(which fdfind)" /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # github cli
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
 sudo apt update
 sudo apt install gh
 mkdir "$ZSH_CUSTOM/plugins/gh"
-gh completion --shell zsh > "$ZSH_CUSTOM/plugins/gh/_gh"
+gh completion --shell zsh >"$ZSH_CUSTOM/plugins/gh/_gh"
 # bat
 wget https://github.com/sharkdp/bat/releases/download/v0.22.1/bat_0.22.1_amd64.deb
 sudo dpkg -i bat_0.22.1_amd64.deb
@@ -40,7 +40,8 @@ cp .tmux.conf ~/
 cp .gitconfig ~/
 
 # python dependencies
-sudo apt-get update; sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+sudo apt-get update
+sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
@@ -53,7 +54,7 @@ cp .pdbrc ~/
 python -m pip install jedi isort flake8 black cookiecutter poetry wheel httpie ruff neovim
 asdf reshim python
 mkdir "$ZSH_CUSTOM/plugins/poetry"
-poetry completions zsh > "$ZSH_CUSTOM/plugins/poetry/_poetry"
+poetry completions zsh >"$ZSH_CUSTOM/plugins/poetry/_poetry"
 
 # go
 asdf plugin add golang
@@ -62,7 +63,7 @@ asdf global golang latest
 go install github.com/miniscruff/changie@latest
 asdf reshim golang
 mkdir -p "$ZSH_CUSTOM/plugins/changie"
-changie completion zsh > "$ZSH_CUSTOM/plugins/changie/_changie"
+changie completion zsh >"$ZSH_CUSTOM/plugins/changie/_changie"
 
 # rust
 asdf plugin add rust
@@ -73,12 +74,16 @@ asdf global rust latest
 asdf plugin add fzf
 asdf install fzf latest
 asdf global fzf latest
-~/.asdf/installs/fzf/$(fzf --version | cut -d" " -f 1)/install --all
+~/.asdf/installs/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
 
 # java
 asdf plugin-add java https://github.com/halcyon/asdf-java.git
 asdf install java openjdk-19
 asdf global java openjdk-19
+
+asdf plugin add gradle
+asdf install gradle latest
+asdf global gradle latest
 
 # neovim
 asdf plugin add neovim
@@ -92,22 +97,22 @@ asdf global nodejs lts
 
 # docker
 sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+	ca-certificates \
+	curl \
+	gnupg \
+	lsb-release
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 sudo apt update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker "$USER"
 
 # vscode
 sudo apt-get install wget gpg
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
