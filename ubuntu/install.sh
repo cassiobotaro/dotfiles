@@ -81,9 +81,10 @@ asdf plugin-add java https://github.com/halcyon/asdf-java.git
 asdf install java openjdk-19
 asdf global java openjdk-19
 
-asdf plugin add gradle
-asdf install gradle latest
-asdf global gradle latest
+asdf plugin add maven
+asdf install maven latest
+asdf global maven latest
+
 
 # neovim
 asdf plugin add neovim
