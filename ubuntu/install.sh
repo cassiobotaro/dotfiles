@@ -82,8 +82,8 @@ asdf install java openjdk-19
 asdf global java openjdk-19
 
 asdf plugin add maven
-asdf install maven latest
-asdf global maven latest
+asdf install maven 3.8.6
+asdf global maven 3.8.6
 
 
 # neovim
