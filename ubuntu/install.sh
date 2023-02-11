@@ -76,16 +76,6 @@ asdf install fzf latest
 asdf global fzf latest
 ~/.asdf/installs/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
 
-# java
-asdf plugin-add java https://github.com/halcyon/asdf-java.git
-asdf install java openjdk-19
-asdf global java openjdk-19
-
-asdf plugin add maven
-asdf install maven 3.8.6
-asdf global maven 3.8.6
-
-
 # neovim
 asdf plugin add neovim
 asdf install neovim stable
