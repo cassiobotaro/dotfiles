@@ -86,6 +86,21 @@ asdf plugin add nodejs
 asdf install nodejs lts
 asdf global nodejs lts
 
+# minikube
+asdf plugin add minikube
+asdf install minikube latest
+asdf global minikube latest
+
+# kubectl
+asdf plugin add kubectl
+asdf install kubectl latest
+asdf global kubectl latest
+
+# helm
+asdf plugin add helm
+asdf install helm latest
+asdf global helm latest
+
 # docker
 sudo apt-get install \
 	ca-certificates \
