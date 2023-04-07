@@ -23,6 +23,7 @@ plugins=(
     changie
     asdf
     docker-compose
+    kubectl
 )
 
 source $ZSH/oh-my-zsh.sh
