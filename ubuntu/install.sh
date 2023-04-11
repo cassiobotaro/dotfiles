@@ -30,9 +30,9 @@ sudo apt install gh
 mkdir "$ZSH_CUSTOM/plugins/gh"
 gh completion --shell zsh >"$ZSH_CUSTOM/plugins/gh/_gh"
 # bat
-wget https://github.com/sharkdp/bat/releases/download/v0.22.1/bat_0.22.1_amd64.deb
-sudo dpkg -i bat_0.22.1_amd64.deb
-rm bat_0.22.1_amd64.deb
+wget https://github.com/sharkdp/bat/releases/download/v0.23.0/bat_0.23.0_amd64.deb
+sudo dpkg -i bat_0.23.0_amd64.deb
+rm bat_0.23.0_amd64.deb
 
 # set preferences
 cp .zshrc ~/
@@ -44,13 +44,14 @@ sudo apt-get update
 sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3
 
 # python
 asdf plugin add python
 asdf install python latest
 asdf global python latest
 cp .pdbrc ~/
+python -m pip install -U pip
 python -m pip install jedi isort flake8 black cookiecutter poetry wheel httpie ruff neovim
 asdf reshim python
 mkdir "$ZSH_CUSTOM/plugins/poetry"
@@ -115,16 +116,6 @@ echo \
 sudo apt update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker "$USER"
-
-# vscode
-sudo apt-get install wget gpg
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
-sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
-sudo apt install apt-transport-https
-sudo apt update
-sudo apt install code
 
 # END
 su - "$USER"
