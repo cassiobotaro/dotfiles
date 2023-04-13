@@ -24,6 +24,7 @@ plugins=(
     asdf
     docker-compose
     kubectl
+    minikube
 )
 
 source $ZSH/oh-my-zsh.sh
