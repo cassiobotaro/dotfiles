@@ -97,6 +97,11 @@ asdf plugin add kubectl
 asdf install kubectl latest
 asdf global kubectl latest
 
+# kubectx
+asdf plugin add kubectx
+asdf install kubectx latest
+asdf global kubectx latest
+
 # helm
 asdf plugin add helm
 asdf install helm latest
