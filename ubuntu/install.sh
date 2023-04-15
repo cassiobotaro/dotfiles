@@ -36,6 +36,7 @@ rm bat_0.23.0_amd64.deb
 
 # set preferences
 cp .zshrc ~/
+cp .gitignore ~/
 cp .tmux.conf ~/
 cp .gitconfig ~/
 
@@ -121,6 +122,11 @@ echo \
 sudo apt update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker "$USER"
+
+# vscode
+wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64 -O vscode.deb
+sudo dpkg -i vscode.deb
+rm vscode.deb
 
 # END
 su - "$USER"
