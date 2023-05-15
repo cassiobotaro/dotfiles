@@ -1,7 +1,7 @@
 #!/bin/bash
 # install fonts
 mkdir -p ~/.local/share/fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Hack.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/Hack.zip
 unzip Hack.zip -d ~/.local/share/fonts
 fc-cache -fv
 rm Hack.zip
@@ -124,7 +124,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker "$USER"
 
 # vscode
-wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64 -O vscode.deb
+wget https://code.visualstudio.com/sha/download?build=stable &
+os=linux-deb-x64 -O vscode.deb
 sudo dpkg -i vscode.deb
 rm vscode.deb
 
