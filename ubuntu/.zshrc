@@ -75,6 +75,17 @@ function structurizr() {
             structurizr/lite
 }
 
+function export_c4(){
+    readonly format=${1:?"The format must be specified."}
+    text=$(docker run -i --init --cap-add=SYS_ADMIN --net=host --name=exporter ghcr.io/puppeteer/puppeteer:latest node -e "$(cat export-diagrams.js)"  "" "http://localhost:8080" "$format")
+    files=($(echo "$text" | grep -o "\S*\.$format"))
+    for file in "${files[@]}"
+    do
+        docker cp exporter:/home/pptruser/"$file" .
+    done
+    docker rm exporter
+}
+
 # update python packages
 function upy(){
     python -m pip install -U pip
