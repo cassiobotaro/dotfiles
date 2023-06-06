@@ -1,7 +1,7 @@
 #!/bin/bash
 # install fonts
 mkdir -p ~/.local/share/fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/Hack.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip
 unzip Hack.zip -d ~/.local/share/fonts
 fc-cache -fv
 rm Hack.zip
