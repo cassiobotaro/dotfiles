@@ -101,6 +101,12 @@ function pyclean(){
     find . -name ".mypy_cache" -type d | xargs rm -rf
 }
 
+function asdf_update(){
+    readonly lang=${1:?"The plugin must be specified."}
+    asdf install $lang latest
+    asdf global $lang latest
+}
+
 # avoid to save env vars
 export HISTORY_IGNORE="export*"
 
