@@ -12,7 +12,10 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 # spotify
-sudo snap install spotify
+sudo apt install curl
+curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update && sudo apt-get install spotify-client
 # others
 sudo apt install build-essential git
 
@@ -45,7 +48,7 @@ sudo apt-get update
 sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
 
 # python
 asdf plugin add python
