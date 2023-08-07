@@ -66,10 +66,6 @@ poetry completions zsh >"$ZSH_CUSTOM/plugins/poetry/_poetry"
 asdf plugin add golang
 asdf install golang latest
 asdf global golang latest
-go install github.com/miniscruff/changie@latest
-asdf reshim golang
-mkdir -p "$ZSH_CUSTOM/plugins/changie"
-changie completion zsh >"$ZSH_CUSTOM/plugins/changie/_changie"
 
 # rust
 asdf plugin add rust
