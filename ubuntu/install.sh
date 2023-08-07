@@ -20,7 +20,8 @@ sudo apt-get update && sudo apt-get install spotify-client
 sudo apt install build-essential git
 
 # terminal stuffs
-sudo apt install fasd fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep shellcheck
+curl -sS https://webi.sh/zoxide | sh
+sudo apt install fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep shellcheck
 sudo ln -s "$(which fdfind)" /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
