@@ -57,7 +57,7 @@ asdf install python latest
 asdf global python latest
 cp .pdbrc ~/
 python -m pip install -U pip
-python -m pip install jedi isort flake8 black cookiecutter poetry wheel httpie ruff neovim
+python -m pip install black cookiecutter poetry wheel httpie ruff neovim
 asdf reshim python
 mkdir "$ZSH_CUSTOM/plugins/poetry"
 poetry completions zsh >"$ZSH_CUSTOM/plugins/poetry/_poetry"
