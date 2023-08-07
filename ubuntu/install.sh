@@ -124,8 +124,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker "$USER"
 
 # vscode
-wget https://code.visualstudio.com/sha/download?build=stable &
-os=linux-deb-x64 -O vscode.deb
+wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O vscode.deb
 sudo dpkg -i vscode.deb
 rm vscode.deb
 
