@@ -20,8 +20,7 @@ sudo apt-get update && sudo apt-get install spotify-client
 sudo apt install build-essential git
 
 # terminal stuffs
-curl -sS https://webi.sh/zoxide | sh
-sudo apt install fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep shellcheck
+sudo apt install zoxide fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep shellcheck
 sudo ln -s "$(which fdfind)" /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -57,7 +56,7 @@ asdf install python latest
 asdf global python latest
 cp .pdbrc ~/
 python -m pip install -U pip
-python -m pip install black cookiecutter poetry wheel httpie ruff neovim
+python -m pip install black cookiecutter poetry wheel ruff neovim httpie
 asdf reshim python
 mkdir "$ZSH_CUSTOM/plugins/poetry"
 poetry completions zsh >"$ZSH_CUSTOM/plugins/poetry/_poetry"

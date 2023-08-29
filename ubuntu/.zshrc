@@ -15,12 +15,11 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(
     git
     extract
-    fasd
+    zoxide
     tmux
     sudo
     poetry
     gh
-    changie
     asdf
     docker-compose
     kubectl
@@ -89,7 +88,7 @@ function export_c4(){
 # update python packages
 function upy(){
     python -m pip install -U pip
-    python -m pip install -U jedi isort flake8 black cookiecutter poetry wheel httpie ruff neovim
+    python -m pip install -U black cookiecutter poetry wheel ruff neovim httpie
     asdf reshim python
 }
 
@@ -106,8 +105,5 @@ function asdf_update(){
     asdf install $lang latest
     asdf global $lang latest
 }
-
-# avoid to save env vars
-export HISTORY_IGNORE="export*"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
