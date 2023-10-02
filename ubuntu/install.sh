@@ -127,5 +127,8 @@ wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" 
 sudo dpkg -i vscode.deb
 rm vscode.deb
 
+# change caps to esc
+dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:escape']"
+
 # END
 su - "$USER"
