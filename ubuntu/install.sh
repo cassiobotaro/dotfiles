@@ -11,11 +11,13 @@ rm Hack.zip
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
+
 # spotify
 sudo apt install curl
 curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-get update && sudo apt-get install spotify-client
+
 # others
 sudo apt install build-essential git
 
@@ -30,8 +32,7 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
 sudo apt update
 sudo apt install gh
-mkdir "$ZSH_CUSTOM/plugins/gh"
-gh completion --shell zsh >"$ZSH_CUSTOM/plugins/gh/_gh"
+
 # bat
 wget https://github.com/sharkdp/bat/releases/download/v0.23.0/bat_0.23.0_amd64.deb
 sudo dpkg -i bat_0.23.0_amd64.deb
@@ -48,64 +49,52 @@ sudo apt-get update
 sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+su - "$USER"
 
 # python
 asdf plugin add python
 asdf install python latest
 asdf global python latest
 cp .pdbrc ~/
-python -m pip install -U pip
-python -m pip install black cookiecutter poetry wheel ruff neovim httpie
-asdf reshim python
-mkdir "$ZSH_CUSTOM/plugins/poetry"
-poetry completions zsh >"$ZSH_CUSTOM/plugins/poetry/_poetry"
+upy
 
 # go
 asdf plugin add golang
-asdf install golang latest
-asdf global golang latest
+asdf_update golang
 
 # rust
 asdf plugin add rust
-asdf install rust latest
-asdf global rust latest
+asdf_update rust
 
 # fzf
 asdf plugin add fzf
-asdf install fzf latest
-asdf global fzf latest
+asdf_update fzf
 ~/.asdf/installs/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
 
 # neovim
 asdf plugin add neovim
-asdf install neovim stable
-asdf global neovim stable
+asdf_update neovim
 
 # nodejs
 asdf plugin add nodejs
-asdf install nodejs lts
-asdf global nodejs lts
+asdf_update nodejs
 
 # minikube
 asdf plugin add minikube
-asdf install minikube latest
-asdf global minikube latest
+asdf_update minikube
 
 # kubectl
 asdf plugin add kubectl
-asdf install kubectl latest
-asdf global kubectl latest
+asdf_update kubectl
 
 # kubectx
 asdf plugin add kubectx
-asdf install kubectx latest
-asdf global kubectx latest
+asdf_update kubectx
 
 # helm
 asdf plugin add helm
-asdf install helm latest
-asdf global helm latest
+asdf_update helm
 
 # docker
 sudo apt-get install \
