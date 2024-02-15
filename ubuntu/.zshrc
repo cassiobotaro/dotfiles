@@ -89,7 +89,9 @@ function export_c4(){
 # update python packages
 function upy(){
     python -m pip install -U pip
-    python -m pip install -U black cookiecutter poetry wheel ruff neovim httpie
+    python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
+    # copilot chat requirements
+    python -m pip install python-dotenv requests pynvim==0.5.0 prompt-toolkit tiktoken
     asdf reshim python
 }
 
