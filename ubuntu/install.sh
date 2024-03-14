@@ -1,7 +1,7 @@
 #!/bin/bash
 # install fonts
 mkdir -p ~/.local/share/fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
 unzip Hack.zip -d ~/.local/share/fonts
 fc-cache -fv
 rm Hack.zip
@@ -34,9 +34,9 @@ sudo apt update
 sudo apt install gh
 
 # bat
-wget https://github.com/sharkdp/bat/releases/download/v0.23.0/bat_0.23.0_amd64.deb
-sudo dpkg -i bat_0.23.0_amd64.deb
-rm bat_0.23.0_amd64.deb
+wget https://github.com/sharkdp/bat/releases/download/v0.24.0/bat_0.24.0_amd64.deb
+sudo dpkg -i bat_0.24.0_amd64.deb
+rm bat_0.24.0_amd64.deb
 
 # set preferences
 cp .zshrc ~/
@@ -49,7 +49,7 @@ sudo apt-get update
 sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 su - "$USER"
 
 # python
@@ -95,6 +95,10 @@ asdf_update kubectx
 # helm
 asdf plugin add helm
 asdf_update helm
+
+# k9s
+asdf plugin add k9s
+asdf_update k9s
 
 # docker
 sudo apt-get install \
