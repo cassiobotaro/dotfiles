@@ -63,10 +63,6 @@ upy
 asdf plugin add golang
 asdf_update golang
 
-# rust
-asdf plugin add rust
-asdf_update rust
-
 # fzf
 asdf plugin add fzf
 asdf_update fzf
