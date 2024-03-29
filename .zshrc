@@ -86,6 +86,32 @@ function export_c4(){
     docker rm exporter
 }
 
+function _gerar_markdown() {
+	arquivo_mmd="$1"
+	conteudo_mmd=$(cat "$arquivo_mmd")
+
+	arquivo_sem_extensao="${arquivo_mmd%.*}"
+	echo "## ${arquivo_sem_extensao##*-}"
+	echo ""
+	echo "\`\`\`mermaid"
+	echo "$conteudo_mmd"
+	echo "\`\`\`"
+	echo ""
+}
+
+# export structurizr diagrams to mermaid
+function c4mmd() {
+	readonly file=${1:?"The filename must be specified."}
+	docker run -it --rm \
+		-u "$(id -u "${USER}")":"$(id -g "${USER}")" \
+		-v "$PWD":/usr/local/structurizr \
+		structurizr/cli export -f mermaid -w "$file"
+
+	for arquivo_mmd in *.mmd; do
+		_gerar_markdown "$arquivo_mmd" >>diagramas.md
+	done
+}
+
 # update python packages
 function upy(){
     python -m pip install -U pip
