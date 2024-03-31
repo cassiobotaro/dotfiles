@@ -1,7 +1,8 @@
 #!/bin/bash
 # install fonts
 mkdir -p ~/.local/share/fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
+latest_version=$(curl -sSl https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep tag_name | cut -d '"' -f 4)
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/"$latest_version"/Hack.zip
 unzip Hack.zip -d ~/.local/share/fonts
 fc-cache -fv
 rm Hack.zip
@@ -34,9 +35,11 @@ sudo apt update
 sudo apt install gh
 
 # bat
-wget https://github.com/sharkdp/bat/releases/download/v0.24.0/bat_0.24.0_amd64.deb
-sudo dpkg -i bat_0.24.0_amd64.deb
-rm bat_0.24.0_amd64.deb
+latest_version=$(curl -sSl https://api.github.com/repos/sharkdp/bat/releases/latest | grep tag_name | cut -d '"' -f 4)
+bat_deb="bat_${latest_version#v}_amd64.deb"
+wget https://github.com/sharkdp/bat/releases/download/"$latest_version"/"$bat_deb"
+sudo dpkg -i "$bat_deb"
+rm "$bat_deb"
 
 # set preferences
 cp .zshrc ~/
@@ -49,7 +52,8 @@ sudo apt-get update
 sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+latest_version=$(curl -sSl https://api.github.com/repos/asdf-vm/asdf/releases/latest | grep tag_name | cut -d '"' -f 4)
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$latest_version"
 su - "$USER"
 
 # python
