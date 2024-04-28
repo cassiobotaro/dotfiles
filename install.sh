@@ -1,5 +1,6 @@
 #!/bin/bash
 # install fonts
+sudo apt install curl
 mkdir -p ~/.local/share/fonts
 latest_version=$(curl -sSl https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep tag_name | cut -d '"' -f 4)
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/"$latest_version"/Hack.zip
@@ -14,16 +15,13 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
 # spotify
-sudo apt install curl
-curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-get update && sudo apt-get install spotify-client
+snap install spotify
 
 # others
 sudo apt install build-essential git
 
 # terminal stuffs
-sudo apt install zoxide fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep shellcheck
+sudo apt install zoxide fd-find exuberant-ctags ncurses-term curl xclip tmux zsh eza jq ripgrep shellcheck
 sudo ln -s "$(which fdfind)" /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -101,27 +99,14 @@ asdf plugin add k9s
 asdf_update k9s
 
 # docker
-sudo apt-get install \
-	ca-certificates \
-	curl \
-	gnupg \
-	lsb-release
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo \
-	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
-sudo apt update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker "$USER"
+su - "$USER"
 
 # vscode
 wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O vscode.deb
 sudo dpkg -i vscode.deb
 rm vscode.deb
-
-# change caps to esc
-dconf write "/org/gnome/desktop/input-sources/xkb-options" "['caps:escape']"
 
 # END
 su - "$USER"
