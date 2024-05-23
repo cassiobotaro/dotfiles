@@ -28,6 +28,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
+set -o vi
 
 # aliases
 alias cat="bat -p"
@@ -35,8 +36,8 @@ alias ls="exa"
 alias tree="ls -T"
 alias zshconf="nvim ~/.zshrc"
 alias nvimconf="nvim ~/.config/nvim/init.lua"
-alias myip="curl http://ipecho.net/plain; echo"
 alias vim="nvim"
+alias sysup="sudo apt update && sudo apt upgrade -y"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
@@ -116,8 +117,6 @@ function c4mmd() {
 function upy(){
     python -m pip install -U pip
     python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
-    # copilot chat requirements
-    python -m pip install python-dotenv requests pynvim==0.5.0 prompt-toolkit tiktoken
     asdf reshim python
 }
 
@@ -136,3 +135,11 @@ function asdf_update(){
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# go
+if asdf where golang &> /dev/null; then
+	export GOPATH=$(asdf where golang)/packages
+	export GOROOT=$(asdf where golang)/go
+	export GOBIN=$GOPATH/bin
+	export PATH="${PATH}:$(go env GOPATH)/bin"
+fi
