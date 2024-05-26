@@ -38,24 +38,11 @@ alias zshconf="nvim ~/.zshrc"
 alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias vim="nvim"
 alias sysup="sudo apt update && sudo apt upgrade -y"
+alias lzd="lazydocker"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# postgres client
-function pgcli(){
-    docker run --rm -ti --name=pgcli --net=host \
-    postgres:alpine psql postgres://${PGUSER:-"postgres"}:${PGPASS:-"postgres"}@${PGHOST:-"localhost"}:${PGPORT:-5432}/${PGDATABASE:-"postgres"}
-}
-
-# container monitoring
-function ctop() {
-    docker run --rm -ti \
-        --name=ctop \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        quay.io/vektorlab/ctop:latest
-}
 
 # structurizr
 function structurizr() {
@@ -85,32 +72,6 @@ function export_c4(){
         docker cp exporter:/home/pptruser/"$file" .
     done
     docker rm exporter
-}
-
-function _gerar_markdown() {
-	arquivo_mmd="$1"
-	conteudo_mmd=$(cat "$arquivo_mmd")
-
-	arquivo_sem_extensao="${arquivo_mmd%.*}"
-	echo "## ${arquivo_sem_extensao##*-}"
-	echo ""
-	echo "\`\`\`mermaid"
-	echo "$conteudo_mmd"
-	echo "\`\`\`"
-	echo ""
-}
-
-# export structurizr diagrams to mermaid
-function c4mmd() {
-	readonly file=${1:?"The filename must be specified."}
-	docker run -it --rm \
-		-u "$(id -u "${USER}")":"$(id -g "${USER}")" \
-		-v "$PWD":/usr/local/structurizr \
-		structurizr/cli export -f mermaid -w "$file"
-
-	for arquivo_mmd in *.mmd; do
-		_gerar_markdown "$arquivo_mmd" >>diagramas.md
-	done
 }
 
 # update python packages

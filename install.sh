@@ -17,6 +17,9 @@ rm google-chrome-stable_current_amd64.deb
 # spotify
 snap install spotify
 
+# dbeaver
+snap install dbeaver-ce
+
 # others
 sudo apt install build-essential git
 
@@ -31,6 +34,7 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
 sudo apt update
 sudo apt install gh
+gh extension install github/gh-copilot
 
 # bat
 latest_version=$(curl -sSl https://api.github.com/repos/sharkdp/bat/releases/latest | grep tag_name | cut -d '"' -f 4)
@@ -70,6 +74,10 @@ asdf plugin add fzf
 asdf_update fzf
 ~/.asdf/installs/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
 
+# lazydocker
+asdf plugin add lazydocker https://github.com/comdotlinux/asdf-lazydocker.git
+asdf_update lazydocker
+
 # neovim
 asdf plugin add neovim
 asdf_update neovim
@@ -102,11 +110,6 @@ asdf_update k9s
 curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker "$USER"
 su - "$USER"
-
-# vscode
-wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O vscode.deb
-sudo dpkg -i vscode.deb
-rm vscode.deb
 
 # change caps to esc
 gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
