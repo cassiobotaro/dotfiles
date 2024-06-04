@@ -36,13 +36,6 @@ sudo apt update
 sudo apt install gh
 gh extension install github/gh-copilot
 
-# bat
-latest_version=$(curl -sSl https://api.github.com/repos/sharkdp/bat/releases/latest | grep tag_name | cut -d '"' -f 4)
-bat_deb="bat_${latest_version#v}_amd64.deb"
-wget https://github.com/sharkdp/bat/releases/download/"$latest_version"/"$bat_deb"
-sudo dpkg -i "$bat_deb"
-rm "$bat_deb"
-
 # set preferences
 cp .zshrc ~/
 cp .gitignore ~/
@@ -57,6 +50,10 @@ sudo apt-get install --no-install-recommends make build-essential libssl-dev zli
 latest_version=$(curl -sSl https://api.github.com/repos/asdf-vm/asdf/releases/latest | grep tag_name | cut -d '"' -f 4)
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$latest_version"
 su - "$USER"
+
+# bat
+asdf plugin add bat
+asdf_update bat
 
 # python
 asdf plugin add python
