@@ -75,6 +75,10 @@ asdf_update fzf
 asdf plugin add lazydocker https://github.com/comdotlinux/asdf-lazydocker.git
 asdf_update lazydocker
 
+# lazygit
+asdf plugin add lazygit
+asdf_update lazygit
+
 # neovim
 asdf plugin add neovim
 asdf_update neovim
