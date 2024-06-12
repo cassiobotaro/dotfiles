@@ -13,8 +13,10 @@ export TERM="xterm-256color"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
+    vi-mode
     git
     extract
+    eza
     zoxide
     tmux
     sudo
@@ -24,15 +26,14 @@ plugins=(
     docker-compose
     kubectl
     minikube
+    python
 )
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
-set -o vi
 
 # aliases
 alias cat="bat -p"
-alias ls="exa"
 alias tree="ls -T"
 alias zshconf="nvim ~/.zshrc"
 alias nvimconf="nvim ~/.config/nvim/init.lua"
@@ -80,14 +81,6 @@ function upy(){
     python -m pip install -U pip
     python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
     asdf reshim python
-}
-
-# clean python thrash
-function pyclean(){
-    find . -name "*.pyc" | xargs rm -rf
-    find . -name "*.pyo" | xargs rm -rf
-    find . -name "__pycache__" -type d | xargs rm -rf
-    find . -name ".mypy_cache" -type d | xargs rm -rf
 }
 
 function asdf_update(){
