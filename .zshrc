@@ -66,7 +66,7 @@ function structurizr() {
 
 function export_c4(){
     readonly format=${1:?"The format must be specified."}
-    [ ! -f export-diagram.js ] && wget https://raw.githubusercontent.com/cassiobotaro/modeloC4/main/export-diagrams.js
+    [ ! -f "./export-diagrams.js" ] && wget https://raw.githubusercontent.com/cassiobotaro/modeloC4/main/export-diagrams.js
     text=$(docker run -i --init --cap-add=SYS_ADMIN --net=host --name=exporter ghcr.io/puppeteer/puppeteer:latest node -e "$(cat export-diagrams.js)"  "" "http://localhost:8080" "$format")
     files=($(echo "$text" | grep -o "\S*\.$format"))
     for file in "${files[@]}"
