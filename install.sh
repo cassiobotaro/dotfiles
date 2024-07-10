@@ -57,8 +57,7 @@ asdf_update bat
 
 # python
 asdf plugin add python
-asdf install python latest
-asdf global python latest
+asdf_update python
 cp .pdbrc ~/
 upy
 
@@ -74,10 +73,6 @@ asdf_update fzf
 # lazydocker
 asdf plugin add lazydocker https://github.com/comdotlinux/asdf-lazydocker.git
 asdf_update lazydocker
-
-# lazygit
-asdf plugin add lazygit
-asdf_update lazygit
 
 # neovim
 asdf plugin add neovim
@@ -99,10 +94,6 @@ asdf_update kubectl
 asdf plugin add kubectx
 asdf_update kubectx
 
-# helm
-asdf plugin add helm
-asdf_update helm
-
 # k9s
 asdf plugin add k9s
 asdf_update k9s
@@ -111,9 +102,6 @@ asdf_update k9s
 curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker "$USER"
 su - "$USER"
-
-# change caps to esc
-gsettings set org.gnome.desktop.input-sources xkb-options "['caps:escape']"
 
 # END
 su - "$USER"
