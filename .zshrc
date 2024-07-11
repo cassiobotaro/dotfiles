@@ -16,7 +16,6 @@ plugins=(
     vi-mode
     git
     extract
-    eza
     zoxide
     tmux
     sudo
@@ -27,6 +26,7 @@ plugins=(
     kubectl
     minikube
     python
+    eza
 )
 
 source $ZSH/oh-my-zsh.sh
