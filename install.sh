@@ -15,16 +15,16 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
 # spotify
-snap install spotify
+flatpak install -y spotify
 
 # dbeaver
-snap install dbeaver-ce
+flatpak install -y app/io.dbeaver.DBeaverCommunity/x86_64/stable
 
 # others
 sudo apt install build-essential git
 
 # terminal stuffs
-sudo apt install zoxide fd-find exuberant-ctags ncurses-term curl xclip tmux zsh eza jq ripgrep shellcheck
+sudo apt install zoxide fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep shellcheck
 sudo ln -s "$(which fdfind)" /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -34,9 +34,14 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
 sudo apt update
 sudo apt install gh
+gh auth login
 gh extension install github/gh-copilot
 
 # set preferences
+mkdir -p ~/Projects
+gh repo clone dotfiles ~/Projects/dotfiles
+cd ~/Projects/dotfiles
+
 cp .zshrc ~/
 cp .gitignore ~/
 cp .tmux.conf ~/
@@ -54,6 +59,10 @@ su - "$USER"
 # bat
 asdf plugin add bat
 asdf_update bat
+
+# eza
+asdf plugin add eza
+asdf_update eza
 
 # python
 asdf plugin add python
@@ -101,7 +110,6 @@ asdf_update k9s
 # docker
 curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker "$USER"
-su - "$USER"
 
 # END
 su - "$USER"
