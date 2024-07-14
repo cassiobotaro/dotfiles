@@ -21,18 +21,17 @@ plugins=(
     sudo
     poetry
     gh
-    asdf
     docker-compose
     kubectl
     minikube
     python
-    eza
 )
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 
 # aliases
+alias ls="eza"
 alias cat="bat -p"
 alias tree="ls -T"
 alias zshconf="nvim ~/.zshrc"
@@ -89,7 +88,6 @@ function asdf_update(){
     asdf global $lang latest
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # go
 if asdf where golang &> /dev/null; then
@@ -98,3 +96,9 @@ if asdf where golang &> /dev/null; then
 	export GOBIN=$GOPATH/bin
 	export PATH="${PATH}:$(go env GOPATH)/bin"
 fi
+
+eval "$(/home/cassiobotaro/.local/bin/mise activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+source <(fzf --zsh)

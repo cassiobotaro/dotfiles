@@ -40,7 +40,7 @@ gh extension install github/gh-copilot
 # set preferences
 mkdir -p ~/Projects
 gh repo clone dotfiles ~/Projects/dotfiles
-cd ~/Projects/dotfiles
+cd ~/Projects/dotfiles || exit 1
 
 cp .zshrc ~/
 cp .gitignore ~/
@@ -56,56 +56,49 @@ latest_version=$(curl -sSl https://api.github.com/repos/asdf-vm/asdf/releases/la
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$latest_version"
 su - "$USER"
 
+# mise
+curl https://mise.run | sh
+
+# brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 # bat
-asdf plugin add bat
-asdf_update bat
+brew install bat
 
 # eza
-asdf plugin add eza
-asdf_update eza
+brew install eza
+
+# fzf
+brew install fzf
+
+# lazydocker
+brew install lazydocker
+
+# neovim
+brew install nvim
+
+# minikube
+brew install minikube
+
+# kubectl
+brew install kubectl
+
+# kubectx
+brew install kubectx
+
+# k9s
+brew install k9s
 
 # python
-asdf plugin add python
-asdf_update python
+mise use --global python@latest
 cp .pdbrc ~/
 upy
 
 # go
-asdf plugin add golang
-asdf_update golang
-
-# fzf
-asdf plugin add fzf
-asdf_update fzf
-~/.asdf/installs/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
-
-# lazydocker
-asdf plugin add lazydocker https://github.com/comdotlinux/asdf-lazydocker.git
-asdf_update lazydocker
-
-# neovim
-asdf plugin add neovim
-asdf_update neovim
+mise use --global go@latest
 
 # nodejs
-asdf plugin add nodejs
-asdf_update nodejs
-
-# minikube
-asdf plugin add minikube
-asdf_update minikube
-
-# kubectl
-asdf plugin add kubectl
-asdf_update kubectl
-
-# kubectx
-asdf plugin add kubectx
-asdf_update kubectx
-
-# k9s
-asdf plugin add k9s
-asdf_update k9s
+mise use --global node@latest
 
 # docker
 curl -fsSL https://get.docker.com | sh
