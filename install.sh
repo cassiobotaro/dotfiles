@@ -59,35 +59,35 @@ su - "$USER"
 # mise
 curl https://mise.run | sh
 
-# brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
 # bat
-brew install bat
+mise use --global bat@latest
 
 # eza
-brew install eza
-
-# fzf
-brew install fzf
+mise use --global eza@latest
 
 # lazydocker
-brew install lazydocker
+mise plugin add lazydocker https://github.com/comdotlinux/asdf-lazydocker.git
+mise use --global lazydocker@latest
 
 # neovim
-brew install nvim
+mise use --global neovim@latest
 
 # minikube
-brew install minikube
+mise use --global minikube@latest
 
 # kubectl
-brew install kubectl
+mise use --global kubectl@latest
 
 # kubectx
-brew install kubectx
+mise use --global kubectx@latest
 
 # k9s
-brew install k9s
+mise use --global k9s@latest
+
+# fzf
+mise plugin add fzf https://github.com/kompiro/asdf-fzf.git
+mise plugin install fzf
+~/.local/share/mise/installs/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
 
 # python
 mise use --global python@latest

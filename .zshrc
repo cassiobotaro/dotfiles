@@ -39,7 +39,6 @@ alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias vim="nvim"
 alias sysup="sudo apt update && sudo apt upgrade -y"
 alias lzd="lazydocker"
-alias lzg="lazygit"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
@@ -79,26 +78,8 @@ function export_c4(){
 function upy(){
     python -m pip install -U pip
     python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
-    asdf reshim python
 }
 
-function asdf_update(){
-    readonly lang=${1:?"The plugin must be specified."}
-    asdf install $lang latest
-    asdf global $lang latest
-}
-
-
-# go
-if asdf where golang &> /dev/null; then
-	export GOPATH=$(asdf where golang)/packages
-	export GOROOT=$(asdf where golang)/go
-	export GOBIN=$GOPATH/bin
-	export PATH="${PATH}:$(go env GOPATH)/bin"
-fi
-
-eval "$(/home/cassiobotaro/.local/bin/mise activate zsh)"
 eval "$(~/.local/bin/mise activate zsh)"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-source <(fzf --zsh)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
