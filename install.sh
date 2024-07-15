@@ -3,10 +3,10 @@
 sudo apt install curl
 mkdir -p ~/.local/share/fonts
 latest_version=$(curl -sSl https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep tag_name | cut -d '"' -f 4)
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/"$latest_version"/Hack.zip
-unzip Hack.zip -d ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/"$latest_version"/FiraCode.zip
+unzip FiraCode.zip -d ~/.local/share/fonts
 fc-cache -fv
-rm Hack.zip
+rm FiraCode.zip
 
 # missing apps
 # google chrome
