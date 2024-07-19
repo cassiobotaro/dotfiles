@@ -4,9 +4,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # THEME
 ZSH_THEME="steeef"
 
-# 256-color
-export TERM="xterm-256color"
-
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
@@ -80,6 +77,15 @@ function upy(){
     python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
 }
 
-eval "$(~/.local/bin/mise activate zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# go
+if asdf where golang &> /dev/null; then
+	export GOPATH=$(asdf where golang)/packages
+	export GOROOT=$(asdf where golang)/go
+	export GOBIN=$GOPATH/bin
+	export PATH="${PATH}:$(go env GOPATH)/bin"
+fi

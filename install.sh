@@ -51,54 +51,54 @@ cp .gitconfig ~/
 sudo apt-get update
 sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
+# homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# bat
+brew install bat
+# eza
+brew install eza
+
+# lazydocker
+brew install lazydocker
+
+# neovim
+brew install neovim
+
+# minikube
+brew install minikube
+
+# kubectx
+brew install kubectx
+
+# k9s
+brew install k9s
+
+# fzf
+brew install fzf
+./.linuxbrew/Cellar/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
+
 # asdf
 latest_version=$(curl -sSl https://api.github.com/repos/asdf-vm/asdf/releases/latest | grep tag_name | cut -d '"' -f 4)
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$latest_version"
 su - "$USER"
 
-# mise
-curl https://mise.run | sh
-
-# bat
-mise use --global bat@latest
-
-# eza
-mise use --global eza@latest
-
-# lazydocker
-mise plugin add lazydocker https://github.com/comdotlinux/asdf-lazydocker.git
-mise use --global lazydocker@latest
-
-# neovim
-mise use --global neovim@latest
-
-# minikube
-mise use --global minikube@latest
-
-# kubectl
-mise use --global kubectl@latest
-
-# kubectx
-mise use --global kubectx@latest
-
-# k9s
-mise use --global k9s@latest
-
-# fzf
-mise plugin add fzf https://github.com/kompiro/asdf-fzf.git
-mise plugin install fzf
-~/.local/share/mise/installs/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
-
 # python
-mise use --global python@latest
+asdf plugin add python
+asdf install python latest
+asdf global python latest
 cp .pdbrc ~/
 upy
 
 # go
-mise use --global go@latest
+asdf plugin add golang
+asdf install golang latest
+asdf global golang latest
 
 # nodejs
-mise use --global node@latest
+asdf plugin add nodejs
+asdf install nodejs latest
+asdf global nodejs latest
 
 # docker
 curl -fsSL https://get.docker.com | sh
