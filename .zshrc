@@ -10,6 +10,7 @@ ZSH_THEME="steeef"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
+    asdf
     vi-mode
     git
     extract

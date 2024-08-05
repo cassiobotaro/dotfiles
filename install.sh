@@ -79,9 +79,7 @@ brew install fzf
 ./.linuxbrew/Cellar/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
 
 # asdf
-latest_version=$(curl -sSl https://api.github.com/repos/asdf-vm/asdf/releases/latest | grep tag_name | cut -d '"' -f 4)
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch "$latest_version"
-su - "$USER"
+brew install asdf
 
 # python
 asdf plugin add python
