@@ -1,3 +1,4 @@
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -79,9 +80,8 @@ function upy(){
 }
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # go
 if asdf where golang &> /dev/null; then
