@@ -54,6 +54,9 @@ sudo apt-get install --no-install-recommends make build-essential libssl-dev zli
 # homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# tldr
+brew install tldr
+
 # bat
 brew install bat
 # eza
