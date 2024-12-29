@@ -11,7 +11,6 @@ ZSH_THEME="steeef"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
-    asdf
     vi-mode
     git
     extract
@@ -74,19 +73,27 @@ function export_c4(){
 }
 
 # update python packages
+function ugpy(){
+    latest_version=$(pyenv latest -k 3)
+    pyenv install -s "$latest_version"
+    pyenv global "$latest_version"
+}
+
 function upy(){
     python -m pip install -U pip
     python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
 }
 
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# go
-if asdf where golang &> /dev/null; then
-	export GOPATH=$(asdf where golang)/packages
-	export GOROOT=$(asdf where golang)/go
-	export GOBIN=$GOPATH/bin
-	export PATH="${PATH}:$(go env GOPATH)/bin"
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+
+export PATH=$PATH:/usr/local/go/bin

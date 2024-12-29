@@ -81,25 +81,24 @@ brew install k9s
 brew install fzf
 ./.linuxbrew/Cellar/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
 
-# asdf
-brew install asdf
+# nodejs
+latest_version=$(curl -sSl https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep tag_name | cut -d '"' -f 4)
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$latest_version/install.sh" | bash
+nvm install --lts
+nvm use --lts
+npm install -g neovim
 
 # python
-asdf plugin add python
-asdf install python latest
-asdf global python latest
-cp .pdbrc ~/
+curl https://pyenv.run | bash
+latest_version=$(pyenv latest -k 3)
+pyenv install "$latest_version"
+pyenv global "$latest_version"
 upy
 
 # go
-asdf plugin add golang
-asdf install golang latest
-asdf global golang latest
-
-# nodejs
-asdf plugin add nodejs
-asdf install nodejs latest
-asdf global nodejs latest
+wget "https://go.dev/dl/$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9.]+\.linux-amd64\.tar\.gz' | head -n 1)"
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go*.linux-amd64.tar.gz
+rm go*.linux-amd64.tar.gz
 
 # docker
 curl -fsSL https://get.docker.com | sh
