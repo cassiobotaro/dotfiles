@@ -82,6 +82,7 @@ function ugpy(){
 function upy(){
     python -m pip install -U pip
     python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
+    uv self update
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
