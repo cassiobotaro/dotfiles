@@ -1,4 +1,6 @@
 #!/bin/bash
+sudo apt update && sudo apt upgrade
+
 # install fonts
 sudo apt install curl
 mkdir -p ~/.local/share/fonts
@@ -15,16 +17,16 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
 # spotify
-flatpak install -y spotify
+sudo snap install spotify
 
 # dbeaver
-flatpak install -y app/io.dbeaver.DBeaverCommunity/x86_64/stable
+sudo snap install dbeaver-ce
 
 # others
 sudo apt install build-essential git
 
 # terminal stuffs
-sudo apt install zoxide fd-find exuberant-ctags ncurses-term curl xclip tmux zsh exa jq ripgrep shellcheck
+sudo apt install zoxide fd-find exuberant-ctags ncurses-term curl xclip tmux zsh jq ripgrep shellcheck
 sudo ln -s "$(which fdfind)" /usr/bin/fd
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -43,7 +45,6 @@ gh repo clone dotfiles ~/Projects/dotfiles
 cd ~/Projects/dotfiles || exit 1
 
 cp .zshrc ~/
-cp .gitignore ~/
 cp .tmux.conf ~/
 cp .gitconfig ~/
 
@@ -53,9 +54,6 @@ sudo apt-get install --no-install-recommends make build-essential libssl-dev zli
 
 # homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# tldr
-brew install tldr
 
 # bat
 brew install bat
@@ -79,7 +77,7 @@ brew install k9s
 
 # fzf
 brew install fzf
-./.linuxbrew/Cellar/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
+/home/linuxbrew/.linuxbrew/Cellar/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all
 
 # nodejs
 latest_version=$(curl -sSl https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep tag_name | cut -d '"' -f 4)
@@ -93,6 +91,7 @@ curl https://pyenv.run | bash
 latest_version=$(pyenv latest -k 3)
 pyenv install "$latest_version"
 pyenv global "$latest_version"
+curl -LsSf https://astral.sh/uv/install.sh | sh
 upy
 
 # go

@@ -98,3 +98,5 @@ eval "$(pyenv init - bash)"
 
 
 export PATH=$PATH:/usr/local/go/bin
+
+. "$HOME/.local/bin/env"
