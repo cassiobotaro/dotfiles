@@ -23,7 +23,7 @@ sudo snap install spotify
 sudo snap install dbeaver-ce
 
 # others
-sudo apt install build-essential git
+sudo apt install build-essential git gnome-tweaks
 
 # terminal stuffs
 sudo apt install zoxide fd-find exuberant-ctags ncurses-term curl xclip tmux zsh jq ripgrep shellcheck
