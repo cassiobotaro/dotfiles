@@ -73,16 +73,29 @@ function export_c4(){
 }
 
 # update python packages
+function upy(){
+    python -m pip install -U pip
+    python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
+    uv self update
+}
+
+# upgrade language versions
 function ugpy(){
     latest_version=$(pyenv latest -k 3)
     pyenv install -s "$latest_version"
     pyenv global "$latest_version"
 }
 
-function upy(){
-    python -m pip install -U pip
-    python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
-    uv self update
+function uggo(){
+    wget "https://go.dev/dl/$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9.]+\.linux-amd64\.tar\.gz' | head -n 1)"
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go*.linux-amd64.tar.gz
+    rm go*.linux-amd64.tar.gz
+}
+
+function ugjs(){
+    nvm install --lts
+    nvm use --lts
+    npm install -g neovim
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
