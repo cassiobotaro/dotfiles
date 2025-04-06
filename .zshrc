@@ -11,7 +11,6 @@ ZSH_THEME="steeef"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
-    vi-mode
     git
     extract
     zoxide
@@ -35,7 +34,7 @@ alias tree="ls -T"
 alias zshconf="nvim ~/.zshrc"
 alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias vim="nvim"
-alias sysup="sudo apt update && sudo apt upgrade -y"
+alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade"
 alias lzd="lazydocker"
 
 # fzf
