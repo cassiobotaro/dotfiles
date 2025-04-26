@@ -110,6 +110,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - bash)"
 
 
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:~/go/bin:/usr/local/go/bin
 
 . "$HOME/.local/bin/env"
