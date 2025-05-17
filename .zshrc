@@ -22,13 +22,13 @@ plugins=(
     kubectl
     minikube
     python
+    eza
 )
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 
 # aliases
-alias ls="eza"
 alias cat="bat -p"
 alias tree="ls -T"
 alias zshconf="nvim ~/.zshrc"
