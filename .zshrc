@@ -81,6 +81,7 @@ function upy(){
 
 # upgrade language versions
 function ugpy(){
+    pyenv update
     latest_version=$(pyenv latest -k 3)
     pyenv install -s "$latest_version"
     pyenv global "$latest_version"
