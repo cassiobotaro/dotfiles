@@ -73,7 +73,6 @@ function export_c4(){
 
 # update python packages
 function upy(){
-    pyenv update
     python -m pip install -U pip
     python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
     uv self update
