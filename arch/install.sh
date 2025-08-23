@@ -32,3 +32,8 @@ sudo systemctl enable docker
 sudo systemctl start docker
 sudo usermod -aG docker "$USER"
 su - "$USER"
+
+#bluetooth
+yay -Sy bluez bluez-utils
+sudo systemctl enable bluetooth
+sudo systemctl start bluetooth
