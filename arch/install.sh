@@ -1,5 +1,5 @@
 #!/bin/bash
-yay -Syy google-chrome neovim ttf-firacode-nerd base-devel spotify zoxide fd ctags ncurses curl xclip tmux zsh jq ripgrep github-cli eza bat neovim fzf lazydocker-bin docker docker-compose
+yay -Syy google-chrome neovim ttf-firacode-nerd base-devel spotify zoxide fd ctags ncurses curl xclip tmux zsh jq ripgrep github-cli eza bat neovim fzf lazydocker-bin docker docker-buildx docker-compose
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 gh auth login
 gh extension install github/gh-copilot
