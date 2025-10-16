@@ -23,6 +23,7 @@ plugins=(
     minikube
     python
     eza
+    uv
 )
 
 source $ZSH/oh-my-zsh.sh
