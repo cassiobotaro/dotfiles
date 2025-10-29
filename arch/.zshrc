@@ -129,9 +129,9 @@ ugjs() {
   # Sempre instala e usa a última LTS do Node.js
   nvm install --lts
   nvm use --lts
-
   # Instala o neovim globalmente via npm
   npm install -g neovim
+  npm install -g @github/copilot
 }
 
 export NVM_DIR="$HOME/.nvm"
