@@ -79,7 +79,7 @@ function upy(){
     python -m ensurepip
     pyenv rehash
     python -m pip install -U pip
-    python -m pip install -U cookiecutter poetry wheel ruff neovim httpie
+    python -m pip install -U poetry wheel ruff neovim httpie
     uv self update
 }
 
