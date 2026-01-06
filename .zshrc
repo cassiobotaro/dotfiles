@@ -33,6 +33,7 @@ alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias vim="nvim"
 alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade && sudo snap refresh"
 alias lzd="lazydocker"
+alias cd=z
 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
