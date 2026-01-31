@@ -9,9 +9,9 @@ sudo apt install gh
 gh auth login
 
 # set preferences
-mkdir -p ~/Projects
-gh repo clone dotfiles ~/Projects/dotfiles
-cd ~/Projects/dotfiles || exit 1
+mkdir -p ~/Projetos
+gh repo clone dotfiles ~/Projetos/dotfiles
+cd ~/Projetos/dotfiles || exit 1
 
 # install fonts
 sudo apt install curl
@@ -28,8 +28,8 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
-# snap
-sudo snap install spotify dbeaver-ce
+# dbeaver
+flatpak install flathub io.dbeaver.DBeaverCommunity
 
 # others
 sudo apt install build-essential git
