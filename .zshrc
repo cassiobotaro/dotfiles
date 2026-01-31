@@ -138,9 +138,13 @@ ugjs() {
 
   # Instala dependências globais
   echo "Instalando dependências globais..."
-  npm install -g neovim @github/copilot
+  npm install -g neovim @github/copilot tree-sitter-cli
 
   echo "Node.js atualizado para $latest_lts_version com sucesso!"
+}
+
+function ujs(){
+  npm update -g npm neovim @github/copilot tree-sitter-cli
 }
 
 function upy(){
