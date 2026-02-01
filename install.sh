@@ -35,7 +35,7 @@ flatpak install flathub io.dbeaver.DBeaverCommunity
 sudo apt install build-essential git
 
 # terminal stuffs
-sudo apt install zoxide fd-find curl xclip tmux zsh jq ripgrep
+sudo apt install zoxide fd-find curl xclip wl-clipboard tmux zsh jq ripgrep
 sudo ln -s "$(which fdfind)" /usr/bin/fd
 
 # oh-my-zsh
