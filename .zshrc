@@ -40,33 +40,22 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # structurizr
 function structurizr() {
-    readonly file=${1:?"The workspace filename must be specified."}
-    if [[ "$file" == *.* ]]; then
-        echo "The workspace filename should not contains a file extension."
-        return 1
-    fi
-    if [[ ! -f "./structurizr.properties" ]]; then
-        echo "structurizr.autoRefreshInterval=2000" > structurizr.properties
-    fi
     docker run --rm -it \
         -p 8080:8080 \
         -u $(id -u ${USER}):$(id -g ${USER}) \
         -v "$PWD":/usr/local/structurizr/ \
-        -e STRUCTURIZR_WORKSPACE_FILENAME=$file \
-            structurizr/lite
+        -e STRUCTURIZR_AUTOREFRESHINTERVAL=2000 \
+        -e STRUCTURIZR_AUTOSAVEINTERVAL=5000 \
+        structurizr/structurizr local
 }
 
+# structurizr export
 function export_c4(){
     readonly format=${1:?"The format must be specified."}
-    [ ! -f "./export-diagrams.js" ] && wget https://raw.githubusercontent.com/cassiobotaro/modeloC4/main/export-diagrams.js
-    docker rm -f exporter 2>/dev/null || true
-    text=$(docker run -i --init --cap-add=SYS_ADMIN --net=host --name=exporter ghcr.io/puppeteer/puppeteer:latest node -e "$(cat export-diagrams.js)"  "" "http://localhost:8080" "$format")
-    files=($(echo "$text" | grep -o "\S*\.$format"))
-    for file in "${files[@]}"
-    do
-        docker cp exporter:/home/pptruser/"$file" .
-    done
-    docker rm exporter
+    docker run --rm -it \
+        -u $(id -u ${USER}):$(id -g ${USER}) \
+        -v "$PWD":/usr/local/structurizr/ \
+        structurizr/structurizr export -workspace workspace.json -format ${format} -output diagrams
 }
 
 function ugpy(){
