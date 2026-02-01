@@ -31,7 +31,7 @@ alias tree="ls -T"
 alias zshconf="nvim ~/.zshrc"
 alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias vim="nvim"
-alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade && sudo snap refresh"
+alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade && flatpak update -y"
 alias lzd="lazydocker"
 alias cd=z
 
