@@ -39,24 +39,35 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --e
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # structurizr
-function structurizr() {
+function c4_local() {
     docker run --rm -it \
         -p 8080:8080 \
         -u $(id -u ${USER}):$(id -g ${USER}) \
         -v "$PWD":/usr/local/structurizr/ \
         -e STRUCTURIZR_AUTOREFRESHINTERVAL=2000 \
         -e STRUCTURIZR_AUTOSAVEINTERVAL=5000 \
+        -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
         structurizr/structurizr local
 }
 
 # structurizr export
-function export_c4(){
+function c4_export(){
     readonly format=${1:?"The format must be specified."}
     docker run --rm -it \
         -u $(id -u ${USER}):$(id -g ${USER}) \
         -v "$PWD":/usr/local/structurizr/ \
         structurizr/structurizr export -workspace workspace.json -format ${format} -output diagrams
 }
+
+# structurizr playground
+function c4_play() {
+    docker run --rm -it \
+        -p 8081:8081 \
+        -e PORT=8081 \
+        -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
+        structurizr/structurizr playground
+}
+
 
 function ugpy(){
     if ! command -v pyenv &> /dev/null; then
