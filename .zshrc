@@ -92,6 +92,7 @@ function ugpy(){
 
     pyenv install -s "$latest_version"
     pyenv global "$latest_version"
+    pyenv rehash
 }
 
 function uggo(){
@@ -118,7 +119,9 @@ ugjs() {
     echo "NVM não encontrado. Instalando..."
     latest_nvm_version=$(curl -sSl https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep tag_name | cut -d '"' -f 4)
     curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$latest_nvm_version/install.sh" | bash
+    export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
   fi
 
   # Verifica versões do Node.js
