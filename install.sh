@@ -2,6 +2,7 @@
 sudo apt update && sudo apt upgrade
 
 # github cli
+sudo apt install curl
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
 sudo apt update
@@ -29,7 +30,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
 # dbeaver
-flatpak install flathub io.dbeaver.DBeaverCommunity
+sudo snap install dbeaver-ce --classic
 
 # others
 sudo apt install build-essential git
@@ -43,6 +44,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
 # brew dependencies
 sudo apt install luarocks lynx
