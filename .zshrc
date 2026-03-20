@@ -22,7 +22,7 @@ plugins=(
     nvm
 )
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 export EDITOR='nvim'
 
 # aliases
@@ -33,7 +33,6 @@ alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias vim="nvim"
 alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade && sudo snap refresh"
 alias lzd="lazydocker"
-alias cd=z
 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -42,7 +41,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 function c4_local() {
     docker run --rm -it \
         -p 8080:8080 \
-        -u $(id -u ${USER}):$(id -g ${USER}) \
+        -u $(id -u):$(id -g) \
         -v "$PWD":/usr/local/structurizr/ \
         -e STRUCTURIZR_AUTOREFRESHINTERVAL=2000 \
         -e STRUCTURIZR_AUTOSAVEINTERVAL=5000 \
@@ -52,9 +51,9 @@ function c4_local() {
 
 # structurizr export
 function c4_export(){
-    readonly format=${1:?"The format must be specified."}
+    local format=${1:?"The format must be specified."}
     docker run --rm -it \
-        -u $(id -u ${USER}):$(id -g ${USER}) \
+        -u $(id -u):$(id -g) \
         -v "$PWD":/usr/local/structurizr/ \
         structurizr/structurizr export -workspace workspace.json -format ${format} -output diagrams
 }
@@ -96,7 +95,7 @@ function ugpy(){
 }
 
 function uggo(){
-    latest_version=$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9.]+\.linux-amd64\.tar\.gz' | head -n 1 | sed 's/go\([0-9.]*\)\.linux-amd64\.tar\.gz/\1/')
+    latest_version=$(curl -sSL 'https://go.dev/dl/?mode=json' | jq -r '.[0].version' | sed 's/go//')
     current_version=$(go version 2>/dev/null | grep -oP 'go[0-9.]+' | head -n 1 | sed 's/go//')
 
     if [ -z "$current_version" ]; then
@@ -117,7 +116,7 @@ ugjs() {
 
   if ! command -v nvm >/dev/null 2>&1; then
     echo "NVM não encontrado. Instalando..."
-    latest_nvm_version=$(curl -sSl https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep tag_name | cut -d '"' -f 4)
+    latest_nvm_version=$(curl -sSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep tag_name | cut -d '"' -f 4)
     curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$latest_nvm_version/install.sh" | bash
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"

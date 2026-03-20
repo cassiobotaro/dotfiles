@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade -y
 
 # github cli
 sudo apt install curl
@@ -15,9 +15,8 @@ gh repo clone dotfiles ~/Projetos/dotfiles
 cd ~/Projetos/dotfiles || exit 1
 
 # install fonts
-sudo apt install curl
 mkdir -p ~/.local/share/fonts
-latest_version=$(curl -sSl https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep tag_name | cut -d '"' -f 4)
+latest_version=$(curl -sSL https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | grep tag_name | cut -d '"' -f 4)
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/"$latest_version"/FiraCode.zip
 unzip FiraCode.zip -d ~/.local/share/fonts
 fc-cache -fv
@@ -32,12 +31,9 @@ rm google-chrome-stable_current_amd64.deb
 # dbeaver
 sudo snap install dbeaver-ce --classic
 
-# others
-sudo apt install build-essential git
-
-# terminal stuffs
-sudo apt install zoxide fd-find curl xclip wl-clipboard tmux zsh jq ripgrep
-sudo ln -s "$(which fdfind)" /usr/bin/fd
+# others + terminal stuffs
+sudo apt install build-essential git zoxide fd-find curl xclip wl-clipboard tmux zsh jq ripgrep
+sudo ln -sf "$(which fdfind)" /usr/bin/fd
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -49,7 +45,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 # brew dependencies
 sudo apt install luarocks lynx
 brew install bat eza lazydocker neovim minikube kubectx fzf
-/home/linuxbrew/.linuxbrew/Cellar/fzf/"$(fzf --version | cut -d" " -f 1)"/install --all # fzf install
+/home/linuxbrew/.linuxbrew/opt/fzf/install --all # fzf install
 
 # docker
 curl -fsSL https://get.docker.com | sh
