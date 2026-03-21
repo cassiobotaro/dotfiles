@@ -22,6 +22,8 @@ plugins=(
     nvm
 )
 
+ZOXIDE_CMD_OVERRIDE=cd
+
 source "$ZSH/oh-my-zsh.sh"
 export EDITOR='nvim'
 
