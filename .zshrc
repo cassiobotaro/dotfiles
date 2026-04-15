@@ -148,7 +148,9 @@ ugjs() {
 }
 
 function ujs(){
-  npm update -g npm neovim @github/copilot tree-sitter-cli
+  npm update -g npm neovim tree-sitter-cli
+  copilot update
+  nvm use --lts
 }
 
 function upy(){
