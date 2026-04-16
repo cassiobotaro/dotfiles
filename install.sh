@@ -43,8 +43,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
 # brew dependencies
-sudo apt install lynx
-brew install luarocks
+sudo apt install luarocks lynx
 brew install bat eza lazydocker neovim minikube kubectx fzf
 /home/linuxbrew/.linuxbrew/opt/fzf/install --all # fzf install
 
