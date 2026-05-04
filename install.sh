@@ -32,7 +32,7 @@ rm google-chrome-stable_current_amd64.deb
 sudo snap install dbeaver-ce --classic
 
 # others + terminal stuffs
-sudo apt install build-essential git zoxide fd-find curl xclip wl-clipboard tmux zsh jq ripgrep
+sudo apt install build-essential git zoxide fd-find curl wl-clipboard tmux zsh jq ripgrep
 sudo ln -sf "$(which fdfind)" /usr/bin/fd
 
 # oh-my-zsh
@@ -43,8 +43,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
 # brew dependencies
-sudo apt install luarocks lynx
-brew install bat eza lazydocker neovim minikube kubectx fzf
+brew install bat eza lazydocker neovim minikube kubectx fzf luarocks lynx
 /home/linuxbrew/.linuxbrew/opt/fzf/install --all # fzf install
 
 # docker
@@ -69,3 +68,6 @@ upy
 
 # go
 uggo
+
+# claude cli
+curl -fsSL https://claude.ai/install.sh | bash

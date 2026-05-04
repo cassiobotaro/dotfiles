@@ -9,7 +9,6 @@ plugins=(
     git
     fzf
     extract
-    zoxide
     tmux
     sudo
     gh
@@ -21,8 +20,6 @@ plugins=(
     uv
     nvm
 )
-
-ZOXIDE_CMD_OVERRIDE=cd
 
 source "$ZSH/oh-my-zsh.sh"
 export EDITOR='nvim'
@@ -168,3 +165,6 @@ eval "$(pyenv init - zsh)"
 
 export PATH=$PATH:~/go/bin:/usr/local/go/bin
 . "$HOME/.local/bin/env"
+export PATH="$HOME/.local/bin:$PATH"
+
+eval "$(zoxide init zsh --cmd cd)"
