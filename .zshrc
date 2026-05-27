@@ -66,6 +66,15 @@ function c4_play() {
         structurizr/structurizr playground
 }
 
+# structurizr mcp
+function c4_mcp() {
+    docker run --rm -it \
+        -p 3000:3000 \
+        -e PORT=3000 \
+        -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
+        structurizr/mcp \
+        -dsl -mermaid -plantuml
+}
 
 function ugpy(){
     if ! command -v pyenv &> /dev/null; then
