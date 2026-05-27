@@ -76,6 +76,11 @@ function c4_mcp() {
         -dsl -mermaid -plantuml
 }
 
+function c4_update() {
+    docker pull structurizr/structurizr && \
+    docker pull structurizr/mcp
+}
+
 function ugpy(){
     if ! command -v pyenv &> /dev/null; then
         echo "pyenv não encontrado. Instalando pyenv..."
