@@ -85,7 +85,11 @@ alias lzd="lazydocker"
 alias dco="docker compose"
 
 # git (mesmos do plugin git do oh-my-zsh)
+alias g="git"
 alias ga="git add"
+alias gf="git fetch"
+alias gl="git pull"
+alias gp="git push"
 alias gd="git diff"
 alias gst="git status"
 alias gc="git commit --verbose"
