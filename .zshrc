@@ -91,6 +91,8 @@ alias gst="git status"
 alias gc="git commit --verbose"
 alias gsw="git switch"
 alias gswc="git switch -c"
+alias glog="git log --oneline --decorate --graph"
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 
 # tmux: anexa a uma sessão (ta [nome]) ou cria uma nova (ts [nome])
 function ta() { tmux attach ${1:+-t "$1"} }
