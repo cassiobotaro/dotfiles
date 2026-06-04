@@ -1,47 +1,110 @@
 typeset -U path PATH
 
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# homebrew (Linux, Apple Silicon ou Intel)
+for _brew in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [[ -x $_brew ]]; then
+        eval "$($_brew shellenv)"
+        fpath+=("$HOMEBREW_PREFIX/share/zsh/site-functions")
+        break
+    fi
+done
+unset _brew
 
-# Theme
-ZSH_THEME="steeef"
+# completions (auditoria de segurança só 1x/dia; rm ~/.zcompdump pra forçar)
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+else
+    compinit -C
+fi
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case-insensitive
 
-plugins=(
-    brew
-    git
-    fzf
-    extract
-    tmux
-    sudo
-    gh
-    docker-compose
-    kubectl
-    minikube
-    python
-    eza
-    uv
-    nvm
-)
-
-source "$ZSH/oh-my-zsh.sh"
-export EDITOR='nvim'
-
+# history
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt EXTENDED_HISTORY SHARE_HISTORY HIST_IGNORE_SPACE HIST_VERIFY
 setopt HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+
+setopt AUTO_CD NO_BEEP INTERACTIVE_COMMENTS
+
+# keybindings
+bindkey -e                                    # modo emacs
+autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search    # ↑ busca no histórico pelo prefixo
+bindkey "^[[B" down-line-or-beginning-search  # ↓ idem
+bindkey "^[[H" beginning-of-line              # Home
+bindkey "^[OH" beginning-of-line              # Home (modo aplicação/iTerm)
+bindkey "^[[F" end-of-line                    # End
+bindkey "^[OF" end-of-line                    # End (modo aplicação/iTerm)
+bindkey "^[[3~" delete-char                   # Delete
+bindkey "^[[1;5C" forward-word                # Ctrl+→
+bindkey "^[[1;5D" backward-word               # Ctrl+←
+bindkey "^[[1;3C" forward-word                # Option+→ (iTerm)
+bindkey "^[[1;3D" backward-word               # Option+← (iTerm)
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# man pages com bat
+if command -v bat >/dev/null; then
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    export MANROFFOPT="-c"
+fi
 
 # aliases
 alias cat="bat -p"
+alias ls="eza"
+alias ll="eza -lh --git"
+alias la="eza -lah --git"
 alias tree="eza --tree"
+compdef eza=ls
 alias zshconf="nvim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias nvimconf="nvim ~/.config/nvim/init.lua"
+alias starshipconf="nvim ~/.config/starship.toml"
 alias vim="nvim"
-alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade && sudo snap refresh"
+if [[ "$OSTYPE" == darwin* ]]; then
+    alias sysup="brew update && brew upgrade && brew cleanup && sudo softwareupdate --install --all"
+else
+    alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade && sudo snap refresh"
+fi
 alias lzd="lazydocker"
+alias dco="docker compose"
 
+# tmux: anexa a uma sessão (ta [nome]) ou cria uma nova (ts [nome])
+function ta() { tmux attach ${1:+-t "$1"} }
+function ts() { tmux new-session ${1:+-s "$1"} }
+
+# kubectl completions + alias k
+if command -v kubectl >/dev/null; then
+    source <(kubectl completion zsh)
+    alias k=kubectl
+    compdef k=kubectl
+fi
+
+# gh completions
+command -v gh >/dev/null && source <(gh completion -s zsh)
+
+# minikube completions
+command -v minikube >/dev/null && source <(minikube completion zsh)
+
+command -v fzf >/dev/null && source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
 export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exclude .git'
+
+# limpa caches do python (copiado do plugin python do oh-my-zsh)
+function pyclean() {
+  find "${@:-.}" -type f -name "*.py[co]" -delete
+  find "${@:-.}" -type d -name "__pycache__" -delete
+  find "${@:-.}" -depth -type d -name ".mypy_cache" -exec rm -r "{}" +
+  find "${@:-.}" -depth -type d -name ".pytest_cache" -exec rm -r "{}" +
+}
 
 # structurizr
 function c4_local() {
@@ -60,6 +123,7 @@ function c4_export(){
     local format=${1:?"The format must be specified."}
     docker run --rm -it \
         -u $(id -u):$(id -g) \
+        -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
         -v "$PWD":/usr/local/structurizr/ \
         structurizr/structurizr export -workspace workspace.json -format "${format}" -output diagrams
 }
@@ -116,7 +180,7 @@ function ugpy(){
 
 function uggo(){
     local latest_version=$(curl -sSL 'https://go.dev/dl/?mode=json' | jq -r '.[0].version' | sed 's/go//')
-    local current_version=$(go version 2>/dev/null | grep -oP 'go[0-9.]+' | head -n 1 | sed 's/go//')
+    local current_version=$(go version 2>/dev/null | grep -oE 'go[0-9.]+' | head -n 1 | sed 's/go//')
 
     if [ -z "$current_version" ]; then
         echo "Go não encontrado. Instalando versão $latest_version..."
@@ -127,11 +191,16 @@ function uggo(){
         echo "Atualizando Go de $current_version para $latest_version..."
     fi
 
-    local arch=$(dpkg --print-architecture)
-    wget "https://go.dev/dl/go${latest_version}.linux-${arch}.tar.gz" && \
+    local os=$(uname -s | tr '[:upper:]' '[:lower:]')  # linux | darwin
+    local arch=$(uname -m)
+    case "$arch" in
+        x86_64) arch=amd64 ;;
+        aarch64|arm64) arch=arm64 ;;
+    esac
+    curl -fsSLO "https://go.dev/dl/go${latest_version}.${os}-${arch}.tar.gz" && \
         sudo rm -rf /usr/local/go && \
-        sudo tar -C /usr/local -xzf "go${latest_version}.linux-${arch}.tar.gz"
-    rm -f go*.linux-*.tar.gz
+        sudo tar -C /usr/local -xzf "go${latest_version}.${os}-${arch}.tar.gz"
+    rm -f go*.tar.gz
 }
 
 function ugjs(){
@@ -180,6 +249,17 @@ function upy(){
     uv self update
 }
 
+# nvm (--no-use pula o "nvm use" do startup, ~500ms; a versão mais nova
+# instalada entra no PATH direto via glob — sem subprocesso)
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    \. "$NVM_DIR/nvm.sh" --no-use
+    _nvm_latest=("$NVM_DIR"/versions/node/*(N/nOn[1]))
+    [ -n "$_nvm_latest" ] && PATH="$_nvm_latest/bin:$PATH"
+    unset _nvm_latest
+fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
@@ -188,4 +268,5 @@ command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 export PATH="$PATH:$HOME/go/bin:/usr/local/go/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
+eval "$(starship init zsh)"
 eval "$(zoxide init zsh --cmd cd)"

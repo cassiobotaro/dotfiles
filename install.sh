@@ -35,16 +35,15 @@ sudo snap install dbeaver-ce --classic
 sudo apt install build-essential git zoxide fd-find curl wl-clipboard tmux zsh jq ripgrep
 sudo ln -sf "$(which fdfind)" /usr/bin/fd
 
-# oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# zsh como shell padrão
+chsh -s "$(which zsh)"
 
 # homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
 # brew dependencies
-brew install bat eza lazydocker neovim minikube kubectx fzf luarocks lynx
-/home/linuxbrew/.linuxbrew/opt/fzf/install --all # fzf install
+brew install bat eza lazydocker neovim minikube kubectl kubectx fzf luarocks lynx starship
 
 # docker
 curl -fsSL https://get.docker.com | sh
@@ -54,6 +53,7 @@ su - "$USER"
 cp .zshrc ~/
 cp .tmux.conf ~/
 cp .gitconfig ~/
+mkdir -p ~/.config && cp starship.toml ~/.config/
 
 # nodejs
 ugjs

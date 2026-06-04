@@ -1,0 +1,56 @@
+# Prompt no estilo do tema steeef (oh-my-zsh):
+#   user at host in ~/dir (branch●●●)
+#   $
+# Cores 256: roxo=135, laranja=166, verde-limão=118, turquesa=81, rosa=161
+
+add_newline = true
+
+format = """
+$username at $hostname in $directory( \\($git_branch$git_status\\))( $python)( $golang)( $nodejs)
+$character"""
+
+[username]
+show_always = true
+style_user = "fg:135"
+style_root = "bold fg:161"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "fg:166"
+format = "[$hostname]($style)"
+
+[directory]
+style = "fg:118"
+truncation_length = 100
+truncate_to_repo = false
+format = "[$path]($style)[$read_only]($style)"
+
+[git_branch]
+style = "fg:81"
+format = "[$branch]($style)"
+
+[git_status]
+format     = "($ahead_behind$staged$modified$untracked$deleted$conflicted)"
+ahead      = "[ ⇡$count](bold cyan)"
+behind     = "[ ⇣$count](bold cyan)"
+diverged   = "[ ⇡$ahead_count⇣$behind_count](bold cyan)"
+staged     = "[ +$count](bold green)"
+modified   = "[ ●$count](bold yellow)"
+untracked  = "[ ?$count](bold white)"
+deleted    = "[ ✘$count](bold red)"
+conflicted = "[ ⚡$count](bold red)"
+
+[python]
+# só aparece com virtualenv ativo, como o virtualenv_info do steeef
+format = '([\($virtualenv\)](fg:blue))'
+
+[golang]
+format = '[$symbol($version)](fg:cyan)'
+
+[nodejs]
+format = '[$symbol($version)](fg:green)'
+
+[character]
+success_symbol = '[\$](fg:white)'
+error_symbol = '[\$](fg:161)'
