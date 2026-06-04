@@ -10,13 +10,30 @@ for _brew in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/loc
 done
 unset _brew
 
+# completions de kubectl/gh/minikube cacheadas em fpath (regeradas quando o binário muda)
+mkdir -p ~/.zsh/completions
+fpath=(~/.zsh/completions $fpath)
+for _t in kubectl gh minikube; do
+    if (( $+commands[$_t] )) && [[ ! ~/.zsh/completions/_$_t -nt $commands[$_t] ]]; then
+        case $_t in
+            gh) gh completion -s zsh > ~/.zsh/completions/_gh ;;
+            *)  $_t completion zsh > ~/.zsh/completions/_$_t ;;
+        esac
+        rm -f ~/.zcompdump  # força o compinit a reindexar o fpath
+    fi
+done
+unset _t
+
 # completions (auditoria de segurança só 1x/dia; rm ~/.zcompdump pra forçar)
+# nota: glob qualifiers não expandem dentro de [[ ]], daí o array auxiliar
 autoload -Uz compinit
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-    compinit
-else
+_zcd=(~/.zcompdump(N.mh-24))
+if (( $#_zcd )); then
     compinit -C
+else
+    compinit
 fi
+unset _zcd
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case-insensitive
 
@@ -79,18 +96,11 @@ alias dco="docker compose"
 function ta() { tmux attach ${1:+-t "$1"} }
 function ts() { tmux new-session ${1:+-s "$1"} }
 
-# kubectl completions + alias k
+# alias k pro kubectl (completions vêm do cache em fpath, lá em cima)
 if command -v kubectl >/dev/null; then
-    source <(kubectl completion zsh)
     alias k=kubectl
     compdef k=kubectl
 fi
-
-# gh completions
-command -v gh >/dev/null && source <(gh completion -s zsh)
-
-# minikube completions
-command -v minikube >/dev/null && source <(minikube completion zsh)
 
 command -v fzf >/dev/null && source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
