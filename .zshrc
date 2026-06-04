@@ -1,4 +1,4 @@
-typeset -U path PATH
+typeset -U path PATH fpath FPATH
 
 # homebrew (Linux, Apple Silicon ou Intel)
 for _brew in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
@@ -10,30 +10,22 @@ for _brew in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/loc
 done
 unset _brew
 
-# completions de kubectl/gh/minikube cacheadas em fpath (regeradas quando o binário muda)
-mkdir -p ~/.zsh/completions
-fpath=(~/.zsh/completions $fpath)
-for _t in kubectl gh minikube; do
-    if (( $+commands[$_t] )) && [[ ! ~/.zsh/completions/_$_t -nt $commands[$_t] ]]; then
-        case $_t in
-            gh) gh completion -s zsh > ~/.zsh/completions/_gh ;;
-            *)  $_t completion zsh > ~/.zsh/completions/_$_t ;;
-        esac
-        rm -f ~/.zcompdump  # força o compinit a reindexar o fpath
-    fi
-done
-unset _t
-
-# completions (auditoria de segurança só 1x/dia; rm ~/.zcompdump pra forçar)
+# completions (auditoria de segurança só 1x/dia; rm o zcompdump pra forçar)
+# kubectl/minikube vêm do site-functions do brew; gh do vendor-completions do apt
 # nota: glob qualifiers não expandem dentro de [[ ]], daí o array auxiliar
 autoload -Uz compinit
-_zcd=(~/.zcompdump(N.mh-24))
+_zcd=(${ZDOTDIR:-$HOME}/.zcompdump(N.mh-24))
 if (( $#_zcd )); then
     compinit -C
 else
     compinit
 fi
 unset _zcd
+# dump gerado por um zsh sem o fpath completo (sem o kubectl indexado)? reconstrói
+if (( $+commands[kubectl] )) && (( ! $+_comps[kubectl] )); then
+    rm -f ${ZDOTDIR:-$HOME}/.zcompdump
+    compinit
+fi
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case-insensitive
 
@@ -96,7 +88,7 @@ alias dco="docker compose"
 function ta() { tmux attach ${1:+-t "$1"} }
 function ts() { tmux new-session ${1:+-s "$1"} }
 
-# alias k pro kubectl (completions vêm do cache em fpath, lá em cima)
+# alias k pro kubectl (completion vem do site-functions do brew)
 if command -v kubectl >/dev/null; then
     alias k=kubectl
     compdef k=kubectl
