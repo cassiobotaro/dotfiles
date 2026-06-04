@@ -23,9 +23,6 @@ plugins=(
     nvm
 )
 
-zstyle ':omz:plugins:nvm' lazy yes
-zstyle ':omz:plugins:nvm' lazy-cmd nvim node npm npx
-
 ZSH_DISABLE_COMPFIX=true
 source "$ZSH/oh-my-zsh.sh"
 export EDITOR='nvim'
