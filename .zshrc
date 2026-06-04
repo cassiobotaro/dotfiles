@@ -23,7 +23,6 @@ plugins=(
     nvm
 )
 
-ZSH_DISABLE_COMPFIX=true
 source "$ZSH/oh-my-zsh.sh"
 export EDITOR='nvim'
 
@@ -182,12 +181,8 @@ function upy(){
 }
 
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT ]] && path=("$PYENV_ROOT/bin" "$PYENV_ROOT/shims" $path)
-pyenv() {
-    unfunction pyenv
-    eval "$(command pyenv init - zsh)"
-    pyenv "$@"
-}
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
 
 export PATH="$PATH:$HOME/go/bin:/usr/local/go/bin"
