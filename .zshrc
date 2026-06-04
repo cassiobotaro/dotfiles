@@ -1,3 +1,5 @@
+typeset -U path PATH
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -19,15 +21,23 @@ plugins=(
     eza
     uv
     nvm
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
+
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' lazy-cmd nvim node npm npx
 
 source "$ZSH/oh-my-zsh.sh"
 export EDITOR='nvim'
 
+setopt HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+
 # aliases
 alias cat="bat -p"
-alias tree="ls -T"
+alias tree="eza --tree"
 alias zshconf="nvim ~/.zshrc"
+alias zshreload="source ~/.zshrc"
 alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias vim="nvim"
 alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade && sudo snap refresh"
@@ -35,6 +45,8 @@ alias lzd="lazydocker"
 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
+export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exclude .git'
 
 # structurizr
 function c4_local() {
@@ -54,7 +66,7 @@ function c4_export(){
     docker run --rm -it \
         -u $(id -u):$(id -g) \
         -v "$PWD":/usr/local/structurizr/ \
-        structurizr/structurizr export -workspace workspace.json -format ${format} -output diagrams
+        structurizr/structurizr export -workspace workspace.json -format "${format}" -output diagrams
 }
 
 # structurizr playground
@@ -92,8 +104,8 @@ function ugpy(){
     fi
 
     pyenv update
-    latest_version=$(pyenv latest -k 3)
-    current_version=$(pyenv global 2>/dev/null)
+    local latest_version=$(pyenv latest -k 3)
+    local current_version=$(pyenv global 2>/dev/null)
 
     if [ "$current_version" = "$latest_version" ]; then
         echo "Python já está na versão mais recente ($current_version)"
@@ -108,8 +120,8 @@ function ugpy(){
 }
 
 function uggo(){
-    latest_version=$(curl -sSL 'https://go.dev/dl/?mode=json' | jq -r '.[0].version' | sed 's/go//')
-    current_version=$(go version 2>/dev/null | grep -oP 'go[0-9.]+' | head -n 1 | sed 's/go//')
+    local latest_version=$(curl -sSL 'https://go.dev/dl/?mode=json' | jq -r '.[0].version' | sed 's/go//')
+    local current_version=$(go version 2>/dev/null | grep -oP 'go[0-9.]+' | head -n 1 | sed 's/go//')
 
     if [ -z "$current_version" ]; then
         echo "Go não encontrado. Instalando versão $latest_version..."
@@ -120,48 +132,49 @@ function uggo(){
         echo "Atualizando Go de $current_version para $latest_version..."
     fi
 
-    wget "https://go.dev/dl/go${latest_version}.linux-amd64.tar.gz"
-    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go*.linux-amd64.tar.gz
-    rm go*.linux-amd64.tar.gz
+    local arch=$(dpkg --print-architecture)
+    wget "https://go.dev/dl/go${latest_version}.linux-${arch}.tar.gz" && \
+        sudo rm -rf /usr/local/go && \
+        sudo tar -C /usr/local -xzf "go${latest_version}.linux-${arch}.tar.gz"
+    rm -f go*.linux-*.tar.gz
 }
 
-ugjs() {
+function ugjs(){
+    if ! command -v nvm >/dev/null 2>&1; then
+        echo "NVM não encontrado. Instalando..."
+        local latest_nvm_version=$(curl -sSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep tag_name | cut -d '"' -f 4)
+        curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$latest_nvm_version/install.sh" | bash
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    fi
 
-  if ! command -v nvm >/dev/null 2>&1; then
-    echo "NVM não encontrado. Instalando..."
-    latest_nvm_version=$(curl -sSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep tag_name | cut -d '"' -f 4)
-    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$latest_nvm_version/install.sh" | bash
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-  fi
+    # Verifica versões do Node.js
+    local current_node_version=$(nvm current 2>/dev/null)
+    local latest_lts_version=$(nvm version-remote --lts 2>/dev/null)
 
-  # Verifica versões do Node.js
-  current_node_version=$(nvm current 2>/dev/null)
-  latest_lts_version=$(nvm version-remote --lts 2>/dev/null)
+    if [ -n "$current_node_version" ] && [ "$current_node_version" != "none" ] && [ "$current_node_version" = "$latest_lts_version" ]; then
+        echo "Node.js já está na versão LTS mais recente ($current_node_version)"
+        return 0
+    fi
 
-  if [ -n "$current_node_version" ] && [ "$current_node_version" != "none" ] && [ "$current_node_version" = "$latest_lts_version" ]; then
-    echo "Node.js já está na versão LTS mais recente ($current_node_version)"
-    return 0
-  fi
+    echo "Atualizando Node.js de ${current_node_version:-não instalado} para $latest_lts_version..."
 
-  echo "Atualizando Node.js de ${current_node_version:-não instalado} para $latest_lts_version..."
+    # Instala a última LTS
+    nvm install --lts
+    nvm use --lts
 
-  # Instala a última LTS
-  nvm install --lts
-  nvm use --lts
+    # Instala dependências globais
+    echo "Instalando dependências globais..."
+    npm install -g neovim @github/copilot tree-sitter-cli
 
-  # Instala dependências globais
-  echo "Instalando dependências globais..."
-  npm install -g neovim @github/copilot tree-sitter-cli
-
-  echo "Node.js atualizado para $latest_lts_version com sucesso!"
+    echo "Node.js atualizado para $latest_lts_version com sucesso!"
 }
 
 function ujs(){
-  npm update -g npm neovim tree-sitter-cli
-  copilot update
-  nvm use --lts
+    npm update -g npm neovim tree-sitter-cli
+    copilot update
+    nvm use --lts
 }
 
 function upy(){
@@ -174,11 +187,10 @@ function upy(){
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
 
-export PATH=$PATH:~/go/bin:/usr/local/go/bin
-. "$HOME/.local/bin/env"
+export PATH="$PATH:$HOME/go/bin:/usr/local/go/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
 eval "$(zoxide init zsh --cmd cd)"
