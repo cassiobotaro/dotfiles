@@ -84,6 +84,14 @@ fi
 alias lzd="lazydocker"
 alias dco="docker compose"
 
+# git (mesmos do plugin git do oh-my-zsh)
+alias ga="git add"
+alias gd="git diff"
+alias gst="git status"
+alias gc="git commit --verbose"
+alias gsw="git switch"
+alias gswc="git switch -c"
+
 # tmux: anexa a uma sessão (ta [nome]) ou cria uma nova (ts [nome])
 function ta() { tmux attach ${1:+-t "$1"} }
 function ts() { tmux new-session ${1:+-s "$1"} }
