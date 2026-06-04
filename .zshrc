@@ -21,8 +21,6 @@ plugins=(
     eza
     uv
     nvm
-    zsh-autosuggestions
-    zsh-syntax-highlighting
 )
 
 zstyle ':omz:plugins:nvm' lazy yes
