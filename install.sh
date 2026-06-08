@@ -69,5 +69,23 @@ upy
 # go
 uggo
 
-# claude cli
+# claude
 curl -fsSL https://claude.ai/install.sh | bash
+# copilot
+curl -fsSL https://gh.io/copilot-install | bash
+
+# Plugins:
+claude plugin install skill-creator@claude-plugins-official
+# https://github.com/vladikk/modularity
+claude plugin marketplace add vladikk/modularity
+claude plugin install modularity@vladikk-modularity
+# https://github.com/cassiobotaro/skills
+claude plugin marketplace add cassiobotaro/skills
+claude plugin install adr@cassiobotaro-skills
+claude plugin install structurizr@cassiobotaro-skills
+claude plugin install mermaid-sequence@cassiobotaro-skills
+claude plugin install design-doc@cassiobotaro-skills
+
+# MCP:
+claude mcp add --scope user --transport http structurizr http://localhost:3000/mcp
+claude mcp add --scope user --transport http mermaid https://mcp.mermaid.ai/mcp
