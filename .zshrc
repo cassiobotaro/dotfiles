@@ -214,10 +214,11 @@ function uggo(){
         x86_64) arch=amd64 ;;
         aarch64|arm64) arch=arm64 ;;
     esac
-    curl -fsSLO "https://go.dev/dl/go${latest_version}.${os}-${arch}.tar.gz" && \
+    local tmp=$(mktemp -d)
+    curl -fsSL -o "$tmp/go.tar.gz" "https://go.dev/dl/go${latest_version}.${os}-${arch}.tar.gz" && \
         sudo rm -rf /usr/local/go && \
-        sudo tar -C /usr/local -xzf "go${latest_version}.${os}-${arch}.tar.gz"
-    rm -f go*.tar.gz
+        sudo tar -C /usr/local -xzf "$tmp/go.tar.gz"
+    rm -rf "$tmp"
 }
 
 function ugjs(){
@@ -285,5 +286,26 @@ command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 export PATH="$PATH:$HOME/go/bin:/usr/local/go/bin"
 export PATH="$HOME/.local/bin:$PATH"
 
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh --cmd cd)"
+command -v starship >/dev/null && eval "$(starship init zsh)"
+command -v zoxide   >/dev/null && eval "$(zoxide init zsh --cmd cd)"
+
+# Reporta o diretório atual ao terminal (OSC 7) — mantém o cwd em novas abas/janelas.
+# Funciona no GNOME Terminal/VTE (Linux), Terminal.app e iTerm2 (macOS).
+autoload -Uz add-zsh-hook
+
+function _osc7_cwd {
+  local url_path='' i ch hexch
+  local LC_ALL=C            # itera byte a byte → percent-encode UTF-8 correto
+  # Percent-encode o caminho (trata espaços e caracteres especiais).
+  for (( i = 1; i <= ${#PWD}; i++ )); do
+    ch="$PWD[i]"
+    if [[ "$ch" == [/._~A-Za-z0-9-] ]]; then
+      url_path+="$ch"
+    else
+      printf -v hexch '%%%02X' "'$ch"
+      url_path+="$hexch"
+    fi
+  done
+  printf '\e]7;file://%s%s\e\\' "${HOST}" "${url_path}"
+}
+add-zsh-hook precmd _osc7_cwd
