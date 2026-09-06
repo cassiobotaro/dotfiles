@@ -248,14 +248,13 @@ function ugjs(){
 
     # Instala dependências globais
     echo "Instalando dependências globais..."
-    npm install -g neovim @github/copilot tree-sitter-cli
+    npm install -g neovim tree-sitter-cli
 
     echo "Node.js atualizado para $latest_lts_version com sucesso!"
 }
 
 function ujs(){
     npm update -g npm neovim tree-sitter-cli
-    copilot update
     nvm use --lts
 }
 
