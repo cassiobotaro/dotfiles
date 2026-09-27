@@ -1,10 +1,15 @@
 typeset -U path PATH fpath FPATH
 
 # homebrew (Linux, Apple Silicon ou Intel)
+# equivale ao `brew shellenv`, mas sem o subprocesso (~50ms); o prefixo é o
+# diretório dois níveis acima do binário (:h:h)
 for _brew in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
     if [[ -x $_brew ]]; then
-        eval "$($_brew shellenv)"
-        fpath+=("$HOMEBREW_PREFIX/share/zsh/site-functions")
+        export HOMEBREW_PREFIX=${_brew:h:h}
+        export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+        path=("$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" $path)
+        fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+        export INFOPATH="$HOMEBREW_PREFIX/share/info${INFOPATH:+:$INFOPATH}"
         break
     fi
 done
@@ -28,6 +33,11 @@ if (( $+commands[kubectl] )) && (( ! $+_comps[kubectl] )); then
 fi
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case-insensitive
+zstyle ':completion:*' use-cache on                       # cacheia completions lentos (kubectl, brew...)
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+# LS_COLORS só pro menu de completion (eza usa as cores dele); padrão do dircolors, sem subprocesso
+export LS_COLORS=${LS_COLORS:-'di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:su=37;41:sg=30;43:tw=30;42:ow=34;42'}
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"   # menu com as cores do ls
 
 # history
 HISTFILE="$HOME/.zsh_history"
@@ -44,7 +54,9 @@ autoload -U up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search    # ↑ busca no histórico pelo prefixo
+bindkey "^[OA" up-line-or-beginning-search    # ↑ (modo aplicação: tmux, após TUIs)
 bindkey "^[[B" down-line-or-beginning-search  # ↓ idem
+bindkey "^[OB" down-line-or-beginning-search  # ↓ (modo aplicação)
 bindkey "^[[H" beginning-of-line              # Home
 bindkey "^[OH" beginning-of-line              # Home (modo aplicação/iTerm)
 bindkey "^[[F" end-of-line                    # End
@@ -65,14 +77,13 @@ if command -v bat >/dev/null; then
 fi
 
 # aliases
-alias cat="bat -p"
+alias cat="bat -pp"  # -pp: sem cabeçalho e sem pager
 alias ls="eza"
 alias ll="eza -lh --git"
 alias la="eza -lah --git"
 alias tree="eza --tree"
-compdef eza=ls
 alias zshconf="nvim ~/.zshrc"
-alias zshreload="source ~/.zshrc"
+alias zshreload="exec zsh"  # shell limpo, sem reexecutar compinit/hooks por cima
 alias nvimconf="nvim ~/.config/nvim/init.lua"
 alias starshipconf="nvim ~/.config/starship.toml"
 alias vim="nvim"
@@ -103,11 +114,8 @@ alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgre
 function ta() { tmux attach ${1:+-t "$1"} }
 function ts() { tmux new-session ${1:+-s "$1"} }
 
-# alias k pro kubectl (completion vem do site-functions do brew)
-if command -v kubectl >/dev/null; then
-    alias k=kubectl
-    compdef k=kubectl
-fi
+# alias k pro kubectl (o zsh completa aliases expandindo-os, não precisa de compdef)
+command -v kubectl >/dev/null && alias k=kubectl
 
 command -v fzf >/dev/null && source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
@@ -117,10 +125,8 @@ export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exc
 
 # limpa caches do python (copiado do plugin python do oh-my-zsh)
 function pyclean() {
-  find "${@:-.}" -type f -name "*.py[co]" -delete
-  find "${@:-.}" -type d -name "__pycache__" -delete
-  find "${@:-.}" -depth -type d -name ".mypy_cache" -exec rm -r "{}" +
-  find "${@:-.}" -depth -type d -name ".pytest_cache" -exec rm -r "{}" +
+    find "${@:-.}" -depth \( -name '*.py[co]' -o -name __pycache__ -o -name .mypy_cache \
+        -o -name .pytest_cache -o -name .ruff_cache \) -exec rm -rf {} +
 }
 
 # structurizr (repassa o subcomando ao container: local, validate, ...)
@@ -256,20 +262,23 @@ function upy(){
     uv self update
 }
 
-# nvm (--no-use pula o "nvm use" do startup, ~500ms; a versão mais nova
-# instalada entra no PATH direto via glob — sem subprocesso)
+# nvm (lazy: carregar o nvm.sh custa ~170ms, então só entra na primeira chamada
+# de `nvm`; a versão mais nova instalada entra no PATH direto via glob)
 export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-    \. "$NVM_DIR/nvm.sh" --no-use
-    _nvm_latest=("$NVM_DIR"/versions/node/*(N/nOn[1]))
-    [ -n "$_nvm_latest" ] && PATH="$_nvm_latest/bin:$PATH"
-    unset _nvm_latest
-fi
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+_nvm_latest=("$NVM_DIR"/versions/node/*(N/nOn[1]))
+[[ -n $_nvm_latest ]] && path=("$_nvm_latest/bin" $path)
+unset _nvm_latest
+function nvm() {
+    unfunction nvm
+    [[ -s $NVM_DIR/nvm.sh ]] && \. "$NVM_DIR/nvm.sh"
+    [[ -s $NVM_DIR/bash_completion ]] && \. "$NVM_DIR/bash_completion"
+    nvm "$@"
+}
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
+# --no-rehash: o rehash a cada shell custa ~120ms; ugpy/upy já fazem rehash ao instalar
+command -v pyenv >/dev/null && eval "$(pyenv init - --no-rehash zsh)"
 
 
 export PATH="$PATH:$HOME/go/bin:/usr/local/go/bin"
