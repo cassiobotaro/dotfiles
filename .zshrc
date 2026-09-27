@@ -147,6 +147,18 @@ function c4_update() {
     docker pull structurizr/structurizr
 }
 
+# mermaid-cli (repassa os argumentos ao container, ex: mmdc -i diagram.mmd -o diagram.svg)
+function mmdc() {
+    docker run --rm -i \
+        -u $(id -u):$(id -g) \
+        -v "$PWD":/data \
+        minlag/mermaid-cli "$@"
+}
+
+function mmdc_update() {
+    docker pull minlag/mermaid-cli
+}
+
 function ugpy(){
     if ! command -v pyenv &> /dev/null; then
         echo "pyenv não encontrado. Instalando pyenv..."
