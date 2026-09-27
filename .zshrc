@@ -123,8 +123,8 @@ function pyclean() {
   find "${@:-.}" -depth -type d -name ".pytest_cache" -exec rm -r "{}" +
 }
 
-# structurizr
-function c4_local() {
+# structurizr (repassa o subcomando ao container: local, validate, ...)
+function structurizr() {
     docker run --rm -it \
         -p 8080:8080 \
         -u $(id -u):$(id -g) \
@@ -132,41 +132,19 @@ function c4_local() {
         -e STRUCTURIZR_AUTOREFRESHINTERVAL=2000 \
         -e STRUCTURIZR_AUTOSAVEINTERVAL=5000 \
         -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
-        structurizr/structurizr local
+        structurizr/structurizr "$@"
 }
+alias c4_local='structurizr local'
+alias c4_validate='structurizr validate -workspace workspace.json'
 
-# structurizr export
-function c4_export(){
+alias c4_play='structurizr playground'
+function c4_export() {
     local format=${1:?"The format must be specified."}
-    docker run --rm -it \
-        -u $(id -u):$(id -g) \
-        -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
-        -v "$PWD":/usr/local/structurizr/ \
-        structurizr/structurizr export -workspace workspace.json -format "${format}" -output diagrams
-}
-
-# structurizr playground
-function c4_play() {
-    docker run --rm -it \
-        -p 8081:8081 \
-        -e PORT=8081 \
-        -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
-        structurizr/structurizr playground
-}
-
-# structurizr mcp
-function c4_mcp() {
-    docker run --rm -it \
-        -p 3000:3000 \
-        -e PORT=3000 \
-        -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
-        structurizr/mcp \
-        -dsl -mermaid -plantuml
+    structurizr export -workspace workspace.json -format "${format}" -output diagrams
 }
 
 function c4_update() {
-    docker pull structurizr/structurizr && \
-    docker pull structurizr/mcp
+    docker pull structurizr/structurizr
 }
 
 function ugpy(){
