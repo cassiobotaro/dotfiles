@@ -17,6 +17,7 @@ unset _brew
 
 # completions (auditoria de segurança só 1x/dia; rm o zcompdump pra forçar)
 # kubectl/minikube vêm do site-functions do brew; gh do vendor-completions do apt
+# o ~/.zshenv desliga o compinit global do Ubuntu, senão o dump é gerado sem o brew
 # nota: glob qualifiers não expandem dentro de [[ ]], daí o array auxiliar
 autoload -Uz compinit
 _zcd=(${ZDOTDIR:-$HOME}/.zcompdump(N.mh-24))
@@ -26,11 +27,6 @@ else
     compinit
 fi
 unset _zcd
-# dump gerado por um zsh sem o fpath completo (sem o kubectl indexado)? reconstrói
-if (( $+commands[kubectl] )) && (( ! $+_comps[kubectl] )); then
-    rm -f ${ZDOTDIR:-$HOME}/.zcompdump
-    compinit
-fi
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case-insensitive
 zstyle ':completion:*' use-cache on                       # cacheia completions lentos (kubectl, brew...)
@@ -90,7 +86,7 @@ alias vim="nvim"
 if [[ "$OSTYPE" == darwin* ]]; then
     alias sysup="brew update && brew upgrade && brew cleanup && sudo softwareupdate --install --all"
 else
-    alias sysup="sudo apt update && sudo apt upgrade -y && brew upgrade && sudo snap refresh"
+    alias sysup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && brew upgrade && brew cleanup && sudo snap refresh"
 fi
 alias lzd="lazydocker"
 alias dco="docker compose"
@@ -218,7 +214,9 @@ function uggo(){
 }
 
 function ugjs(){
-    if ! command -v nvm >/dev/null 2>&1; then
+    # testa o arquivo, não o comando: o wrapper lazy abaixo faz `command -v nvm`
+    # sempre existir, mesmo sem o nvm instalado
+    if [[ ! -s $NVM_DIR/nvm.sh ]]; then
         echo "NVM não encontrado. Instalando..."
         local latest_nvm_version=$(curl -sSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep tag_name | cut -d '"' -f 4)
         curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$latest_nvm_version/install.sh" | bash
@@ -276,15 +274,17 @@ function nvm() {
 }
 
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+[[ -d $PYENV_ROOT/bin ]] && path=("$PYENV_ROOT/bin" $path)
 # --no-rehash: o rehash a cada shell custa ~120ms; ugpy/upy já fazem rehash ao instalar
 command -v pyenv >/dev/null && eval "$(pyenv init - --no-rehash zsh)"
 
-
-export PATH="$PATH:$HOME/go/bin:/usr/local/go/bin"
-export PATH="$HOME/.local/bin:$PATH"
+path+=("$HOME/go/bin" /usr/local/go/bin)
+path=("$HOME/.local/bin" $path)
 
 command -v starship >/dev/null && eval "$(starship init zsh)"
+# _ZO_DOCTOR=0: o zoxide < 0.10 reclama da ordem de init em shells não interativos
+# (scripts, Claude Code); o hook está registrado, o aviso é falso positivo
+export _ZO_DOCTOR=0
 command -v zoxide   >/dev/null && eval "$(zoxide init zsh --cmd cd)"
 
 # Reporta o diretório atual ao terminal (OSC 7) — mantém o cwd em novas abas/janelas.

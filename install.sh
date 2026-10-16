@@ -50,24 +50,26 @@ curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker "$USER"
 su - "$USER"
 
-cp .zshrc ~/
-cp .tmux.conf ~/
-cp .gitconfig ~/
-mkdir -p ~/.config && cp starship.toml ~/.config/
+# symlinks: editar ~/.zshrc (zshconf) edita o repositório
+ln -sf "$PWD/.zshenv" ~/.zshenv
+ln -sf "$PWD/.zshrc" ~/.zshrc
+ln -sf "$PWD/.tmux.conf" ~/.tmux.conf
+ln -sf "$PWD/.gitconfig" ~/.gitconfig
+mkdir -p ~/.config && ln -sf "$PWD/starship.toml" ~/.config/starship.toml
 
+# as funções ug*/upy vivem no .zshrc, por isso rodam num zsh interativo
 # nodejs
-ugjs
+zsh -ic ugjs
 
 # python
 # dependencies
 sudo apt-get install --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-ugpy
+zsh -ic ugpy
 curl -LsSf https://astral.sh/uv/install.sh | sh
-# deve reiniciar o shell antes de executar upy
-upy
+zsh -ic upy  # shell novo, já enxerga o uv e o python recém-instalados
 
 # go
-uggo
+zsh -ic uggo
 
 # claude
 curl -fsSL https://claude.ai/install.sh | bash
