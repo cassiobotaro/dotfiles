@@ -32,7 +32,7 @@ rm google-chrome-stable_current_amd64.deb
 sudo snap install dbeaver-ce --classic
 
 # others + terminal stuffs
-sudo apt install build-essential git zoxide fd-find curl wl-clipboard tmux zsh jq ripgrep
+sudo apt install build-essential git zoxide fd-find curl wl-clipboard zsh jq ripgrep
 sudo ln -sf "$(which fdfind)" /usr/bin/fd
 
 # zsh como shell padrão
@@ -42,8 +42,8 @@ chsh -s "$(which zsh)"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
-# brew dependencies
-brew install bat eza lazydocker neovim minikube kubectl kubectx fzf luarocks lynx starship
+# brew dependencies (tmux pelo brew: o apt fica no 3.6, o popup do fzf precisa do 3.7+)
+brew install bat eza lazydocker neovim minikube kubectl kubectx fzf luarocks lynx starship tmux
 
 # docker
 curl -fsSL https://get.docker.com | sh
