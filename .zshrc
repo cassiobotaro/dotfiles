@@ -113,6 +113,8 @@ function ts() { tmux new-session ${1:+-s "$1"} }
 # alias k pro kubectl (o zsh completa aliases expandindo-os, não precisa de compdef)
 command -v kubectl >/dev/null && alias k=kubectl
 
+# dentro do tmux (3.7+), Ctrl+T, Ctrl+R e Alt+C abrem num pane flutuante
+export FZF_TMUX_OPTS='-p 80%,60%'
 command -v fzf >/dev/null && source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
