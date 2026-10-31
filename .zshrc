@@ -129,26 +129,42 @@ function pyclean() {
 
 # structurizr (repassa o subcomando ao container: local, validate, ...)
 function structurizr() {
-    docker run --rm -it \
-        -p 8080:8080 \
+    local -a opts
+    case "$1" in
+        local|playground) opts=(-p 8080:8080) ;;
+    esac
+    docker run --rm -it "${opts[@]}" \
         -u $(id -u):$(id -g) \
         -v "$PWD":/usr/local/structurizr/ \
         -e STRUCTURIZR_AUTOREFRESHINTERVAL=2000 \
         -e STRUCTURIZR_AUTOSAVEINTERVAL=5000 \
         -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
-        structurizr/structurizr "$@"
+        "${STRUCTURIZR_IMAGE:-structurizr/structurizr}" "$@"
 }
 alias c4_local='structurizr local'
 alias c4_validate='structurizr validate -workspace workspace.json'
-
 alias c4_play='structurizr playground'
+
+# c4_export <formato> [opções extras], ex: c4_export png -mode dark
+# png e svg usam a tag local "playwright", mantida pelo c4_update
 function c4_export() {
     local format=${1:?"The format must be specified."}
-    structurizr export -workspace workspace.json -format "${format}" -output diagrams
+    local image=structurizr/structurizr
+    [[ "$format" == (png|svg) ]] && image+=:playwright
+    STRUCTURIZR_IMAGE=$image structurizr export \
+        -workspace workspace.json -format "$format" -output diagrams "${@:2}"
 }
 
+# atualiza a latest e a variante -playwright da mesma versão,
+# que recebe a tag local structurizr/structurizr:playwright
 function c4_update() {
-    docker pull structurizr/structurizr
+    docker pull structurizr/structurizr || return
+    local version
+    version=$(docker run --rm structurizr/structurizr version 2>&1 \
+        | grep -oE 'structurizr: [0-9.]+' | cut -d' ' -f2)
+    [[ -n "$version" ]] || { echo "não consegui descobrir a versão do structurizr" >&2; return 1; }
+    docker pull "structurizr/structurizr:${version}-playwright" \
+        && docker tag "structurizr/structurizr:${version}-playwright" structurizr/structurizr:playwright
 }
 
 # mermaid-cli (repassa os argumentos ao container, ex: mmdc -i diagram.mmd -o diagram.svg)
