@@ -42,8 +42,23 @@ chsh -s "$(which zsh)"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
-# brew dependencies (tmux pelo brew: o apt fica no 3.6, o popup do fzf precisa do 3.7+)
-brew install bat eza lazydocker neovim minikube kubectl kubectx fzf luarocks lynx starship tmux
+# brew dependencies
+brew install bat eza lazydocker neovim minikube kubectl kubectx fzf luarocks lynx starship
+
+# kitty (instalador oficial: o do apt fica desatualizado)
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
+mkdir -p ~/.local/bin ~/.local/share/applications ~/.config/kitty
+ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
+# atalho no menu de aplicativos apontando para o binário instalado
+cp ~/.local/kitty.app/share/applications/kitty*.desktop ~/.local/share/applications/
+sed -i "s|Icon=kitty|Icon=$HOME/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g; s|Exec=kitty|Exec=$HOME/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+# config: editar ~/.config/kitty/kitty.conf edita o repositório
+ln -sf "$PWD/kitty.conf" ~/.config/kitty/kitty.conf
+touch ~/.config/kitty/current-theme.conf  # incluído pelo kitty.conf, preenchido por `kitten themes`
+# kitty como terminal padrão: Ctrl+Alt+T/menu (xdg-terminal-exec) e x-terminal-emulator
+echo kitty.desktop > ~/.config/xdg-terminals.list
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator "$HOME/.local/kitty.app/bin/kitty" 50
+sudo update-alternatives --set x-terminal-emulator "$HOME/.local/kitty.app/bin/kitty"
 
 # docker
 curl -fsSL https://get.docker.com | sh
@@ -53,7 +68,6 @@ su - "$USER"
 # symlinks: editar ~/.zshrc (zshconf) edita o repositório
 ln -sf "$PWD/.zshenv" ~/.zshenv
 ln -sf "$PWD/.zshrc" ~/.zshrc
-ln -sf "$PWD/.tmux.conf" ~/.tmux.conf
 ln -sf "$PWD/.gitconfig" ~/.gitconfig
 mkdir -p ~/.config && ln -sf "$PWD/starship.toml" ~/.config/starship.toml
 

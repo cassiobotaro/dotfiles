@@ -50,7 +50,7 @@ autoload -U up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search    # ↑ busca no histórico pelo prefixo
-bindkey "^[OA" up-line-or-beginning-search    # ↑ (modo aplicação: tmux, após TUIs)
+bindkey "^[OA" up-line-or-beginning-search    # ↑ (modo aplicação, após TUIs)
 bindkey "^[[B" down-line-or-beginning-search  # ↓ idem
 bindkey "^[OB" down-line-or-beginning-search  # ↓ (modo aplicação)
 bindkey "^[[H" beginning-of-line              # Home
@@ -106,15 +106,9 @@ alias gswc="git switch -c"
 alias glog="git log --oneline --decorate --graph"
 alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 
-# tmux: anexa a uma sessão (ta [nome]) ou cria uma nova (ts [nome])
-function ta() { tmux attach ${1:+-t "$1"} }
-function ts() { tmux new-session ${1:+-s "$1"} }
-
 # alias k pro kubectl (o zsh completa aliases expandindo-os, não precisa de compdef)
 command -v kubectl >/dev/null && alias k=kubectl
 
-# dentro do tmux (3.7+), Ctrl+T, Ctrl+R e Alt+C abrem num pane flutuante
-export FZF_TMUX_OPTS='-p 80%,60%'
 command -v fzf >/dev/null && source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -306,7 +300,7 @@ export _ZO_DOCTOR=0
 command -v zoxide   >/dev/null && eval "$(zoxide init zsh --cmd cd)"
 
 # Reporta o diretório atual ao terminal (OSC 7) — mantém o cwd em novas abas/janelas.
-# Funciona no GNOME Terminal/VTE (Linux), Terminal.app e iTerm2 (macOS).
+# Funciona no kitty, GNOME Terminal/VTE (Linux), Terminal.app e iTerm2 (macOS).
 autoload -Uz add-zsh-hook
 
 function _osc7_cwd {

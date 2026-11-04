@@ -10,6 +10,6 @@ As the name says, here are my dotfiles, updated as possible.
 
 ![Imagem do nvim](./images/nvim.png)
 
-**TMUX**
+**KITTY**
 
-![Imagem do tmux config](./images/tmux.png)
+Terminal padrão, com ligaturas, abas e splits (substitui o tmux). Config em `kitty.conf`.
