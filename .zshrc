@@ -319,3 +319,5 @@ function _osc7_cwd {
   printf '\e]7;file://%s%s\e\\' "${HOST}" "${url_path}"
 }
 add-zsh-hook precmd _osc7_cwd
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
