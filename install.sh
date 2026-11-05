@@ -52,6 +52,9 @@ ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
 # atalho no menu de aplicativos apontando para o binário instalado
 cp ~/.local/kitty.app/share/applications/kitty*.desktop ~/.local/share/applications/
 sed -i "s|Icon=kitty|Icon=$HOME/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g; s|Exec=kitty|Exec=$HOME/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+# lançador "Terminal" abre o kitty: renomeia o kitty e esconde o Ptyxis
+sed -i "s|^Name=kitty$|Name=Terminal|" ~/.local/share/applications/kitty.desktop
+printf '[Desktop Entry]\nType=Application\nName=Ptyxis\nNoDisplay=true\n' > ~/.local/share/applications/org.gnome.Ptyxis.desktop
 # config: editar ~/.config/kitty/kitty.conf edita o repositório
 ln -sf "$PWD/kitty.conf" ~/.config/kitty/kitty.conf
 ln -sf "$PWD/kitty_tab_bar.py" ~/.config/kitty/tab_bar.py
