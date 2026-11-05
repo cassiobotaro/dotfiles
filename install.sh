@@ -54,6 +54,7 @@ cp ~/.local/kitty.app/share/applications/kitty*.desktop ~/.local/share/applicati
 sed -i "s|Icon=kitty|Icon=$HOME/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g; s|Exec=kitty|Exec=$HOME/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 # config: editar ~/.config/kitty/kitty.conf edita o repositório
 ln -sf "$PWD/kitty.conf" ~/.config/kitty/kitty.conf
+ln -sf "$PWD/kitty_tab_bar.py" ~/.config/kitty/tab_bar.py
 touch ~/.config/kitty/current-theme.conf  # incluído pelo kitty.conf, preenchido por `kitten themes`
 # kitty como terminal padrão: Ctrl+Alt+T/menu (xdg-terminal-exec) e x-terminal-emulator
 echo kitty.desktop > ~/.config/xdg-terminals.list
