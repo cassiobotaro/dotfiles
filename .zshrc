@@ -299,8 +299,40 @@ command -v starship >/dev/null && eval "$(starship init zsh)"
 export _ZO_DOCTOR=0
 command -v zoxide   >/dev/null && eval "$(zoxide init zsh --cmd cd)"
 
+# integração do kitty carregada aqui, não pela injeção automática (shell_integration
+# disabled no kitty.conf): a injeção só vale no shell que o kitty abre e se perde
+# no `exec zsh` (zshreload), `sudo -E zsh` etc. no-title: o título fica com os programas
+# o TERM evita carregar num terminal aberto a partir do kitty, que herda as variáveis
+if [[ $TERM == xterm-kitty && -n $KITTY_INSTALLATION_DIR ]]; then
+    export KITTY_SHELL_INTEGRATION="enabled no-title"
+    autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+    kitty-integration
+    unfunction kitty-integration
+fi
+# kitten ssh copia o terminfo do xterm-kitty pro servidor (sem ele: "unknown
+# terminal type", clear/htop quebrados) e leva a integração junto
+# icat: imagens no terminal; kdiff: diff lado a lado com syntax highlight
+# pbcopy/pbpaste via OSC 52 (funcionam até por ssh); no macOS ficam os nativos
+if [[ $TERM == xterm-kitty ]] && (( $+commands[kitten] )); then
+    alias ssh="kitten ssh"
+    alias icat="kitten icat"
+    alias kdiff="kitten diff"
+    (( $+commands[pbcopy] )) || alias pbcopy="kitten clipboard"
+    (( $+commands[pbpaste] )) || alias pbpaste="kitten clipboard --get-clipboard"
+fi
+
+# integração do iTerm2 (macOS): marcas de prompt, saída do último comando, cwd.
+# Instalar com: curl -fsSL https://iterm2.com/shell_integration/zsh -o ~/.iterm2_shell_integration.zsh
+# (não usar o menu "Install Shell Integration": ele acrescenta linhas ao ~/.zshrc,
+# que é o arquivo do repositório). O script sozinho também ativaria com TERM_PROGRAM
+# vazio (kitty), daí o teste; LC_TERMINAL chega via ssh a partir do iTerm2
+if [[ $TERM_PROGRAM == iTerm.app || $LC_TERMINAL == iTerm2 ]] && [[ -r ~/.iterm2_shell_integration.zsh ]]; then
+    source ~/.iterm2_shell_integration.zsh
+fi
+
 # Reporta o diretório atual ao terminal (OSC 7) — mantém o cwd em novas abas/janelas.
-# Funciona no kitty, GNOME Terminal/VTE (Linux), Terminal.app e iTerm2 (macOS).
+# Para GNOME Terminal/VTE (Linux), Terminal.app e iTerm2 sem a integração. Se a do
+# kitty (_ksi_state; acima ou via kitten ssh) ou a do iTerm2 carregou, ela já reporta o cwd.
 autoload -Uz add-zsh-hook
 
 function _osc7_cwd {
@@ -318,6 +350,6 @@ function _osc7_cwd {
   done
   printf '\e]7;file://%s%s\e\\' "${HOST}" "${url_path}"
 }
-add-zsh-hook precmd _osc7_cwd
+(( $+_ksi_state )) || [[ -n $ITERM_SHELL_INTEGRATION_INSTALLED ]] || add-zsh-hook precmd _osc7_cwd
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
