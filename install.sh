@@ -45,24 +45,20 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 # brew dependencies
 brew install bat eza lazydocker neovim minikube kubectl kubectx fzf luarocks lynx starship
 
-# kitty (instalador oficial: o do apt fica desatualizado)
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
-mkdir -p ~/.local/bin ~/.local/share/applications ~/.config/kitty
-ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
-# atalho no menu de aplicativos apontando para o binário instalado
-cp ~/.local/kitty.app/share/applications/kitty*.desktop ~/.local/share/applications/
-sed -i "s|Icon=kitty|Icon=$HOME/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g; s|Exec=kitty|Exec=$HOME/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-# lançador "Terminal" abre o kitty: renomeia o kitty e esconde o Ptyxis
-sed -i "s|^Name=kitty$|Name=Terminal|" ~/.local/share/applications/kitty.desktop
+# ghostty (snap: o do apt fica desatualizado)
+sudo snap install ghostty --classic
+mkdir -p ~/.local/share/applications ~/.config/ghostty
+# lançador "Terminal" abre o Ghostty: cópia do .desktop do snap renomeada (a do
+# usuário tem precedência) e Ptyxis escondido
+sed 's|^Name=Ghostty$|Name=Terminal|; /^Terminal=false$/a X-TerminalArgExec=-e' \
+    /var/lib/snapd/desktop/applications/ghostty_ghostty.desktop > ~/.local/share/applications/ghostty_ghostty.desktop
 printf '[Desktop Entry]\nType=Application\nName=Ptyxis\nNoDisplay=true\n' > ~/.local/share/applications/org.gnome.Ptyxis.desktop
-# config: editar ~/.config/kitty/kitty.conf edita o repositório
-ln -sf "$PWD/kitty.conf" ~/.config/kitty/kitty.conf
-ln -sf "$PWD/kitty_tab_bar.py" ~/.config/kitty/tab_bar.py
-touch ~/.config/kitty/current-theme.conf  # incluído pelo kitty.conf, preenchido por `kitten themes`
-# kitty como terminal padrão: Ctrl+Alt+T/menu (xdg-terminal-exec) e x-terminal-emulator
-echo kitty.desktop > ~/.config/xdg-terminals.list
-sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator "$HOME/.local/kitty.app/bin/kitty" 50
-sudo update-alternatives --set x-terminal-emulator "$HOME/.local/kitty.app/bin/kitty"
+# config: editar ~/.config/ghostty/config.ghostty edita o repositório
+ln -sf "$PWD/ghostty.config" ~/.config/ghostty/config.ghostty
+# Ghostty como terminal padrão: Ctrl+Alt+T/menu (xdg-terminal-exec) e x-terminal-emulator
+echo ghostty_ghostty.desktop > ~/.config/xdg-terminals.list
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /snap/bin/ghostty 50
+sudo update-alternatives --set x-terminal-emulator /snap/bin/ghostty
 
 # docker
 curl -fsSL https://get.docker.com | sh

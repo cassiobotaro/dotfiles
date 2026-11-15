@@ -10,6 +10,6 @@ As the name says, here are my dotfiles, updated as possible.
 
 ![Imagem do nvim](./images/nvim.png)
 
-**KITTY**
+**GHOSTTY**
 
-Terminal padrão, com ligaturas, abas e splits (substitui o tmux). Config em `kitty.conf`.
+Terminal padrão, com ligaturas, abas e splits. Config em `ghostty.config`.
