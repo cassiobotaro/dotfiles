@@ -45,6 +45,11 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 # brew dependencies
 brew install bat eza lazydocker neovim minikube kubectl kubectx fzf luarocks lynx starship
 
+# mgc cli (magalu cloud): tap não oficial, precisa de trust explícito
+brew tap magalucloud/mgccli
+brew trust --tap magalucloud/mgccli
+brew install mgccli
+
 # ghostty (snap: o do apt fica desatualizado)
 sudo snap install ghostty --classic
 mkdir -p ~/.local/share/applications ~/.config/ghostty
