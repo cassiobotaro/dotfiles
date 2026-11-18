@@ -102,6 +102,7 @@ claude plugin marketplace add vladikk/modularity
 claude plugin install modularity@vladikk-modularity
 # https://github.com/cassiobotaro/skills
 claude plugin marketplace add cassiobotaro/skills
+claude plugin install adr@cassiobotaro-skills
 claude plugin install structurizr@cassiobotaro-skills
 claude plugin install mermaid-sequence@cassiobotaro-skills
 claude plugin install design-doc@cassiobotaro-skills
